@@ -1,5 +1,5 @@
 $(function(){
-	$("#topMenu").load("/menu.html");
+	$("#topMenu").load("/header.html");
 
 	function activeNav() {
 		var pgUrl = window.location.pathname.substr(0, window.location.pathname.lastIndexOf("/") + 1);
@@ -12,7 +12,8 @@ $(function(){
 				var curPageText = $(this).text();
 				var maxLength = 12;
 				if (curPageText.length > maxLength) {
-					curPageText = curPageText.substr(0, maxLength) + "...";
+					// We want to subtract 3 to accommodate for the ellipses
+					curPageText = curPageText.substr(0, maxLength - 3) + "...";
 				}
 				$("#menuBtn").html(curPageText);
 			}
