@@ -10,7 +10,7 @@ $(function(){
 				// If we want to change some CSS. Hard to do with bootstrap
 				// $(this).addClass("active");
 				var curPageText = $(this).text();
-				var maxLength = 12;
+				var maxLength = 15;
 				if (curPageText.length > maxLength) {
 					// We want to subtract 3 to accommodate for the ellipses
 					curPageText = curPageText.substr(0, maxLength - 3) + "...";
