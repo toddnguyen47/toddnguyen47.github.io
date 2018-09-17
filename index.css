@@ -1,9 +1,24 @@
 body {
 	font-family: Lato, sans-serif;
+	padding: 0em 1em;
+	font-size: 1em;
 }
 
-@media screen and (min-width:320px) and (max-width:568px) {
+/* @media screen and (min-width:320px) and (max-width:568px) {
 	#mobileWidth {
 		width: 568px;
 	}
+} */
+
+.active {
+	font-weight: bold;
 }
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #E6E6FA;; /* Choose your own color here*/
+ }
+
+ .top-margin-needed {
+	 margin-top: 1em;
+ }
