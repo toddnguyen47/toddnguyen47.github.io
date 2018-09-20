@@ -15,6 +15,11 @@ $(document).ready(function(){
 						"Displayed Hotkeys - HD Black",
 						"Display your hotkeys when you select villager build or when you select a building")
 	$("#modList").append(li);
+	
+	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=176712202",
+						"Alignment Grid",
+						"Adds a Grid for alignment purposes/range checking.")
+	$("#modList").append(li);
 
 
 	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=649570924",
