@@ -16,6 +16,11 @@ $(document).ready(function(){
 						"Display your hotkeys when you select villager build or when you select a building")
 	$("#modList").append(li);
 	
+	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=808105965",
+						"Maximum Extended Help (Expansions)",
+						"More useful displayed information")
+	$("#modList").append(li);
+	
 	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=176712202",
 						"Alignment Grid",
 						"Adds a Grid for alignment purposes/range checking.")
@@ -30,11 +35,6 @@ $(document).ready(function(){
 	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=649570924",
 						"Tech Tree UI",
 						"Display a tech tree for your civ when you select any unit/building.")
-	$("#modList").append(li);
-	
-	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=808105965",
-						"Maximum Extended Help (Expansions)",
-						"More useful displayed information")
 	$("#modList").append(li);
 
 	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=567576680",
