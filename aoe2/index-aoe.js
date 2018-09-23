@@ -20,9 +20,19 @@ $(document).ready(function(){
 						"Alignment Grid",
 						"Adds a Grid for alignment purposes/range checking.")
 	$("#modList").append(li);
+	
+	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=473358292",
+						"Custom AI - ResonanceBot 5-1c",
+						"Custom AI that's worth checking out.")
+	$("#modList").append(li);
 
 
 	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=649570924",
+						"Tech Tree UI",
+						"Display a tech tree for your civ when you select any unit/building.")
+	$("#modList").append(li);
+	
+	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=808105965",
 						"Maximum Extended Help (Expansions)",
 						"More useful displayed information")
 	$("#modList").append(li);
