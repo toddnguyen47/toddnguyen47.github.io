@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function(){	
 	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=153265246",
 						"Ozhara's Full Texture Pack V4",
 						"A nice texture pack so the game looks decent for the modern days.")
@@ -8,6 +8,11 @@ $(document).ready(function(){
 	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=549369672",
 						"P*ssywood Pack (Small Trees Pack)",
 						"Make the trees smaller so you can see more things.")
+	$("#modList").append(li);
+	
+	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=466219059",
+						"Original Resource Icons",
+						"So you can clearly distinguish between food icon and wood icon. NOTE: You must put the priority of this mod above other mods! To do this, go into AoE2 &#8594; Steam Workshop, then move the priority of the mod &quot;Original Resource Icons&quot; all the way up.")
 	$("#modList").append(li);
 
 
