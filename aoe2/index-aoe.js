@@ -21,9 +21,10 @@ $(document).ready(function(){
 						"Display your hotkeys when you select villager build or when you select a building")
 	$("#modList").append(li);
 	
-	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=643159206",
+	var li = createLi	("https://steamcommunity.com/sharedfiles/filedetails/?id=643159206",
 						"Maximum Extended Help (AoC Base Game)",
 						"More useful displayed information. This is for the base AoC game. For AoE2 HD expansions, go <a href=\"http://steamcommunity.com/sharedfiles/filedetails/?id=649570924\">here</a>)."
+						)
 	$("#modList").append(li);
 	
 	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=176712202",
