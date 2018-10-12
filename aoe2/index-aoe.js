@@ -41,6 +41,11 @@ $(document).ready(function(){
 						"Tech Tree UI",
 						"Display a tech tree for your civ when you select any unit/building.")
 	$("#modList").append(li);
+	
+	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=658998239",
+						"Green Arabia",
+						"Arabia custom map with slightly more trees.")
+	$("#modList").append(li);
 
 	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=567576680",
 						"Fast Castle Tutorial",
