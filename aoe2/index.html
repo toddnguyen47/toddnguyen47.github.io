@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
 		<title>Age of Empires 2</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -14,37 +15,129 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
-		<span id="topMenu"></span>
-
-		<h1>Age of Empires 2</h1>
-		<h2>Where to buy the game</h2>
-		<p> Purchase the game on Steam
-			<a href="https://store.steampowered.com/app/221380/Age_of_Empires_II_HD/" target="_blank">here!</a>
-		</p>
-		<hr />
+		<div class="container-fluid">
+			<span id="topMenu"></span>
 
 
-		<h2 class="top-margin-needed">My Personal Mods</h2>
-		<h3 class="top-margin-needed">How to Use:</h3>
-		<p>
-			<ol>
-				<li>Click on the links below</li>
-				<li>Sign in with your Steam account</li>
-				<li>Click on the "Subscribe" button</li>
-			</ol>
-		</p>
-		<h3 class="top-margin-needed">List of Mods:</h3>
-		<!-- Use jQuery to load the list -->
-		<ol id="modList"></ol>
-		<hr />
+			<div class="row">
+				<div class="col-md-12">
+					<nav class="navbar navbar-dark bg-dark">
+						<div class="mr-auto">
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<a class="pull-left navbar-brand" href="#aoe2-header">Age of Empires 2</a>
+						</div>
+
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav mr-auto">
+								<li class="nav-item">
+									<a class="nav-link" href="#where-to-buy">Where to buy the game</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#my-mods">My Personal Mods</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#uniqueUnits">List of Unique Units</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
 
 
-		<h2 class="top-margin-needed">My Hotkeys</h2>
-		<p>These are the hotkeys I use to "go to" or "jump to" certain buildings. c-A stands
-			for &quot;Ctrl + A&quot; .
-		</p>
-		<p><strong>NOTE:</strong>These are NOT the hotkeys I use to build these buildings.</p>
-		<img src="images/aoe2-hotkeys.png" />
-		<hr />
+			<div class="row">
+				<div class="col-md-12"><h1 id="aoe2-header">Age of Empires 2</h1></div>
+			</div>
+			<hr />
+
+
+			<div class="row">
+				<div class="col-md-12"><h2 id="where-to-buy">Where to buy the game</h2></div>
+				<div class="col-md-12">Purchase the game on Steam
+					<a href="https://store.steampowered.com/app/221380/Age_of_Empires_II_HD/" target="_blank">here!</a>
+				</div>
+			</div>
+			<hr />
+
+
+			<div class="row">
+				<div class="col-md-12"><h2 id="my-mods">My Personal Mods</h2></div>
+				<div class="col-md-12"><h3 class="">How to Use:</h3></div>
+				<div class="col-md-12">
+					<ol>
+						<li>Click on the links below</li>
+						<li>Sign in with your Steam account</li>
+						<li>Click on the "Subscribe" button</li>
+					</ol>
+				</div>
+
+				<div class="col-md-12"><h3 id="listOfMods">List of Mods:</h3></div>
+				<!-- Use jQuery to load the list -->
+				<div class="col-md-12"><ol id="modList"></ol></div>
+			</div>
+			<hr />
+
+
+			<div class="row">
+				<div class="col-md-12"><h2 id="uniqueUnits" class="top-margin-needed">List of Unique Units</h2></div>
+				<div class="col-md-9">
+					<table class="table table-hover">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">Civilization</th>
+								<th scope="col">Unique Units</th>
+								<th scope="col">Unique Technologies</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td scope="row"><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Aztecs_(Age_of_Empires_II)" target="_blank">Aztecs</a></td>
+								<td><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Jaguar_Warrior" target="_blank">Jaguar Warrior</a></td>
+								<td><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Garland_Wars" target="_blank">Garland Wars</a></td>
+							</tr>
+							<tr>
+								<td scope="row"><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Britons" target="_blank">Britons</a></td>
+								<td><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Longbowman_(Age_of_Empires_II)" target="_blank">Longbowman</a>
+								</td><td><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Yeomen" target="_blank">Yeomen</a></td>
+							</tr>
+							<tr>
+								<td scope="row"><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Byzantines" target="_blank">Byzantines</a></td>
+								<td><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Cataphract_(Age_of_Empires_II)" target="_blank">Cataphract</a></td>
+								<td><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Logistica" target="_blank">Logistica</a></td>
+							</tr>
+							<tr>
+								<td scope="row"><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Celts" target="_blank">Celts</a></td>
+								<td><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Woad_Raider" target="_blank">Woad Raider</a></td>
+								<td><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Furor_Celtica" target="_blank">Furor Celtica</a></td>
+							</tr>
+							<tr>
+								<td><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Chinese_(Age_of_Empires_II)" target="_blank">Chinese</a></td>
+								<td><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Chu_Ko_Nu_(Age_of_Empires_II)" target="_blank">Chu Ko Nu</a></td>
+								<td><a class="link-td-wide" href="http://ageofempires.wikia.com/wiki/Rocketry" target="_blank">Rocketry</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<hr />
+
+
+			<div class="row">
+				<div class="col-md-12"><h2 class="top-margin-needed">My Hotkeys</h2></div>
+				<div class="col-md-12">
+					These are the hotkeys I use to "go to" or "jump to" certain buildings. c-A stands
+					for &quot;Ctrl + A&quot; .
+				</div>
+				<div class="col-md-12">
+					<strong>NOTE:</strong>These are NOT the hotkeys I use to build these buildings.
+				</div>
+				<div class="col-md-12">
+					<img src="images/aoe2-hotkeys.png" />
+				<div class="col-md-12">
+			</div>
+			<hr />
+		</div>
 	</body>
 </html>

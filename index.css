@@ -16,9 +16,15 @@ body {
 
 .table-striped>tbody>tr:nth-child(odd)>td, 
 .table-striped>tbody>tr:nth-child(odd)>th {
-   background-color: #E6E6FA;; /* Choose your own color here*/
- }
+	background-color: #E6E6FA;; /* Choose your own color here*/
+}
 
- .top-margin-needed {
-	 margin-top: 1em;
- }
+.top-margin-needed {
+	margin-top: 1em;
+}
+
+
+a.link-td-wide {
+	display: block;
+	width: 100%;
+}
