@@ -1,0 +1,42 @@
+span.food {
+	color: red;
+}
+
+span.wood {
+	color: green;
+}
+
+span.gold {
+	color: rgb(216, 184, 0);
+}
+
+span.stone {
+	color: gray;
+}
+
+/* Reference: */
+/* https://www.w3schools.com/howto/howto_js_scroll_to_top.asp */
+button#toTopButton {
+	display: none; /* Hidden by default */
+	position: fixed; /* Fixed/sticky position */
+
+	/* Chrome fixes below */
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+
+	bottom: 20px; /* Place the button at the bottom of the page */
+	right: 30px; /* Place the button 30px from the right */
+	z-index: 99; /* Make sure it does not overlap */
+	border: none; /* Remove borders */
+	outline: none; /* Remove outline */
+	background-color: rgba(23, 163, 184, 0.75); /* Set a background color */
+	color: white; /* Text color */
+	cursor: pointer; /* Add a mouse pointer on hover */
+	padding: 15px; /* Some padding */
+	border-radius: 10px; /* Rounded corners */
+	font-size: 1.4em; /* Increase font size */
+}
+
+button#toTopButton:hover {
+	background-color: rgb(18, 133, 151); /* Add a dark-grey background on hover */
+}
