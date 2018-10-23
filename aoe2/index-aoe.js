@@ -98,10 +98,16 @@ function generatePopover(id, content_input) {
 	// When mouse enters, show the popover
 	.on('click', function() {
 		var _this = this;
-		$(this).popover('show');
-		$('.popover').on('mouseleave', function() {
+		// If the window is visible
+		if (!$('.popover:visible').length) {
 			$(_this).popover('hide');
-		})
+		}
+		else {
+			$(this).popover('show');
+			$('.popover').on('mouseleave', function() {
+				$(_this).popover('hide');
+			})
+		}
 	}).on('mouseleave', function() {
 		// Close the popover if the mouse leaves the original link
 		var _this = this;
