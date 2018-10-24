@@ -2,13 +2,20 @@
 <html lang="en">
   <head>
     <title>Age of Empires 2</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/index.css">
     <link rel="stylesheet" href="aoe2.css?v=20181023-1537">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="/header.js"></script>
+    <script src="index-aoe.js?v=20181024-1215"></script>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -29,18 +36,11 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="#where-to-buy">Where to buy the game</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#my-mods">My Personal Mods</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#uniqueUnits">List of Unique Units</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#myHotkeys">My Personal Hotkeys</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="#where-to-buy">Where to buy the game</a></li>
+                <li class="nav-item"><a class="nav-link" href="#mappacks">Map Packs</a></li>
+                <li class="nav-item"><a class="nav-link" href="#my-mods">My Personal Mods</a></li>
+                <li class="nav-item"><a class="nav-link" href="#uniqueUnits">List of Unique Units</a></li>
+                <li class="nav-item"><a class="nav-link" href="#myHotkeys">My Personal Hotkeys</a></li>
               </ul>
             </div>
           </nav>
@@ -59,6 +59,17 @@
         <div class="col-md-12">Purchase the game on Steam
           <a href="https://store.steampowered.com/app/221380/Age_of_Empires_II_HD/" target="_blank">here!</a>
         </div>
+      </div>
+      <hr />
+
+
+      <div class="row">
+        <div class="col-md-12"><h2 id="mapPacks">Map Packs</h2></div>
+        <div class="col-md-12">
+          Map packs can be found <a href="https://www.aoezone.net/threads/aoc-wk-maps-and-map-packs-overview-thread.109064/" target="_blank">
+          here</a>.
+        </div>
+        <img style="max-height: 20%;" src="https://www.aoezone.net/attachments/install-png.157761/" />
       </div>
       <hr />
 
@@ -384,10 +395,5 @@
       </div>
       <hr />
     </div>
-    
-    <!-- Include JavaScript scripts -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="/header.js"></script>
-    <script src="index-aoe.js?v=20181020-0030"></script>
   </body>
 </html>
