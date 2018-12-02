@@ -122,9 +122,14 @@ function generatePopover(id, content_input) {
 
 
 function addPersonalMods() {
-	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=153265246",
-						"Ozhara's Full Texture Pack V4",
-						"A nice texture pack so the game looks decent for the modern days.")
+	// var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=153265246",
+	// 					"Ozhara's Full Texture Pack V4",
+	// 					"A nice texture pack so the game looks decent for the modern days.")
+	// $("#modList").append(li);
+
+	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=176712202",
+	"Alignment Grid",
+	"Adds a Grid for alignment purposes/range checking.")
 	$("#modList").append(li);
 
 
@@ -150,10 +155,6 @@ function addPersonalMods() {
 						)
 	$("#modList").append(li);
 	
-	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=176712202",
-						"Alignment Grid",
-						"Adds a Grid for alignment purposes/range checking.")
-	$("#modList").append(li);
 	
 	var li = createLi(	"https://steamcommunity.com/sharedfiles/filedetails/?id=473358292",
 						"Custom AI - ResonanceBot 5-1c",
