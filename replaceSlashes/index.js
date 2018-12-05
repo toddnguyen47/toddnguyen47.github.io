@@ -139,6 +139,10 @@ gauRageButton.onclick = function() {
 function outputGauRage(idInput, output) {
 	let outputId = idInput + "Output";
 	let elem = document.getElementById(outputId);
+	// If output is 0x00 then leave the value empty
+	if (output === "0x00") {
+		output = "";
+	}
 	elem.value = output;
 }
 
