@@ -31,12 +31,7 @@ convertBackwardHexSubmitButton.onclick = function() {
 	let contents = inputElem.value;
 	contents = contents.split(' ').join('');
 
-	let reversedString = contents.split('').reverse().join('');
-	// If the length of the reversed string is not divisible by 4,
-	// add a 0 in front of it
-	while (reversedString.length % 4 !== 0) {
-		reversedString = "0" + reversedString;
-	}
+	let reversedString = reverseString(contents);
 	console.log(reversedString);
 	
 	// Convert to hex
@@ -54,7 +49,21 @@ convertBackwardHexSubmitButton.onclick = function() {
 }
 
 
-// Convert a binary input to hex string
+function reverseString(strInput) {
+	let reversedString = strInput.split('').reverse().join('');
+	// If the length of the reversed string is not divisible by 4,
+	// add a 0 in front of it
+	while (reversedString.length % 4 !== 0) {
+		reversedString = "0" + reversedString;
+	}
+	return reversedString;
+}
+
+
+/**
+ * Convert a binary strInput to a hexInput.
+ * @param {*} strInput - A binary string with a length divisible by 4.
+ */
 function convertBinaryToHex(strInput) {
 	var binHexDict = {
 		"0000": "0",
@@ -95,6 +104,42 @@ function convertBinaryToHex(strInput) {
 	}
 
 	return hexNum;
+}
+
+
+var gauRageButton = document.getElementById("gauRageButton");
+gauRageButton.onclick = function() {
+	// Get the form
+	var curForm = document.forms['gauRageCheckboxes'];
+	let maxOutputs = 32;
+
+	// Get all check outputs
+	for (i = 0; i < maxOutputs; i++) {
+		let groupId = "group" + i;
+		var elems = curForm.elements[groupId];
+		var binaryString = "";
+
+		elems.forEach((elem) => {
+			let isChecked = elem.checked;
+			if (isChecked) {binaryString += "1";}
+			else {binaryString += "0";}
+		});
+
+		// Gotta reverse the string first. FF6 is weird
+		let hexString = convertBinaryToHex(reverseString(binaryString));
+		outputGauRage(groupId, "0x" + hexString);
+	}
+}
+
+
+/**
+ * Output the hex number into the output text fields.
+ * @param {*} idInput 
+ */
+function outputGauRage(idInput, output) {
+	let outputId = idInput + "Output";
+	let elem = document.getElementById(outputId);
+	elem.value = output;
 }
 
 
