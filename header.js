@@ -3,9 +3,7 @@ $(function(){
 
 	function activeNav() {
 		var pgUrl = window.location.pathname.substr(0, window.location.pathname.lastIndexOf("/") + 1);
-		console.log(pgUrl);
-		$("#topMenu div a").each(function(){
-			console.log($(this).attr("href"));
+		$("#topMenu div a").each(function() {
 			if ($(this).attr("href") === pgUrl || $(this).attr("href") === "/") {
 				// If we want to change some CSS. Hard to do with bootstrap
 				// $(this).addClass("active");

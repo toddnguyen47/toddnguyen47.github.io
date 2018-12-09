@@ -7,6 +7,10 @@
       div.customMarginBottom {
         margin-bottom: 2.5em;
       }
+
+      input.redText {
+        color: red;
+      }
     </style>
 
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -28,9 +32,7 @@
         <label for="hexOutput0">Hex Output</label>
       </div>
       <div class="form-group">
-        <button id="convertBackwardHexSubmitButton" class="btn btn-primary" type="button">
-          Reverse, then Convert
-        </button>
+        <button id="convertBackwardHexSubmitButton" class="btn btn-primary" type="button">Reverse, then Convert</button>
       </div>
     </form>
     <hr />
@@ -45,6 +47,7 @@
           <textarea class="form-control col-md-12" id="hexInput0" rows="2" style="resize: none;"></textarea>
         </div>
         <button type="button" id="inputHexFormButton" class="btn btn-primary">Import Sav Hex Data</button>
+        <button type="button" id="clearAllCheckboxes" class="btn btn-secondary">Clear All Checkboxes</button>
       </form>
     </div>
 
@@ -59,6 +62,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script src="/header.js"></script>
-    <script src="index.js?v=20181208-0411"></script>
+    <script src="index.js?v=20181209-0104"></script>
   </body>
 </html>

@@ -1,6 +1,3 @@
-console.log("Yo");
-
-
 var convertBackwardHexSubmitButton = document.getElementById("convertBackwardHexSubmitButton");
 convertBackwardHexSubmitButton.onclick = function() {
 	let inputElem = document.getElementById("binaryInput0");
@@ -8,7 +5,6 @@ convertBackwardHexSubmitButton.onclick = function() {
 	contents = contents.split(' ').join('');
 
 	let reversedString = reverseString(contents);
-	console.log(reversedString);
 	
 	// Convert to hex
 	let hexIntStr = parseInt(reversedString, '2').toString().trim();
@@ -25,6 +21,10 @@ convertBackwardHexSubmitButton.onclick = function() {
 }
 
 
+/**
+ * Reverse a string
+ * @param {*} strInput - A binary string with a length divisible by 4.
+ */
 function reverseString(strInput) {
 	let reversedString = strInput.split('').reverse().join('');
 	// If the length of the reversed string is not divisible by 4,
@@ -103,21 +103,35 @@ gauRageButton.onclick = function() {
 
 		// Gotta reverse the string first. FF6 is weird
 		let hexString = convertBinaryToHex(reverseString(binaryString));
-		outputGauRage(groupId, "0x" + hexString);
+		outputGauRage(groupId, "0x" + hexString, true);
 	}
 }
 
 
 /**
  * Output the hex number into the output text fields.
- * @param {*} idInput 
+ * @param {*} idInput Integer ID of input
+ * @param {*} output The output value
+ * @param {*} changeRedTextClass `true` if we want to enable changing text to red 
+ *            if value changed, `false` otherwise
  */
-function outputGauRage(idInput, output) {
+function outputGauRage(idInput, output, changeRedTextClass) {
 	let outputId = idInput + "Output";
 	let elem = document.getElementById(outputId);
 	// If output is 0x00 then leave the value empty
 	if (output === "0x00") {
 		output = "";
+	}
+	
+	if (changeRedTextClass) {
+		// If the value is the same as previous value, remove the redText class
+		if (elem.value === output) {
+			elem.classList.remove("redText");
+		}
+		// If the value changed, color it red
+		else {
+			elem.classList.add("redText");
+		}
 	}
 	elem.value = output;
 }
@@ -131,14 +145,20 @@ function outputGauRage(idInput, output) {
 function checkTheCheckboxes(listInput) {
 	// Get the form
 	var curForm = document.forms['gauRageCheckboxes'];
-	let maxOutputs = listInput.length;
+	// Gau has 32 groups of rages
+	let maxOutputs = 32;
+	let lenListInput = listInput.length;
 
 	// Get all check outputs
 	for (i = 0; i < maxOutputs; i++) {
 		let groupId = "group" + i;
 		var elems = curForm.elements[groupId];
 		
-		curInput = listInput[i];
+		var curInput = [0, 0, 0, 0, 0, 0, 0, 0];
+		// If the length of array is still in range
+		if (i < lenListInput) {
+			curInput = listInput[i];
+		}
 		// Since FF6 saves little-endian bits, we have to reverse our traversal
 		var count = 7;
 
@@ -151,6 +171,40 @@ function checkTheCheckboxes(listInput) {
 }
 
 
+// ****************************************************************************
+// Add the functionality of clearing all checkboxes
+var clearCheckboxesButton = document.getElementById("clearAllCheckboxes");
+clearCheckboxesButton.addEventListener('click', clearAllCheckboxes);
+
+function clearAllCheckboxes() {
+	let answer = confirm("Are you sure you want to clear all checkboxes?");
+	// If user confirms yes
+	if (answer) {
+		// Get the form
+		var curForm = document.forms['gauRageCheckboxes'];
+		// Gau has 32 groups of rages
+		let maxOutputs = 32;
+
+		// Get all check outputs
+		for (i = 0; i < maxOutputs; i++) {
+			let groupId = "group" + i;
+			var elems = curForm.elements[groupId];
+
+			// For each group
+			elems.forEach((elem) => {
+				elem.checked = false;
+			});
+
+			// Clear the output areas as well
+			outputGauRage(groupId, "", false);
+		}
+	}
+}
+// o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o--o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o
+
+
+// ****************************************************************************
+// What happens when the user clicks on the "input hex form" button
 var inputHexFormButton = document.getElementById("inputHexFormButton");
 inputHexFormButton.addEventListener('click', function(evt) {
 	var hexTextArea = document.getElementById("hexInput0");
@@ -172,6 +226,9 @@ inputHexFormButton.addEventListener('click', function(evt) {
 		binary2 = ('0000' + binary2).slice(-4);
 
 		outputList.push(binary1 + binary2);
+
+		// Output to the output areas
+		outputGauRage("group" + i, "0x" + hex1 + hex2, false);
 	}
 
 	// If contentList.length is odd, push the last number into list anyway
@@ -182,10 +239,7 @@ inputHexFormButton.addEventListener('click', function(evt) {
 		outputList.push(binary1);
 	}
 
-	console.log(outputList);
 	// Check checkboxes accordingly
 	checkTheCheckboxes(outputList);
 });
-
-
-console.log("End");
+// o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o--o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o

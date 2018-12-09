@@ -1,5 +1,3 @@
-console.log("Yo");
-
 var replaceSlashesSubmitButton = document.getElementById("replaceSlashesSubmitButton");
 replaceSlashesSubmitButton.onclick = function() {
 	let initTextElem = document.getElementById("initInput");
