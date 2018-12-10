@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,11 +35,15 @@ public class MainFrame extends JFrame {
      * 
      */
     private static final long serialVersionUID = 1L;
+    private static final int[] SAVE_SLOT = {1, 2, 3};
+    
     private JFileChooser fileChooser;
     private JButton fileChooserButton;
     private JLabel fileChooserLabel;
     private JTextArea outputTextArea;
     private JLabel chosenFileName;
+    private JComboBox<String> savSlotComboBox;
+    
     
     private boolean firstTimeFileBrowsed;
     private File prevPath;
@@ -46,7 +51,7 @@ public class MainFrame extends JFrame {
     
     // ------------------------------------
     // End of Initializing Frame Components
-    // ************************************************************************
+    // o-o-o-o-o-o-o-o-o-o-o-o-o-o--o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o
     
     
     public MainFrame() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
@@ -80,7 +85,7 @@ public class MainFrame extends JFrame {
         gridBagConstraints = getBaseGridbagConstraints(0, 0);
         gridBagConstraints.anchor = GridBagConstraints.LINE_END;
         gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.weighty = 0.25;
+        gridBagConstraints.weighty = 0;
         this.getContentPane().add(fileChooserLabel, gridBagConstraints);
         
         // Add the button that enables the fileChooser browsing
@@ -98,13 +103,41 @@ public class MainFrame extends JFrame {
         gridBagConstraints = getBaseGridbagConstraints(1, 0);
         gridBagConstraints.anchor = GridBagConstraints.LINE_START;
         gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.weighty = 0.25;
         this.getContentPane().add(fileChooserButton, gridBagConstraints);
+        
+        
+        // Let the user choose which save file slot
+        JLabel fileSaveSlotLabel = new JLabel();
+        fileSaveSlotLabel.setText("Choose save file slot");
+        gridBagConstraints = this.getBaseGridbagConstraints(0, 1);
+        gridBagConstraints.weighty = 0;
+        gridBagConstraints.anchor = GridBagConstraints.LINE_END;
+        this.getContentPane().add(fileSaveSlotLabel, gridBagConstraints);
+        
+        savSlotComboBox = new JComboBox<String>();
+        for (int i : SAVE_SLOT) {
+            savSlotComboBox.addItem("Save Slot " + String.valueOf(i));
+        }
+        // Read the sav file again every time a new save slot is chosen
+        savSlotComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                readFileContents();
+            }
+            
+        });
+        
+        gridBagConstraints = this.getBaseGridbagConstraints(1, 1);
+        gridBagConstraints.anchor = GridBagConstraints.LINE_START;
+        this.getContentPane().add(savSlotComboBox, gridBagConstraints);
+        
         
         // If the user selected a file, display it here
         chosenFileName = new JLabel();
-        gridBagConstraints = this.getBaseGridbagConstraints(0, 1);
+        gridBagConstraints = this.getBaseGridbagConstraints(0, 2);
         gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
         this.getContentPane().add(chosenFileName, gridBagConstraints);
         
         // Add the text area output
@@ -114,7 +147,7 @@ public class MainFrame extends JFrame {
         outputTextArea.setComponentPopupMenu(this.getMenu());
         outputTextArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
         JScrollPane pane = new JScrollPane(outputTextArea);
-        gridBagConstraints = getBaseGridbagConstraints(0, 2);
+        gridBagConstraints = getBaseGridbagConstraints(0, 3);
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.weighty = 0.75;
@@ -193,10 +226,13 @@ public class MainFrame extends JFrame {
      */
     public void readFileContents() {
         try {
-            ParseSavFile parseSavFile = new ParseSavFile(this.selectedFile.getAbsolutePath());
-            String result = parseSavFile.readGauRagesHex();
-            
-            this.outputTextArea.setText(result);
+            // Only if the user selected a file
+            if (this.selectedFile != null) {
+                ParseSavFile parseSavFile = new ParseSavFile(this.selectedFile.getAbsolutePath());
+                String result = parseSavFile.readGauRagesHex(this.savSlotComboBox.getSelectedIndex());
+                
+                this.outputTextArea.setText(result);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
