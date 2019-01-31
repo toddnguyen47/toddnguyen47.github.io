@@ -35,16 +35,25 @@ a.link-td-wide {
 	position: relative;
 }
 
-.dropdown-submenu a::after {
+/* .dropdown-submenu a::after {
 	transform: rotate(-90deg);
 	position: absolute;
 	right: 6px;
 	top: .8em;
-}
+} */
 
 .dropdown-submenu .dropdown-menu {
 	top: 0;
 	left: 100%;
-	margin-left: .1rem;
-	margin-right: .1rem;
 }
+
+
+/*Rotate the arrow in the navbar from downward to right-ward (is rightward a word?) */
+.dropdown-submenu a::after {
+	transform: rotate(-90deg);
+}
+
+/*The show class*/
+/* .show {
+	display: inline;
+} */
