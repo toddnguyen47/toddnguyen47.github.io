@@ -43,9 +43,9 @@ function addSubMenuFunctionality() {
 		submenu.toggleClass("show");
 
 		// If parent closes, close the submenus
-		$(this).parents("li.nav-item.dropdown.show").on("hidden.bs.dropdown", function(e) {
-			$(".dropdown-submenu .show").removeClass("show");
-		});
+		// $(this).parents("li.nav-item.dropdown.show").on("hidden.bs.dropdown", function(e) {
+			// $(".dropdown-submenu .show").removeClass("show");
+		// });
 		
 		e.stopPropagation();
 	});

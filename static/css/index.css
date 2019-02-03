@@ -35,13 +35,6 @@ a.link-td-wide {
 	position: relative;
 }
 
-/* .dropdown-submenu a::after {
-	transform: rotate(-90deg);
-	position: absolute;
-	right: 6px;
-	top: .8em;
-} */
-
 .dropdown-submenu .dropdown-menu {
 	top: 0;
 	left: 100%;
@@ -49,11 +42,10 @@ a.link-td-wide {
 
 
 /*Rotate the arrow in the navbar from downward to right-ward (is rightward a word?) */
-.dropdown-submenu a::after {
-	transform: rotate(-90deg);
+/*https://getbootstrap.com/docs/4.2/layout/grid/#offset-classes */
+/*According to website, max-width for medium is 768px*/
+@media only screen and (min-width:769px) {
+	.dropdown-submenu a::after {
+		transform: rotate(-90deg);
+	}
 }
-
-/*The show class*/
-/* .show {
-	display: inline;
-} */

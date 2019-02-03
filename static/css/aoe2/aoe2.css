@@ -1,3 +1,71 @@
+/* Make a desktop only class. References:
+https://getbootstrap.com/docs/4.2/layout/grid/#offset-classes 
+sm is >= 576px
+*/
+@media only screen and (min-width:576px) {
+	div.sidebarNav {
+		width: 25%;
+		position: fixed;
+		height: 85%;
+	}
+
+	/* Hide the toggle button in bigger screens*/
+	button#sidebarNavToggleMobile {
+		display: none;
+	}
+
+	div.mainContent {
+		margin-left: 30%;
+	}
+}
+
+
+/* For larger desktop screens, reduce the size of navbar */
+@media only screen and (min-width:768px) {
+	div.sidebarNav {
+		width: 15%;
+		position: fixed;
+		height: 85%;
+	}
+
+	/* Hide the toggle button in bigger screens*/
+	button#sidebarNavToggleMobile {
+		display: none;
+	}
+
+	div.mainContent {
+		margin-left: 20%;
+	}
+}
+
+
+/* Mobile only */
+@media only screen and (max-width: 575px) {
+	div.sidebarNav {
+		z-index: 1;
+		position: fixed;
+		margin-top: 45px;
+		background-color: rgb(202, 202, 202);
+		height: 60%;
+	}
+
+	button#sidebarNavToggleMobile {
+		width: 10%;
+		/* background-color: #007BFF; */
+		position: fixed;
+	}
+
+	button#sidebarNavToggleMobile img {
+		width: 100%;
+		height: 100%;
+	}
+
+	div.mainContent {
+		margin-left: 12%;
+	}
+}
+
+
 span.food {
 	color: red;
 }
@@ -39,4 +107,13 @@ button#toTopButton {
 
 button#toTopButton:hover {
 	background-color: rgb(18, 133, 151); /* Add a dark-grey background on hover */
+}
+
+
+.customHidden {
+	display: none;
+}
+
+.sidebarNav {
+	overflow-y: auto;
 }
