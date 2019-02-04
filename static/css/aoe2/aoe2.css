@@ -44,15 +44,12 @@ sm is >= 576px
 	div.sidebarNav {
 		z-index: 1;
 		position: fixed;
-		margin-top: 45px;
 		background-color: rgb(202, 202, 202);
-		height: 60%;
 	}
 
 	button#sidebarNavToggleMobile {
-		width: 10%;
+		width: 20%;
 		/* background-color: #007BFF; */
-		position: fixed;
 	}
 
 	button#sidebarNavToggleMobile img {
@@ -61,7 +58,14 @@ sm is >= 576px
 	}
 
 	div.mainContent {
-		margin-left: 12%;
+		margin-top: 1em;
+	}
+
+
+	/*Scale image to width size*/
+	img.scaleToScreen {
+		width: 100%;
+		height: auto;
 	}
 }
 
@@ -116,4 +120,12 @@ button#toTopButton:hover {
 
 .sidebarNav {
 	overflow-y: auto;
+}
+
+
+/*Remove borders from buttons with images*/
+button.buttonWithImage {
+	padding: 0;
+	border: 0;
+	background: none;
 }
