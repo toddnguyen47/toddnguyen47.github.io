@@ -118,6 +118,10 @@ button#toTopButton:hover {
 	display: none;
 }
 
+.normalFontWeight {
+	font-weight: normal;
+}
+
 .sidebarNav {
 	overflow-y: auto;
 }

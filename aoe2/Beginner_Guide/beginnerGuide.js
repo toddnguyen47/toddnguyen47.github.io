@@ -3,6 +3,14 @@ var maxMobileWindowWidth = 575;
 // Remember which military civilization was shown last
 var lastShownCivCardId1 = "#aztecsContent";
 
+// The alphabetically sorted list of civs
+// Used for loadCivTabs() and loadCivMilitaryComposition()
+var civList = ["Aztecs","Berbers","Britons","Burmese","Byzantines","Celts","Chinese",
+	"Ethiopians","Franks","Goths","Huns","Incas","Indians","Italians","Japanese","Khmer",
+	"Koreans","Magyars","Malay","Malians","Mayans","Mongols","Persians","Portuguese",
+	"Saracens","Slavs","Spanish","Teutons","Turks","Vietnamese","Vikings"];
+var activeCiv = "Aztecs";
+
 $(document).ready(function(){
 	addSidebarActive();
 
@@ -15,6 +23,9 @@ $(document).ready(function(){
 	addSidebarLinkClickHandler();
 
 	addMilitaryCardUnitFunc();
+
+	loadCivTabs();
+	loadCivMilitaryComposition();
 });
 
 
@@ -90,5 +101,75 @@ function addMilitaryCardUnitFunc() {
 
 		// Only show the current tab
 		$(tabId).addClass("active");
+	});
+}
+
+
+/**
+ * Load each civ tabs
+ */
+function loadCivTabs() {
+	for (let civ of civList) {
+		var civId = civ.toLowerCase() + "Tab";
+		var civHref = "#" + civ.toLowerCase() + "Content";
+
+		$("ul#civMilitaryTabs").append(
+			$('<li>').attr("class", "nav-item")
+					 .append(
+				$('<a>').attr("class", "nav-link")
+						.attr("id", civId)
+						.attr("data-toggle", "tab")
+						.attr("href", civHref)
+						.attr("role", "tab")
+						.append(civ)
+			)
+		);
+
+		// Add an active pane
+		if (civ === activeCiv) {
+			$("ul#civMilitaryTabs li a").addClass("active");
+		}
+	}
+}
+
+
+/**
+ * Load each civilization's military composition
+ */
+function loadCivMilitaryComposition() {
+	// Load the JSON that contains civ military composition
+	$.getJSON("civComposition.json", function(data, textStatus, jqXHR) {
+		var civJsonData = data;
+		
+		for (let civ of civList) {
+			if (civ !== "Aztecs") break;
+			var civId = civ.toLowerCase() + "Content";
+
+			var curCivData = civJsonData[civ];
+			var primary = curCivData["primary"];
+			var supportingUnits = curCivData["support"];
+			var notes = curCivData["notes"];
+
+			$("div#civMilitaryContent").append(
+				$('<div>').attr("class", "tab-pane card col-sm-10 card-body normalFontWeight")
+						  .attr("id", civId)
+						  .attr("role", "tabpanel")
+						  .append(
+							$('<p>').append("<strong>Primary Units: </strong>")
+								    .append(primary)
+						  ).append(
+							$('<p>').append("<strong>Supporting Units: </strong>")
+								    .append(supportingUnits)
+						  ).append(
+							$('<p>').append("<strong>Notes: </strong>")
+								    .append(notes)
+						  )
+			);
+
+			// Add an active pane
+			if (civ === activeCiv) {
+				$("div#civMilitaryContent div").addClass("active");
+			}
+		}
 	});
 }

@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/index.css?v=20190204-2348">
-    <link rel="stylesheet" href="/static/css/aoe2/aoe2.css?v=20190202-1807">
+    <link rel="stylesheet" href="/static/css/aoe2/aoe2.css?v=20190205-1530">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -406,35 +406,12 @@
       <hr />
       <div id="militaryComposition" class="top-margin-needed-2x">
         <h2>MILITARY COMPOSITION</h2>
-        <ul class="nav nav-tabs" id="aztecsBerbersTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="aztecs-tab" data-toggle="tab" href="#aztecsContent" role="tab">Aztecs</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="berbers-tab" data-toggle="tab" href="#berbersContent" role="tab">Berbers</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="berbers-tab" data-toggle="tab" href="#britonsContent" role="tab">Britons</a>
-          </li>
+        <ul class="nav nav-tabs" id="civMilitaryTabs" role="tablist">
+          <!--Load each civ with beginnerGuide.js-->
         </ul>
 
-        <div class="tab-content" id="aztecsBerbersTabContent">
-          <div class="tab-pane active top-margin-needed" id="aztecsContent" role="tabpanel">
-            <p>AZTECS LIKE THIS.</p>
-            <p>AZTECS LIKE THIS.</p>
-            <p>AZTECS LIKE THIS.</p>
-            <p>AZTECS LIKE THIS.</p>
-            <p>AZTECS LIKE THIS.</p>
-          </div>
-
-          <div class="tab-pane top-margin-needed" id="berbersContent" role="tabpanel">
-            <p>BERBERS LIKE THIS.</p>
-            <p>BERBERS LIKE THIS.</p>
-          </div>
-
-          <div class="tab-pane top-margin-needed" id="britonsContent" role="tabpanel">
-            BRITONS LIKE THIS.
-          </div>
+        <div class="tab-content" id="civMilitaryContent">
+          <!--Load each civ unit composition with beginnerGuide.js-->
         </div>
 
       </div>
