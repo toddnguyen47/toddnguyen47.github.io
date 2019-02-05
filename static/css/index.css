@@ -23,6 +23,10 @@ body {
 	margin-top: 1em;
 }
 
+.top-margin-needed-2x {
+	margin-top: 2em;
+}
+
 
 a.link-td-wide {
 	display: block;

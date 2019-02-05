@@ -1,5 +1,8 @@
 var maxMobileWindowWidth = 575;
 
+// Remember which military civilization was shown last
+var lastShownCivCardId1 = "#aztecsContent";
+
 $(document).ready(function(){
 	addSidebarActive();
 
@@ -10,6 +13,8 @@ $(document).ready(function(){
 
 	addSidebarButtonToggleFunctionality();
 	addSidebarLinkClickHandler();
+
+	addMilitaryCardUnitFunc();
 });
 
 
@@ -65,5 +70,25 @@ function addSidebarLinkClickHandler() {
 		if ($windowWidth < maxMobileWindowWidth) {
 			$(this).parents(".sidebarNav").addClass("customHidden");
 		}
+	});
+}
+
+
+/**
+ * Add functionality to the military cards
+ */
+function addMilitaryCardUnitFunc() {
+	$("#aztecsBerbersTab a").on("click", function(e) {
+		e.preventDefault();
+		// Obtain the ID associated with the tab
+		var tabId = $(this)[0]["hash"];
+
+		// Turn off previously active card
+		$(lastShownCivCardId1).removeClass("active");
+		// Save the currently shown tab
+		lastShownCivCardId1 = tabId;
+
+		// Only show the current tab
+		$(tabId).addClass("active");
 	});
 }
