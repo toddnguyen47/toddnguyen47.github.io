@@ -142,44 +142,36 @@ function loadCivMilitaryComposition() {
 		url: "civComposition.xml",
 		dataType: "xml",
 		success: function(xmlData) {
-			civ = $(xmlData).find("civ");
+			civs = $(xmlData).find("civ");
+			for (i = 0; i < civs.length; i++) {
+				var curCiv = civs[i];
+				var civName = $(curCiv).find("name").text();
+				var primaryUnits = $(curCiv).find("primary").text();
+				var supportingUnits = $(curCiv).find("support").text();
+				var notes = $(curCiv).find("notes").text();
+				
+				var civId = civName.toLowerCase() + "Content";
 
-			console.log(civ.find("name")[0]["textContent"]);
-		}
-	});
+				$("div#civMilitaryContent").append(
+					$('<div>').attr("class", "tab-pane card col-sm-10 card-body normalFontWeight")
+					.attr("id", civId)
+					.attr("role", "tabpanel")
+					.append(
+						$('<p>').append("<strong>PRIMARY UNITS: </strong>")
+						.append(primaryUnits)
+					).append(
+						$('<p>').append("<strong>SUPPORTING UNITS: </strong>")
+						.append(supportingUnits)
+					).append(
+						$('<p>').append("<strong>NOTES: </strong>")
+						.append(notes)
+					)
+				);
 
-	// Load the JSON that contains civ military composition
-	$.getJSON("civComposition.json", function(data, textStatus, jqXHR) {
-		var civJsonData = data;
-		
-		for (let civ of civList) {
-			if (civ !== "Aztecs") break;
-			var civId = civ.toLowerCase() + "Content";
-
-			var curCivData = civJsonData[civ];
-			var primary = curCivData["primary"];
-			var supportingUnits = curCivData["support"];
-			var notes = curCivData["notes"];
-
-			$("div#civMilitaryContent").append(
-				$('<div>').attr("class", "tab-pane card col-sm-10 card-body normalFontWeight")
-						  .attr("id", civId)
-						  .attr("role", "tabpanel")
-						  .append(
-							$('<p>').append("<strong>Primary Units: </strong>")
-								    .append(primary)
-						  ).append(
-							$('<p>').append("<strong>Supporting Units: </strong>")
-								    .append(supportingUnits)
-						  ).append(
-							$('<p>').append("<strong>Notes: </strong>")
-								    .append(notes)
-						  )
-			);
-
-			// Add an active pane
-			if (civ === activeCiv) {
-				$("div#civMilitaryContent div").addClass("active");
+				// Add an active pane
+				if (civName === activeCiv) {
+					$("div#civMilitaryContent div").addClass("active");
+				}
 			}
 		}
 	});

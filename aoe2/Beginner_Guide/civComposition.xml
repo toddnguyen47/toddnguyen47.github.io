@@ -3,12 +3,29 @@
   <civ>
     <name>Aztecs</name>
     <primary>Eagle Warriors (Barracks)</primary>
-    <support>Support</support>
+    <support>Jaguar Warriors (Castle), Pikemen (Barracks), Arbalests (Archery Range)</support>
     <notes>Aztecs have very strong Eagle Warriors with their unique
     technology Garland Wars giving all their infantry +4 attack.
     Eagle Warriors are fast raiding units that excel against ranged
     and siege units, however they fall flat against other melee units.
     That's where your Jaguar Warriors (anti-infantry) and Pikemen
     (anti-cavalry) come in.</notes>
+  </civ>
+  <civ>
+    <name>Berbers</name>
+    <primary>Cavaliers (Stables) or Camels (Stables)</primary>
+    <support>Skirmishers (Archery Range)</support>
+    <notes>Berbers have cheaper cavalry, so you should use this to your advantage. An army of 
+    Cavaliers and Camels backed up by Skirmishers to take care of those pesky Halberdiers
+    can go a long way.</notes>
+  </civ>
+  <civ>
+    <name>Britons</name>
+    <primary>Longbowman (Castle) or Arbalests (Archery Range)</primary>
+    <support>Light Cavalry (Stables), Halberdiers (Barracks)</support>
+    <notes>The Britons' claim to fame are their long-range archers, including their unique unit
+    Longbowman and their Arbalests from the Archery Range. Light Cavalry to take care of enemy
+    Skirmishers and Siege Units, and Halberdiers to take care of enemy Cavaliers/Paladins,
+    which are the biggest counters to archers.</notes>
   </civ>
 </civs>
