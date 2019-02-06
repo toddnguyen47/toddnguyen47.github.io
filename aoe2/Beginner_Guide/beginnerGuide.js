@@ -1,8 +1,10 @@
 $(document).ready(function() {
 	addSidebarActive();
 
-	// // Check for initial window width
 	var dynamicResizeObj = addDynamicResizing();
+	// Check for initial window width
+	dynamicResizeObj.windowWidthFunc();
+	
 	// Then when window changes size, check dynamically
 	$(window).resize(dynamicResizeObj.windowWidthFunc);
 
@@ -93,14 +95,14 @@ function getMilitaryCivObject() {
 		"Saracens","Slavs","Spanish","Teutons","Turks","Vietnamese","Vikings"];
 	// Randomly choose a last shown civ
 	var randomIndex = Math.floor(Math.random() * m_civList.length);
-	var m_activeCiv = m_civList[randomIndex];
+	var m_activeCivId = m_civList[randomIndex].toLowerCase();
 
 	getCivList = function() {
 		return m_civList;
 	}
 
 	getActiveCiv = function() {
-		return m_activeCiv;
+		return m_activeCivId;
 	}
 
 
@@ -111,20 +113,20 @@ function getMilitaryCivObject() {
 		$("#civMilitaryTabs li a").on("click", function(e) {
 			e.preventDefault();
 			// Obtain the ID associated with the tab
-			var curCiv = "#" + $(this).text().toLowerCase();
+			var curCiv = $(this).text().toLowerCase();
 
 			// Turn off previously active card's tab's content
-			$(m_activeCiv + "Content").removeClass("active");
+			$("#" + m_activeCivId + "Content").removeClass("active");
 			// Remove the bottom border
-			$(m_activeCiv + "Tab").parent().removeClass("bottomBorder");
+			$("#" + m_activeCivId + "Tab").parent().removeClass("bottomBorder");
 
 			// Only show the current tab's content
-			$(curCiv + "Content").addClass("active");
+			$("#" + curCiv + "Content").addClass("active");
 			// Add the bottom border to the tab
-			$(curCiv + "Tab").parent().addClass("bottomBorder");
+			$("#" + curCiv + "Tab").parent().addClass("bottomBorder");
 
 			// Save the currently shown tab
-			m_activeCiv = curCiv;
+			m_activeCivId = curCiv;
 		});
 	}
 
@@ -152,7 +154,7 @@ function getMilitaryCivObject() {
 			);
 
 			// Add an active pane
-			if (civ === m_activeCiv) {
+			if (civ.toLowerCase() === m_activeCivId.toLowerCase()) {
 				var curAnchorLink = "ul#civMilitaryTabs li a#" + civId;
 				$(curAnchorLink).addClass("active");
 				$(curAnchorLink).parent("li.nav-item").addClass("bottomBorder");
@@ -197,7 +199,7 @@ function getMilitaryCivObject() {
 					);
 
 					// Add an active pane
-					if (civName === m_activeCiv) {
+					if (civName.toLowerCase() === m_activeCivId.toLowerCase()) {
 						$("div#" + civId).addClass("active");
 					}
 				}
