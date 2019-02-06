@@ -1,3 +1,6 @@
+# Windows soft links
+*.lnk
+
 # Compiled class file
 *.class
 

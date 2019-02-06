@@ -122,6 +122,10 @@ button#toTopButton:hover {
 	font-weight: normal;
 }
 
+.bottomBorder {
+	border-bottom: 1px solid #ddd;
+}
+
 .sidebarNav {
 	overflow-y: auto;
 }

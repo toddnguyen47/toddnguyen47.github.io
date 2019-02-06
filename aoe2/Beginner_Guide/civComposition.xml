@@ -16,8 +16,8 @@
     <primary>Cavaliers (Stables) or Camels (Stables)</primary>
     <support>Skirmishers (Archery Range)</support>
     <notes>Berbers have cheaper cavalry, so you should use this to your advantage. An army of 
-    Cavaliers and Camels backed up by Skirmishers to take care of those pesky Halberdiers
-    can go a long way.</notes>
+    Cavaliers and Camels backed up by Skirmishers - to take care of those pesky Halberdiers -
+     can go a long way.</notes>
   </civ>
   <civ>
     <name>Britons</name>
@@ -26,6 +26,209 @@
     <notes>The Britons' claim to fame are their long-range archers, including their unique unit
     Longbowman and their Arbalests from the Archery Range. Light Cavalry to take care of enemy
     Skirmishers and Siege Units, and Halberdiers to take care of enemy Cavaliers/Paladins,
-    which are the biggest counters to archers.</notes>
+    which are the biggest counters to archers. Rain on 'em with your Longbowmen!</notes>
+  </civ>
+  <civ>
+    <name>Burmese</name>
+    <primary>Arambai (Castle) or Battle Elephants (Castles)</primary>
+    <support>Skirmishers (Barracks), Halberdier (Barracks)</support>
+    <notes>The Burmese has very good Battle Elephants. Their unique unitm, the Arambai, is very
+    inaccurate at long range, so you have to put them very close (2 tiles away max) to the enemy
+    to do damage. Since both the Arambai and the Battle Elephants are cavalry, the opposing
+    civs will build Halberdiers and Camels to counter you. To kill Halberdiers, Skirmishers
+    will do the trick. For Camels, your Halberdiers can take care of them.</notes>
+  </civ>
+  <civ>
+    <name>Byzantines</name>
+    <primary>Arbalests (Archery Range) or Cataphracts (Castle) or Paladins (Barracks)</primary>
+    <support>Halberdiers (Barracks), Skirmishers (Archery Range), Camels (Stables),
+    Hussars (Stables)</support>
+    <notes>The Byzantines are kings of "trash" units, i.e. units that do not cost gold. These
+    units are the Skirmishers, the Halberdiers, and the Hussar. Trash units for Byzantines
+    cost less resources than other civs, except for Hussars.
+    However, that means you should spend gold on more powerful units. The Byzantines unfortunately
+    lack the final Melee Offensive upgrade at the Blacksmith (Blast Furnace), so their melee units
+    deal less damage than other civs. The exception is their unique unit, the Cataphracts. The
+    Cataphracts deal area of effect damage once the Imperial tech Logistica is researched at the
+    Castle, meaning for every attack they will do an extra 5 damage to any nearby units. Cataphracts
+    also deal bonus damage to infantry. The Byzantines also get fully upgraded Arbalests, so their
+    Archery range units are strong. Combined either Arbalests and Cataphracts with their cheaper
+    trash units as supporting units and the Byzantines can have a formidable military force.</notes>
+  </civ>
+  <civ>
+    <name>Celts</name>
+    <primary>Scorpions (Siege Workshop)</primary>
+    <support>Halberdiers (Barracks), Woad Raider (Castle)</support>
+    <notes>The Celts excel in Siege Workshop units, particularly the Scorpions and the Onagers.
+    Onagers can do friendly fire damage though, thus they are a bit harder to use than
+    Scorpions. Siege Workshops shred through archers and skirmishers, but they struggle against
+    melee and other siege units. To take care of that, the Halberdiers can deal with any
+    cavalry trying to get to your siege units, while the Woad Raiders can take care of opposing
+    siege units.</notes>
+  </civ>
+  <civ>
+    <name>Chinese</name>
+    <primary>Chu Ko Nu (Castle) or Scorpions (Siege Workshop)</primary>
+    <support>Light Cavalry (Stables), Halberdiers (Barracks), Camels (Stables)</support>
+    <notes>The Chinese have very good unique units in the Chu Ko Nu. They have less range than
+    other archers, but they do significantly more damage, even to high pierce armor targets
+    such as Rams. However, siege units such as Onagers will still pose a threat to the 
+    low melee armored Chu Ko Nus. To kill siege units, go for Light Cavalry. To kill any
+    cavalry that's trying to get to your archers, go for Halberdiers and Camels.</notes>
+  </civ>
+  <civ>
+    <name>Ethiopians</name>
+    <primary>Arbalests (Archery Range), Scorpions (Siege Workshop)</primary>
+    <support>Halberdiers (Barracks), Hussars (Stables), Shotel Warrior (Castle)</support>
+    <notes>Ethiopians have faster firing archers, thus you can use this advantage by making
+    lots of archers. They also have very strong Siege units with their Imperial unique tech,
+    Torsion Engine. You should have Hussars in front of your archers and siege units as a
+    meat shield, while having Halberdiers to deal with any incoming Cavalry. Shotel Warriors
+    get created very quickly, thus they can be used to defend against opposing Rams, 
+    Skirmishers, and Halberdiers.</notes>
+  </civ>
+  <civ>
+    <name>Franks</name>
+    <primary>Paladins (Stables)</primary>
+    <support>Skirmishers (Archery Range), Halberdiers (Barracks), Throwing Axeman (Castle)</support>
+    <notes>The Franks have one good unit, and that is the Paladin. Granted, they have the best
+    Paladins in the game, so that should be something. They also get free Mill farm upgrades, so
+    their Farms are very good (not as good as Slavs though). Paladins' biggest counters are
+    Halberdiers and Camels. To take care of Halberdiers, go for Skirmishers. Your own Halberdiers
+    take care of opposing Camels. However, your Skirmishers lack the final archer upgrades 
+    in the Blacksmith, so they are not too strong. To combat this, if you have any extra gold,
+    consider building Throwing Axemen to counter the Halberdiers.</notes>
+  </civ>
+  <civ>
+    <name>Goths</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Huns</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Incas</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Indians</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Italians</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Japanese</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Khmer</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Koreans</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Magyars</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Malay</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Malians</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Mayans</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Mongols</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Persians</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Portuguese</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Saracens</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Slavs</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Spanish</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Teutons</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Turks</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Vietnamese</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
+  </civ>
+  <civ>
+    <name>Vikings</name>
+    <primary></primary>
+    <support></support>
+    <notes></notes>
   </civ>
 </civs>
