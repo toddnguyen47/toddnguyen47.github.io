@@ -137,6 +137,17 @@ function loadCivTabs() {
  * Load each civilization's military composition
  */
 function loadCivMilitaryComposition() {
+	$.ajax({
+		type: "GET",
+		url: "civComposition.xml",
+		dataType: "xml",
+		success: function(xmlData) {
+			civ = $(xmlData).find("civ");
+
+			console.log(civ.find("name")[0]["textContent"]);
+		}
+	});
+
 	// Load the JSON that contains civ military composition
 	$.getJSON("civComposition.json", function(data, textStatus, jqXHR) {
 		var civJsonData = data;

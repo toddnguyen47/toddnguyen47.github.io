@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<civs>
+  <civ>
+    <name>Aztecs</name>
+    <primary>Eagle Warriors (Barracks)</primary>
+    <support>Support</support>
+    <notes>Aztecs have very strong Eagle Warriors with their unique
+    technology Garland Wars giving all their infantry +4 attack.
+    Eagle Warriors are fast raiding units that excel against ranged
+    and siege units, however they fall flat against other melee units.
+    That's where your Jaguar Warriors (anti-infantry) and Pikemen
+    (anti-cavalry) come in.</notes>
+  </civ>
+</civs>
