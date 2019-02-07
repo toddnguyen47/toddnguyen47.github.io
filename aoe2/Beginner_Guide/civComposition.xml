@@ -132,21 +132,37 @@
   </civ>
   <civ>
     <name>Indians</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Imperial Camel (Stables)</primary>
+    <support>Skirmishers (Archery Range), Hand Cannoneer (Archery Range after Chemistry is
+    researched at the University)</support>
+    <notes>The Indians have one of the best camels in the game, them being the Imperial Camels.
+    Camels are anti-cavalry, and Indian Camels are especially tanky thanks to their +1 Melee/
+    +1 Pierce armor. Camels are weak against Archers and Halberdiers, both units that Skirmishers can
+    counter. In the late game, Hand Cannoneer can also be used against Halberdiers since Hand
+    Cannoneers get +10 attack against infantry.</notes>
   </civ>
   <civ>
     <name>Italians</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Genoese Crossbowman (Castles)</primary>
+    <support>Hussars (Stables)</support>
+    <notes>The Italians have a great unique unit in the Genoese Crossbowman since these archers
+    are anti-cavalry, thus they innately counter one of the archers' weakness. However, they are
+    still weak to Skirmishers and Siege units, where you can use the Hussars to counter.</notes>
   </civ>
   <civ>
     <name>Japanese</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Arbalests (Archery Range) or Samurai (Castles), Trebuchets (Castles)</primary>
+    <support>Light Cavalry (Stables), Halberdiers (Barracks), Skirmishers (Archery Range),
+    Scorpions (Siege Workshop)</support>
+    <notes>The Japanese have very great infantry (infantry attacks faster) and a complete
+    Archery Range. They also have a complete Blacksmith tree, so any units they go for can be fully
+    upgraded at the Blacksmith. Furthermore, they also have a complete Barracks, save for the
+    Meso-only Eagle Warriors. Thus, you can either go for an army of mass Arbalests combined with
+    Halberdiers and Light Cav, or you can go for Samurai (anti-unique unit), Halberdiers and
+    Skirmishers, depending on the opposing army composition. If you have spare gold in the end
+    game, Heavy Scorpions are also a good choice to counter opposing Archers. Lastly, the Japanes
+    Trebuchets packs and unpacks faster, thus you can destroy a castle, pack your Trebuchet,
+    and move it to destroy the next building much faster than any other civ.</notes>
   </civ>
   <civ>
     <name>Khmer</name>
