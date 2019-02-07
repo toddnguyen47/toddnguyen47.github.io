@@ -101,21 +101,34 @@
   </civ>
   <civ>
     <name>Goths</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Huskarls (Castles and Barracks once Anarchy is researched)</primary>
+    <support>Halberdiers (Barracks), Hussars (Stables)</support>
+    <notes>The Goths have the best infantry in the game because their infantry is cheaper and their
+    Barracks work faster, especially after their Imperial tech Perfusion is researched. The
+    Huskarls, their unique unit, can be created from the Goths' Barracks after their Castle Age tech
+    Anarchy is researched. The Huskarls have very high pierce armor, making them excellent
+    against archers and Scorpions. Huskarls are weak against cavalry and onagers. Halberdiers
+    can handle cavalry, while the Hussars can handle onagers.</notes>
   </civ>
   <civ>
     <name>Huns</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Paladins (Stables) or Cavalry Archer (Archery Range)</primary>
+    <support>Skirmishers (Archery Range), Hussars (Stables), Halberdiers (Barracks)</support>
+    <notes>The Huns are a very aggressive civ, simply because they do not have to waste early
+    resources on building houses. They have a great Stable, with their Stables working 20% faster.
+    They also have cheaper Cavalry Archers if you opt to use them as the backbone of your
+    military. If you opt to go for Paladins, go for Skirmishers to kill off the pesky Halberdiers.
+    If you want to build Cavalry Archers, build some Hussars to take care of skirmishers and 
+    siege. If you see opposing Camels, start making Halberdiers.</notes>
   </civ>
   <civ>
     <name>Incas</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Kamayuk (Castle) or Eagle Warriors (Barracks)</primary>
+    <support>Halberdiers (Barracks), Arbalests (Archery Range), Skirmishers (Archery Range)</support>
+    <notes>Similar to the Aztes, the Incas are a Meso civ with strong infantry units. Their unique
+    unit, the Kamayuk, is anti-cavalry, so if you build them you don't have to build any additional
+    Halberdiers. Kamayuks are weak against opposing infantry and archers, so consider building
+    Arbalests to kill infantry and Skirmishers to kill archers. </notes>
   </civ>
   <civ>
     <name>Indians</name>
