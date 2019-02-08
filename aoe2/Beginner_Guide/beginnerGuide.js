@@ -183,7 +183,7 @@ function getMilitaryCivObject() {
 					var civId = civName.toLowerCase() + "Content";
 
 					$("div#civMilitaryContent").append(
-						$('<div>').attr("class", "tab-pane card col-sm-10 card-body normalFontWeight")
+						$('<div>').attr("class", "tab-pane card card-body normalFontWeight")
 						.attr("id", civId)
 						.attr("role", "tabpanel")
 						.append(
