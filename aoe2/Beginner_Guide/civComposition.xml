@@ -166,27 +166,51 @@
   </civ>
   <civ>
     <name>Khmer</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Scorpions (Siege Workshop) or Battle Elephants (Stables)</primary>
+    <support>Skirmishers (Archery Range), Halberdiers (Barracks), Light Cavalry (Stables)</support>
+    <notes>Khmer has strong Battle Elephants and strong Scorpions after their Imperial tech
+    Double Crossbow is researched. However, both units are gold-intensive, so you should
+    pick only one of the two units to mass. Battle Elephants are very weak to Halberdiers and
+    Monks, thus you'll need Skirmishers for Halberdiers and Light Cavalry for Monks. If you decide
+    to mass Scorpions, go for Halberdiers to stop the opposing cavalry units.</notes>
   </civ>
   <civ>
     <name>Koreans</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Towers, Castles, War Wagons (Castles)</primary>
+    <support>Halberdiers (Barracks), Hussars (Stables)</support>
+    <notes>Koreans have very strong towers and they have a bonus to stone mining, so consider
+    building lots of Towers and Castles for defensive or offensive purposes (tower rushes come
+    to mind). Koreans also have a good Archery Range and a great unique unit in the tanky
+    War Wagons. War Wagons are considered Cavalry Archers and they are fairly slow, so 
+    opposing cavalry can counter them, especially Camels. To counter this, make Halberdiers
+    to kill opposing cavalry. Also, make Hussars to counter any opposing Skirmishers that try to
+    kill your War Wagons.</notes>
   </civ>
   <civ>
     <name>Magyars</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Paladins (Stables) or Cavalry Archers (Archery Range)</primary>
+    <support>Skirmishers (Archery Range), Halberdiers (Barrracks), Hussars (Stables),
+    Magyar Hussars (Castle)</support>
+    <notes>The Magyars have great cavalry as well as great cavalry archers. If you decide to
+    mass Paladins, make Skirmishers to kill opposing Halberdiers and Halberdiers to kill opposing
+    Camels. If you feel more like Cavalry Archers, go for Hussars to kill the Skirmishers and your
+    unique unit Magyar Hussars to kill Siege. Note that if you want to make Magyar Hussars,
+    consider researching the Castle age tech Mercenaries at the Castle so that your Magyar Hussars
+    cost no gold.</notes>
   </civ>
   <civ>
     <name>Malay</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Arbalests (Archery Range), Two-Handed Swordsman (Barracks)</primary>
+    <support>Halberdiers (Barracks), Skirmishers (Archery Range)</support>
+    <notes>Although Malay has access to the Battle Elephant, they do not have access to the
+    2 final Blacksmith cavalry armor upgrades, thus making their cavalry line very very weak.
+    Thus, you should focus on their fully upgraded Arbalests as well as their Two-Handed
+    Swordsman, which costs no gold after the Imperial tech Forced Levy is researched. The
+    Two-Handed Swordsman serve as the Malay's Skirmishers and Halberdiers counters since
+    their Light Cavalry is weak, and since they cost no gold after Forced Levy is researched,
+    the Two-Handed Swordsman is considered a "trash" unit. Their Skirmishers can also be used
+    to counter opposing Skirmishers, although this is not as effective as the Two-Handed
+    Swordsman.</notes>
   </civ>
   <civ>
     <name>Malians</name>
