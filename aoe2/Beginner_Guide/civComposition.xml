@@ -214,21 +214,41 @@
   </civ>
   <civ>
     <name>Malians</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Heavy Camel (Stables) or Cavalier (Stables)</primary>
+    <support>Skirmishers (Archery Range), Pikeman (Barracks)</support>
+    <notes>The Malians have strong Stable units due to their Imperial tech Farimba, giving all their
+    cavalry +5 attack. They unfortunately do not have Paladins, so Heavy Camels are their best units.
+    If the enemy is not building cavalry, you can also consider going Cavaliers. As usual, cavalry
+    can be countered with Halberdiers, so Skirmishers should be made to kill the Halberdiers. Since
+    Malian infantry get extra pierce armor per age as well, Pikeman can also be a good units in case
+    you need to counter opposing siege/archers. The Malians team bonus has their team research
+    at the university 80% faster, thus they can upgrade their towers all the way to keep. If you
+    want to build towers, remember to upgrade them at the University.</notes>
   </civ>
   <civ>
     <name>Mayans</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Plumed Archer (Castle)</primary>
+    <support>Halberdiers (Barracks), Skirmishers (Archery Range), Rams (Siege Workshop),
+    Eagle Warriors (Barracks)</support>
+    <notes>The Mayans have the one of the best unique unit in the game, Plumed Archers, and their
+    cost is also reduced in by 10%/20%/30% per age starting from Feudal Age. As usual, make
+    Halberdiers to counter opposing cavalry, and Skirmishers to counter opposing Skirmishers. While
+    Plumed Archers do have a fair bit of pierce armor, they still do not fight Skirmishers very
+    well. Since the Mayans do not have access to any cavalry, you'll have to do with your own
+    Skirmishers as a cost-effective way to counter opposing Skirmishers. When you have an 
+    excess amount of gold, consider making some Eagles as well. Mayans are VERY weak to opposing
+    siege (Plumed needs to be micro excessively in order to avoid death), and Eagles can
+    greatly help with that weakness.</notes>
   </civ>
   <civ>
     <name>Mongols</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Mangudai (Castle)</primary>
+    <support>Hussars (Stables), Skirmishers (Archery Range), Pikeman (Barracks)</support>
+    <notes>Similar to the Mayans, the Mongols have great archer units in the Mangudai. The Mongols
+    also have Hussars with extra HP, thus they have an effective ounter against opposing
+    skirmishers. For any opposing camels or paladins, consider making some Pikeman if your
+    Mangudai cannot fight back. From what I've seen from pro play though, the Mangudai can
+    usually tear through Paladins given that there are enough number of Mangudais available.</notes>
   </civ>
   <civ>
     <name>Persians</name>
