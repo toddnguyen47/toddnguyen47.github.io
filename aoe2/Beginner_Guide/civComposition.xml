@@ -252,21 +252,37 @@
   </civ>
   <civ>
     <name>Persians</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Paladins (Stables) or War Elephants (Stables)</primary>
+    <support>Skirmishers (Archery Range), Halberdiers (Barracks)</support>
+    <notes>Similar to the Huns, the Persians have great cavalry. Dissimilar to the Huns, the
+    Persians' Archery Range are only decent since they lack Bracer, the last ranged units
+    attack/range upgrade at the Blacksmith. Thus, it can be difficult for Persians to counter
+    opposing Halberdiers with Skirmishers. Your cavalry is great though, so sheer number of
+    paladins might overpower the Halberdiers. To counter opposing camels, build your fully
+    upgraded Halberdiers.</notes>
   </civ>
   <civ>
     <name>Portuguese</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Organ Guns (Stables)</primary>
+    <support>Halberdiers (Barracks), Light Cavalry (Stables)</support>
+    <notes>The Portuguese have good siege units thanks to their Imperial tech Arquebus, which
+    essentially gives Ballistic to your siege units. In other words, their siege units will
+    hit moving targets more accurately. You should also build Halberdiers to counter opposing
+    Cavalry, and Light Cav to counter opposing mangonels.</notes>
   </civ>
   <civ>
     <name>Saracens</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Heavy Camels (Stables) or Arbalests (Archery Range) or Cavalry Archers (Archery
+    Range)</primary>
+    <support>Skirmishers (Archery Range), Hussars (Stables)</support>
+    <notes>The Saracens have a very open tech tree, which means that they can build many types
+    of units. They do specialize in Camels, so that is a good choice to go for. Their Mamelukes
+    are great units, however they are very costly (costs more gold than a Paladin), thus the
+    Mamelukes are hard to mass. To counter opposing Halberdiers, build your own fully upgraded
+    Skirmishers. To counter opposing Siege, you can build fully upgraded Hussars. Also, use
+    your market excessively, as you can sell resources more efficiently than other civs, AND
+    your market costs less wood as well, which can help your fast castle/slinging if that is the
+    strategy you are going for.</notes>
   </civ>
   <civ>
     <name>Slavs</name>
