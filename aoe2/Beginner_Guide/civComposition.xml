@@ -286,9 +286,16 @@
   </civ>
   <civ>
     <name>Slavs</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Onagers (Siege Workshop) or Scorpions (Siege Workshop) or Cavaliers (Stables)</primary>
+    <support>Halberdiers (Barracks), Skirmishers (Archery Range)</support>
+    <notes>The Slavs have cheaper siege units and really, really strong farmers. You'll most
+    likely have more food than you know what to do with. Thus, you can either go for their cheaper
+    siege units, or you can go use all that food for Cavaliers. You can also go for Champions
+    and Halberdiers if you like, since with the Slav's unique tech Druzhina gives their infantry
+    splash damage. The Slavs have pretty weak archer units since they lack the final range
+    and attack upgrade at the Blacksmith (Bracer), so they rely on their siege workshop units to 
+    counter opposing Archers and Skirmishers. However, if you are running out of gold, making
+    Skirmishers is not a bad idea.</notes>
   </civ>
   <civ>
     <name>Spanish</name>
