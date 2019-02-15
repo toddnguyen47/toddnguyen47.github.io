@@ -300,31 +300,64 @@
   <civ>
     <name>Spanish</name>
     <primary>Conquistador (Castle) or Paladins (Stable)</primary>
-    <support></support>
-    <notes></notes>
+    <support>Hussars (Stable), Skirmishers (Archery Range), Halberdiers (Barracks)</support>
+    <notes>The Spanish is one of the few civs who have a fully available Blacksmith tree. Thus,
+    they have many choices of units to go for. If you want some ranged cavalry, go for their
+    unique unit Conquistador who serves a role similarly to a Cavalry Archer. Conq's biggest
+    counters are Skirmishers and Camels, which can be countered by Hussars and Halberdiers,
+    respectively. If you rather go for cavalry, Spanish have fully upgraded Paladins that are
+    very good. In this case, build Skirmishers and Halberdiers to counter opposing Halberdiers
+    and Camels.</notes>
   </civ>
   <civ>
     <name>Teutons</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Teutonic Knights (Castles) or Siege Onager (Siege Workshop) or 
+    Scorpions (Siege Workshop)</primary>
+    <support>Skirmishers (Archery Range), Halberdiers (Barracks)</support>
+    <notes>Teutons is a very defensive civ. Hence, they have great towers as well as very
+    good siege units. Their overall army tends to be very slow but tanky. You can go for an
+    army composition of Teutonic Knights with Skirmishers to counter Archers. If you do make
+    these, consider researching "Heresy" (cost 1000g) at the Monastery so when your units get
+    converted, they'll die instead of being converted. If you opt to go for an army composition
+    of Siege Workshop units, consider making Halberdiers to counter opposing cavalry.</notes>
   </civ>
   <civ>
     <name>Turks</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Janissaries (Castle) or Cavalry Archers (Archery Range)</primary>
+    <support>Hussars (Stables)</support>
+    <notes>The Turks have the worst trash units in the game save for their Hussars. Thus,
+    you must try to keep your gold-intensive units alive. You can either go for Janissaries,
+    which are basically tankier version of Hand Cannoneers that fare a bit worse against
+    infantry but much better against everything else; or, you can go for Cavalry Archers where
+    the Turks have an extra 20 HP after their Castle Age tech Sipahi is researched. To support
+    your Jans/Cav Archers, build Hussars to take care of opposing Skirmishers and siege units.
+    Also, consider making lots of Bombard Cannons from the Siege Workshop as well as building
+    lots of Bombard towers.</notes>
   </civ>
   <civ>
     <name>Vietnamese</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Rattan Archers (Castle) or Arbalests (Archery Range)</primary>
+    <support>Imperial Skirmishers (Archery Range), Light Cavalry (Stables), Halberdiers
+    (Barracks)</support>
+    <notes>The Vietnamese have a great Archery Range, with all their Archery Range units
+    having +10%/15%/20% HP in the Feudal/Castle/Imperial age. They, as well as their team, can
+    also upgrade Skirmishers to Imperial Skirmishers in the Imperial age, which performs much
+    better than the average Skirmishers. Hence, an ideal Vietnamese military will consists of 
+    either Rattan Archers or Arbalests combined with Imperial Skirmishesr and Halberdiers in order
+    to take care of opposing cavalry. If you find siege workshop units giving you trouble,
+    consider making Light Cavalry to deal with them.</notes>
   </civ>
   <civ>
     <name>Vikings</name>
-    <primary></primary>
-    <support></support>
-    <notes></notes>
+    <primary>Berserkers (Castle) or Arbalests (Archery Range)</primary>
+    <support>Skirmishers (Archery Range), Pikemen (Barracks)</support>
+    <notes>The Vikings have a great econ plus a very interesting unique unit, the Berserkers.
+    Berserkers heal their HP over time. Vikings also have a unique Castle Age tech Chieftains
+    that gives their infantry +5/+4 against Knights/Camels respectively, so they make fairly
+    effective cavalry counters. Berserkers are fairly weak against archers, thus build some
+    Skirmishers to counter that. Vikings also have fully upgraded Arbalests if that's what you
+    want to go for. In this case, make Skirmishers to fight opposing Skirmishers and Pikemen
+    (+ Chieftains) to counter opposing cavalry. The Vikings have a very bad Stables, so try
+    not to make too many cavalry if you can.</notes>
   </civ>
 </civs>
