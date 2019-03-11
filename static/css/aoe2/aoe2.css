@@ -130,6 +130,18 @@ button#toTopButton:hover {
 	overflow-y: auto;
 }
 
+.customBotTopMargin {
+	margin: 1em 0em;
+}
+
+.customLeftMargin {
+	margin-left: 0.5em;
+}
+
+.lightGrayBackground {
+	background-color: #ddd;
+}
+
 
 /*Remove borders from buttons with images*/
 button.buttonWithImage {
