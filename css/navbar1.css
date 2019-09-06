@@ -1,0 +1,30 @@
+/* Style the navigation menu */
+.topnavGridContainer {
+    display: grid;
+    grid-template-rows: 2fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.topnavGridContainer #pageTitle {
+    grid-area: "pageTitle";
+}
+
+.topnavGridContainer #btnNavbar {
+    grid-area: "hamburgerMenu";
+    justify-self: end;
+    
+    background-image: url( "/images/Hamburger_icon.png" );
+    background-size: 3em 3em;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+
+    width: 3em;
+    height: 3em;
+}
+
+
+/* Hide all links inside the navigation menu except for logo and home */
+div#navLinks {
+    display: none;
+}
