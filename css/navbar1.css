@@ -7,10 +7,13 @@
 
 .topnavGridContainer #pageTitle {
     grid-area: "pageTitle";
+    /* Align via internal rows */
+    align-self: center;
 }
 
 .topnavGridContainer #btnNavbar {
     grid-area: "hamburgerMenu";
+    /* Align via internal columns */
     justify-self: end;
     
     background-image: url( "/images/Hamburger_icon.png" );
