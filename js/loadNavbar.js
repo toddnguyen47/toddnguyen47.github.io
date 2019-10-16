@@ -6,7 +6,11 @@
  * Load the navbar.
  */
 var loadNavbar = function() {
-	$("div#navbarLocation").load( "/navbar1.html div#topNavMenu" );
+	$("div#navbarLocation").load("/navbar1.html div#topNavMenu",
+		function(responseText, textStatus, jqXHR){
+			if (jqXHR.readyState === 4)
+				bindAllButtons();
+		});
 };
 
 
@@ -25,12 +29,19 @@ var closeNav = function() {
 	$("#overlay").width("0%");
 }
 
+/**
+ * Handle what happens after the page finishes loading.
+ */
+var handlePostLoad = function() {
+	bindAllButtons();
+}
+
+
 // o----------------o
 // | Event Handlers |
 // o----------------o
 var bindAllButtons = function() {
 	$(window).on("resize", function(e) {
-		console.log($("#overlay").width());
 		if ($("#overlay").width() !== 0)
 			openNav();
 	});
@@ -51,25 +62,5 @@ var bindAllButtons = function() {
  * When the DOM finishes loading.
  */
 $(document).ready( function() {
-	let deferredObj = $.Deferred();
-	deferredObj
-		.then (function() {
-			return loadUsingDefers(loadNavbar);
-		}).then (function() {
-			return loadUsingDefers(bindAllButtons);
-		});
-	
-	// Run the code
-	deferredObj.resolve();
+	loadNavbar();
 });
-
-/**
- * Load using a defer statement.
- * @param {function} fn pointer to a function
- */
-function loadUsingDefers(fn) {
-	let internalDeferred = $.Deferred();
-	fn();
-	return internalDeferred.resolve();
-}
-
