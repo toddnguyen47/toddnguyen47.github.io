@@ -9,21 +9,40 @@ var loadNavbar = function() {
 	$("div#navbarLocation").load( "/navbar1.html div#topNavMenu" );
 };
 
+
+/**
+ * Open the navigation top menu.
+ */
+var openNav = function() {
+	$("#overlay").width($('body').outerWidth());
+}
+
+
+/**
+ * Close the navigation bar.
+ */
+var closeNav = function() {
+	$("#overlay").width("0%");
+}
+
 // o----------------o
 // | Event Handlers |
 // o----------------o
-var bindBtnNavbar = function() {
+var bindAllButtons = function() {
+	$(window).on("resize", function(e) {
+		console.log($("#overlay").width());
+		if ($("#overlay").width() !== 0)
+			openNav();
+	});
+
 	$("button#btnNavbar").click(function (e) { 
 		e.preventDefault();
+		openNav();
+	});
 
-		let divNavLinks = $("div#navLinks");
-		let cssDisplayVal = divNavLinks.css( "display" );
-
-		if (cssDisplayVal == "none") {
-			$(divNavLinks).show();
-		} else {
-			$(divNavLinks).hide();
-		}
+	$("button#closeBtn").click(function(e) {
+		e.preventDefault();
+		closeNav();
 	});
 }
 
@@ -31,21 +50,26 @@ var bindBtnNavbar = function() {
 /**
  * When the DOM finishes loading.
  */
-$( document ).ready( function() {
+$(document).ready( function() {
 	let deferredObj = $.Deferred();
 	deferredObj
 		.then (function() {
-			let internalDeferred = $.Deferred();
-			// Load navbar
-			loadNavbar();
-			// We don't need .promise() yet; just resolve the deferred
-			return internalDeferred.resolve();
+			return loadUsingDefers(loadNavbar);
 		}).then (function() {
-			let internalDeferred = $.Deferred();
-			bindBtnNavbar();
-			return internalDeferred.resolve();
+			return loadUsingDefers(bindAllButtons);
 		});
 	
 	// Run the code
 	deferredObj.resolve();
 });
+
+/**
+ * Load using a defer statement.
+ * @param {function} fn pointer to a function
+ */
+function loadUsingDefers(fn) {
+	let internalDeferred = $.Deferred();
+	fn();
+	return internalDeferred.resolve();
+}
+

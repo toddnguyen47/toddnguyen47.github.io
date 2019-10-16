@@ -1,26 +1,11 @@
-/* Style the navigation menu */
-.topnavGridContainer {
-    display: grid;
-    grid-template-rows: 2fr;
-    grid-template-columns: 1fr 1fr;
-}
-
-.topnavGridContainer #pageTitle {
-    grid-area: "pageTitle";
-    /* Align via internal rows */
-    align-self: center;
-}
-
-.topnavGridContainer #btnNavbar {
-    grid-area: "hamburgerMenu";
-    /* Align via internal columns */
-    justify-self: end;
-    
+/* Ref: https://www.w3schools.com/howto/howto_js_fullscreen_overlay.asp */
+#btnNavbar {
     background-image: url( "/images/Hamburger_icon.png" );
     background-size: 3em 3em;
     background-position: center;
     background-color: transparent;
     border: none;
+    float: right;
 
     width: 3em;
     height: 3em;
@@ -28,6 +13,54 @@
 
 
 /* Hide all links inside the navigation menu except for logo and home */
-div#navLinks {
-    display: none;
+div#overlay {
+    /* display: none; */
+    width: 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    transition: 0.25s;
+
+    /* Hide the content when the width is 0% */
+    overflow-x: hidden;
+    
+    /* Sits on top */
+    position: fixed;
+    z-index: 10;
+}
+
+.rightFlex {
+    /* Align right */
+    display: flex;
+    justify-content: flex-end;
+}
+
+div#overlayContent {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+}
+
+/* Style the menu links */
+div#overlayContent a {
+    display: block;
+    text-decoration: none;
+    color: rgb(150, 150, 150);
+}
+
+div#overlayContent a:hover {
+    background-color: lightgreen;
+}
+
+button.transparentButton {
+    width: 5em;
+    height: 5em;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+button.transparentButton .transparentButtonText {
+    font-size: 5em;
+    color: rgb(150, 150, 150);
 }
