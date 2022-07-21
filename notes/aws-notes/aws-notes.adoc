@@ -1,0 +1,578 @@
+= AWS Notes
+Todd Nguyen
+:source-highlighter: pygments
+:pygments-style: gruvbox
+:pygments-linenums-mode: inline
+:toc:
+
+== Summary
+
+AWS Notes
+
+== S3
+
+* We need to translate from `web hosting` to API call
+* API Gateway to split into CRUD lambda calls
+
+== Module 2 - Building a Web App in AWS
+
+* Audio files, host the applications
+* S3 bucket to host our app
+* Another S3 bucket to host our MP3 / audio files
+* Lambda files in the BG doing functionality
+* Store items in DynamoDB (limit of 400 Kb)
+  ** Items too big to store in DynamoDB -> store in S3 buckets instead
+* IAM to use authentication & authorization
+* Use the API gateway to expose
+  ** Cognito will be used for user authentication
+* For S3 to be HTTPS, it needs to be behind a Load Balancer or a Cloud Distribution
+
+== How to Access AWS programmatically
+
+* Everything in AWS has to be a HTTPS signed requests
+* 400 is client error (request was **NOT** ok)
+* 500 is server error (request was ok)
+* AWS management console is using the SDK in the background
+
+**Why use AWS SDKs?**
+
+* built-in resilience
+  ** logic for retries / errors / timeouts
+  ** retry is exponential backoff (wait for 1, 2, 4, 8, 16 seconds, etc)
+* API:
+  ** Low-level
+    *** client connection
+    *** one method per service operation
+  ** High-level
+    *** resource-level connection
+    *** has one CLASS per conceptual resource
+    *** defines service resource and individual resources
+
+* Example S3 command
+
+[source, shell]
+----
+aws s3 ls s3://mybucket --recursive
+
+# <base_call> <service (command)> <subcommand> <target> <parameters>
+----
+
+* Synchronous / Blocking: Client makes a request and waits for command to complete
+* Asynchronous:
+  ** poll waiters to get status
+  ** wait until table becomes ACTIVE
+* Python3 error: `botocore.exceptions.ClientError`
+
+## Module 3
+
+.get caller identity
+[source, shell]
+----
+aws sts get-caller-identity
+
+# sts = secure <> <>
+----
+
+* Amazon CloudWatch allows you to monitor CPU, disk I/O, and network throughput
+* Each AWS SDK implements automatic retry logic
+* Can isolate AWS by locking version
+
+## Module 4 - Getting Started with Permissions
+
+* Look at IAM (AWS Identity and Access Management)
+* IAM holds onto a collection of users
+  ** Different set of app users instead of devs
+* Preferable to assign permissions to a `User group` rather than a `user`
+  ** Users become members of group
+* **A group CANNOT contain another group!**
+  ** Users can be part of multiple groups
+* Policies and permissions -> Users, User Groups
+* Policies and permissions -> Roles
+  ** Temporary tokens can come into the principle of a role
+* Resource-based policies vs. Identity-based policies
+  ** Resource-based policies: resource can be s3 bucket;decryption ticket; etc
+    *** `"Principal"`
+    *** In the resource-based policies example, the `"Condition"` makes the deny policy not applied to certain IP addresses
+  ** Identity-based policies:
+    *** By annotating a `version`, you can use variables!
+    *** No version = defaults to 2008. First line should always be `"Version"`
+    *** `Principal` is ASSUMED on identity based policies
+
+.Identity-based policy
+
+[source, json]
+----
+{
+  "Version": "2012-10-17",
+  "Id": "s3policyId1",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Action": "",
+      "Resource": "",
+    }
+  ]
+}
+----
+
+* `arn` refer to objects, you'll need `notes/*` (the slash)
+  ** bucket you don't need the slash
+  ** `notes` isn't actually a folder in terms of S3. It's there for the conceptual aspect of a folder
+
+**Permission Boundaries**
+
+* Guard rail on an account / individual so they are limited so what they can do
+* They are used to set MAXIMUM permissions; usually it's to deny all except for things stated in the `permission boundaries`
+
+* IAM user accounts are NOT always required
+  ** As long as we can get some identity, we can get the concept of `Roles`
+  ** Roles also have permissions
+  ** Roles and tokens are **TEMPORARY**; however, roles can be re-assumed
+  ** Assume the role (API Call), then you'll get a new permission based on the role
+* Roles gives us the ability to hand out permissions to anyone we want
+
+**Roles: Example**
+
+* Can request access to `UpdateApp` role -> temporary credentials are granted -> user update S3 bucket with role credentials
+* Can assign `UpdateApp` role to a lambda function; lambda can then execute with that role permissions
+
+* You can use different profiles, as long as the profile name matches in `.aws/config` and `.aws/credentials` (`credentials` is the PASSWORD file)
+
+**Sign requests with credentials**
+
+* We have to sign Signature Version 4 (SigV4)
+* Why? So we can verify, protect, etc.
+* SDK will sign for us (Yay!)
+* Whenever you look at a role, look at the `Trust relationships` tab
+  ** `"Principal"`` will show up!
+  ** Allows AWS lambda to take on the particular role
+* Temporary credentials do not need to be rotated or explicitly revoked; permanent (user groups / user accounts) need to be rotated or explicitly revoked
+
+== Module 5 - S3
+
+3 types of storages:
+
+* Block Storage
+* File Storage
+* Object Storage
+  ** S3 standard is the most expensive from a byte standpoint, but the cheapest in terms of accessibility
+* S3 bucket has Object ACLs and Bucket ACLs, but they are never used nowadays as we prefer to use IAM permissions instead
+
+**CLI**
+
+* low-level commands: `s3api`
+* high-level commands: `s3`
+
+**Integrating with S3 using SDK**
+
+* Create a S3 client (STUB) and use the client to make requests into the S3 service
+* `s3client` is a "low level" client interface, `s3resource` is a "high level" resource interface
+* `ETag` is the MD5 hash of the object
+* Data is stored in S3 buckets as objects. Objects can be any kind of file
+* An S3 bucket is NOT created globally; it is created within a region. It only has a globally unique name (dependent on a region)
+* AWS SDKs define low-level APIs for Amazon S3, which are mapped to the underlining AWS REST API operations
+* Enabling an S3 bucket for website hosting does NOT change its endpoint; it gives you a new endpoint
+* All objects and buckets are PRIVATE by default
+* Amazon S3 ACLs are NOT configured through IAM
+
+## Module 6 - Processing Your Storage Operations
+
+* Bucket Operations:
+  ** Create
+  ** List
+  ** NO delete (?)
+* 404 means bucket does not exist, so proceed with creating the bucket
+* Bucket needs a region; its bucket name is unique within the AWS North America cloud / single namespace
+
+**Working with Objects**
+
+* Objects go into buckets
+* Objects has a unique key within that bucket
+* >= 5 GB: Consider uploading multi-parts
+* Get a complete object or get an array of bytes
+
+
+**S3 Select**
+
+* Retrieveonly a subset of data from an object
+* `InputSerliazation`
+
+**Grant temporary access to objects**
+
+* Request to a bucket
+  ** Use a pre-signed URL
+* Grants PUT or GET access
+* Grant different types of permissions for the URLs
+* Applies to ONE object
+* Use parameter `--exclude` a S3 bucket
+* Large scale processing of items
+
+### S3 Batch Operations - Large-scale processing
+
+* For large processes
+
+**Host a static website**
+
+* has default `index.html` and `error.html`
+* static files only
+* S3 cannot host HTTPS; need to expose S3 into a cloud front distribution
+
+**Knowledge check**
+
+* Recommended for multipart upload for objects larger than 100 MB in size
+* Some services have APIs that require pagination (e.g. S3)
+* With presigned URLs, you can share specific S3 objects with time-limited access
+* Use S3 Select with SQL-like querying; cannot download OBJECTS, as S3 Select can only select some kind of table
+* By default, Amazon S3 event notifications are NOT sent in response to any actions in Amazon S3
+* A web server uses CORS to allow or deny the loading of resources stored within ANOTHER domain
+
+## Module 7 - Getting Started with Databases
+
+* Partition key (required) / Hash
+  ** The data is going to live in a partition according to its partition key
+* Sort key (optional) / Range
+* Attributes
+* Primary key (Partition + Sort key) has to be UNIQUE
+* Read capacity unit (RCU): Number of strongly consistent reads per second of items up to 4 KB in size
+  ** Eventually consistent reads use HALF the provisioned read capacity
+  ** Strongly = if you read and someone has made an update, as a reader you'll have to wait and then you'll get the updated item
+  ** Transactional reads cost double
+* Write capacity unit (WCU): Number of 1-KB writes per second
+  ** Transacational writes cost double
+* Throughput is divided evenly among partitions
+
+### Secondary Indices / Indexes
+
+* You can query data based on non-primary key attributes
+
+* Two types:
+  ** Global secondary index
+  ** Local secondary index
+* No need for uniqueness in indices
+  ** You'll get more than one record back
+
+*Local secondary index*
+
+* MUST have the same _partition_ key
+* Use a different attribute as my sort key
+* A local secondary index has to be created at the same time as when the table is created
+  ** If you forget when you create the table, you'll have to recreate the table
+* Partitipates in the partitioning of the table
+
+*Global secondary index*
+
+* Can be added and removed at any time
+* Global has its own partitioning
+* Does NOT have to be the same partition key
+* You might encounter throttling
+
+*Adaptive Capacity*
+
+* Minimize throttling
+* Provision what you need
+
+### Accessing DynamoDB
+
+*Locally*
+
+* Apache Maven dependency or Docker Image
+* Set up DynamoDB locally!
+
+*PartiQL*
+
+* SQL-compatible query access
+* Queries compatible with DynamoDB console / NoSQL Workbench / AWS CLI / DynamoDB APIs
+
+*AWS CLI*
+
+* Use the `aws dynamodb put-item --table-name Notes --item '{}'`
+  ** The command above is low level as you'll need to put the type as the key and the value as the value, e.g. `{"S": "StudentA"}`
+
+*Programmatic interfaces*
+
+* Object Persistence Interface
+* Document Interface
+* Low-Level Interface
+
+*Example*
+
+* Must provide `ProvisionedThroughput` even if it's dynamic, as dynamic will use this item as the initial seed
+
+### Request and Response Model
+
+* Under the hood, the GET request is a POST call as we need a JSON payload
+
+### Check your knowledge
+
+* Relational databases DO need a fixed schema
+* Amazon DynamoDB stores data in ITEMS, not rows
+* Each DynamoDB attribute has a name, data type, and value
+  ** 400 KB per item
+* You can access DynamoDB locally; does not need AWS Web service
+* AWS SDK Document interface for DynamoDB, you do NOT need to specify data type descriptors for documents OR objects
+  ** Document you are given a schema and it'll translate for ya
+  ** Object can do the above as well
+
+## Module 8
+
+*Table Design*
+
+* Data size?
+* Data shape?
+
+*Partition key design*
+
+* Selecting a key requires
+  ** Common access patterns
+  ** High cardinality
+  ** Well known to the application
+* A good spread across partition
+  ** Bad values example: Gender (only a few partitions)
+  ** Good example: User ID
+
+*Index design*
+
+* Use secondary indexes / indices
+* Keep related data together with a common partition key
+* Use a sort order to distinguish items within the same partition key
+
+*Choosing initial throughput*
+
+* Provisioned vs. On-demand
+
+*Working with Tables*
+
+* CLI: use `--cli-input-json` file
+  ** JSON files / declarative provisioning are also used by templates
+
+### Creating an item
+
+* Use a `put-item` call
+  ** Writes it completely OR completely replace it
+* If you want to replace certain attributes, use the `Update` call
+* A `Put` needs at least a primary key and any attributes associated with that value
+* A `batch-write-item` depends on a JSON file to describe items
+  ** Allows you to write to different tables at the same time
+  ** `BatchWriteItem` supports `DeleteRequest` and `PutRequest`
+
+### Process Data
+
+* Scan with filter -> NOT RECOMMENDED! We are going to hit ALL the items in the DB
+
+*Read an item*
+
+* `get-item`
+* supplies the pieces that make up the Primary Key (partition key + sort key, as an example)
+* No key? No problem. Use a QUERY
+
+*Querying data*
+
+* Specify partition key name and avlue as an equality condition
+* Must include a key condition expression
+* A second condition, if a sort key is provided
+* Maximum of 1 MB of data retrieved
+* Use a local secondary index for a different attribute
+
+Paginating Results
+
+* DynamoDB returns a result of only 1 MB in size or less
+* Resulst are divided into pages of data
+* Check for `LastEvaluatedKey`, as there could be more results
+  ** If this is empty then you have reached the last result
+* SDK can bring it to a higher level
+
+*Scan*
+
+* These are EXPENSIVE depending on how many items we have
+* Returns a result set; maximum of 1 MB data retrieved
+* Filter expressions are applied after a scan finishes but before both results are returned
+
+### Updating an Item
+
+* `UpdateItem` updates only passed attributes
+* `UpdateItem` operations are _unconditional_ by default, meaning it will always update an item
+
+*Conditional Write Operations*
+
+* Use a `--condition-expression`
+  ** Example: `--condition-expression "Favorite NOT yes"`
+
+### DynamoDB Caching Options
+
+* Amazon DynamoDB Accelerator (DAX)
+* Amazon ElastiCache
+
+### Knowledge check
+
+* NoSQL key design concepts include size, shape, and velocity
+* Design partition keys around common access patterns and their level of uniqueness among items in the table
+* Developers should set the table's capacity mode to ON-DEMAND; if you know what your traffic is, use PROVISIONED
+* By default, the DynamoDB write operations (`PutItem`, `UpdateItem`, `DeleteItem`) are UNCONDITIONAL
+* `BatchWriteItem` CANNOT update items; to update items, use the `UpdateItem` action
+  ** Batch can DELETE and PUT, no UPDATE.
+* By design, table scans are NOT more efficient than query
+
+## Module - AWS Lambdas
+
+* AWS Lambda - Event-driven serverless compute
+  ** Two parameters: encapsulation of the event, encapsulation of the context of that invocation
+* AWS turns your code into a container and launches the container on-demand
+* Many things can invoke an AWS Lambda event
+* The function itself becomes the identity
+
+*Invoke*
+
+* Can invoke lambda synchronous
+  ** Invoker has a thread that waits for a response
+  ** No retries
+* Asynchronous (push)
+  ** Amazon S3 can do this
+  ** Amazon SNS (publish / subscribe)
+  ** Built-in retries (2 times)
+* Poll-based (pull)
+  ** Kinesis, DynamoDB streams
+  ** These events are batched up
+  ** Retry: base on source
+
+* Warm start: if the lambda is already warmed up for the invocation of the lambda func
+
+*Concurrency*
+
+* Lambda may be able to cold start another environment: 2+ environments in parallel
+  ** NOTE: `/tmp` folder will be wiped clean on environment clean up
+
+*Minimize Cold Starts*
+
+* Schedule a lambda function
+  ** Create a rule to run a function at a specific interval
+* Provisioned concurrency
+  ** Initialize the specified number of Lambda runtime environments
+
+### Lambda Permissions
+
+* Invocation permissions
+  ** Grant event sources to invoke Lambda
+
+* Processing permissions
+  ** Update the `execution role`
+
+*Developing Options*
+
+* Most likely you'll upload a packaged .zip file
+
+*Planning a Lambda function*
+
+* Programming Model
+  ** Use processes, threads, `/tmp` sockets
+  ** AWS SDKs
+* Stateless
+  ** If it needs something, add it to the `event` input parameter
+  ** Use persistent storage such as DynamoDB if needed
+* Monitoring and logging
+  ** persist data using external storage
+
+* Handler function: Gets passed an `event` object and a `context` object
+  ** `event` object: data sent during invocation
+    *** Amazon S3 event can pass in a list of records
+  ** `context` object: provides information about the current runtime environment
+    *** methods and properties that provide information about the current runtime environment
+
+.Python example
+[source, python, linenums]
+----
+def handler_name(event, context):
+    """a lambda function handler that accepts an `event` object and a `context` object"""
+    return some_value
+----
+
+* Control the runtime environment with versions and aliases
+* Share code with layers
+
+### Knowledge Check
+
+* The AWS Lambda service handles servers, capacity, and deployment needs for you.
+* Your AWS Lambda function needs Processing / Execution role (identity based) permissions to access other AWS resources in your account
+
+## Module 10 - API Gateway / Managing the APIs
+
+* Can invoke via HTTP API or REST API
+* WebSocket APIs: need both a `$connect` and a `$disconnect`
+* Ultimately, API wants to be invoked via HTTP
+* Your API can have versions
+* Two things you define
+  ** Resource -> what you want to do with various HTTP methods (GET, POST, DELETE, etc.)
+  ** `{api-id}` is given to us by the API gateway
+
+
+*Design APIs with Swagger*
+
+* Swagger gives us a language to define APIs
+
+*Testing*
+
+* Left side of AWS = available resources? stages?
+* Can integrate mocks
+
+*Deploy*
+
+* Deploy using different stages
+* In your stages, use ALIASes to your lambda functions
+  ** Pass in stage variables; standard variable `$stageVariables.environment` obtained from the context object
+* Canary release
+  ** Using a percentage, e.g. 10% of users get new version, 90% of users get stable version
+  ** Allow to test performance and develop in parallel
+  ** Once we're ready, promote the canary (100% of users have the new stage / version)
+
+### Knowledge Check
+
+* With Amazon API gateway, developers can create, publish, maintain, monitor, and secure APIs
+* In a canary release deployment, deployment is RANDOM; it is unpredictable
+* Mock intergrations can respond with anything you want
+* A resource is a logical entity that an application can access through a resource path
+* Stage variables are name-value pairs that you can define as configuration attributes with a deployment stage of a REST API
+* To handle a diverse array of API calls intelligently, you can use AWS Lambda function as a CRUD backend
+  ** In our application, we have 4-5 AWS Lambda functions per CRUD call
+
+## Module 11 - Developing a Modern Application
+
+*Characteristics of modern applications*
+
+* Domain-driven design: bounded context
+  ** Knows how to combine with other cells
+* Monolithic: tightly coupled (gross)
+* Microservice: does one thing
+  ** Completely independent
+  ** Fast and independent deployments
+  ** Independent scaling
+* Each service is independent of other services
+* Domain-driven design
+  ** Functionality of microservice is within the context of the domain
+  ** Defines the integration of other domains
+* Interaction patterns - API Driven; Event-Driven
+* API = synchronous
+* Event = asychronous
+
+*Decoupling your monolithic application*
+
+* Start small with simple services to decompose
+* Minimize dependency back to the monolithic
+
+*Serverless*
+
+* No need to worry about virtual machines, etc.
+
+*Orchestration*
+
+* Manage state across distributed tasks while reducing application code and improving resiliency
+
+## Best Practices
+
+**Policies**
+
+* Apply policies to groups
+* Use the principle of LEAST privilege
+* If we want to grant permissions, we need at least ONE allow, NO denies
+* Bucket SHOULD be built out of a TEMPLATE
+* Lambda functions need to be STATELESS
+* Initialize SDK clients and resources OUTSIDE of the handler function
