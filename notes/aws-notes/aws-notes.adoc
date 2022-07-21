@@ -599,6 +599,45 @@ def handler_name(event, context):
 * Third-party federations: you are not forced to use identity pools; you can get tokens either from JWT or SAML
 * Amazon Cognito identity pools can provide AWS credentials for unauthenticated users
 
+## Module 13 - Deploying your application
+
+*12 factor app philosophy*
+
+* 12factor.net
+
+*What is AWS SAM?*
+
+* AWS SAM is an open-source framework used to deploy serverless applications
+* `template.yml` file has our SAM information
+
+*Deployment Strategies*
+
+### Knowledge Check
+
+* AWS SAM templates are an extension of AWS CloudFormation templates
+* Supported languages only need the environment that it runs in to be set up
+* `sam init` initializes a new AWS SAM project with required parameters
+
+## Module 14 - CloudWatch
+
+* Amazon CloudWatch = database of metrics
+* Metrics -> data about the performance of your systems
+* Dimensions
+* Alarms
+* Logs
+* Lambda context logging
+* Amazon CloudWatch aplication `Insights` can help us detect patterns of problems
+
+*AWS X-Ray*
+
+* Can filter
+* Daemon instance
+* Trace -> Segments -> Subsegments
+* Metadata vs. annotations
+  ** Metadata is just data
+  ** Annotations can be used for indexing and filtering
+
+
 ## Best Practices
 
 **Policies**

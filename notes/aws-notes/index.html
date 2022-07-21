@@ -563,6 +563,12 @@ pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
 <li><a href="#_knowledge_check_4">Knowledge Check</a></li>
 </ul>
 </li>
+<li><a href="#_module_13_deploying_your_application">Module 13 - Deploying your application</a>
+<ul class="sectlevel2">
+<li><a href="#_knowledge_check_5">Knowledge Check</a></li>
+</ul>
+</li>
+<li><a href="#_module_14_cloudwatch">Module 14 - CloudWatch</a></li>
 <li><a href="#_best_practices">Best Practices</a></li>
 </ul>
 </div>
@@ -2372,6 +2378,112 @@ pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
 </div>
 </div>
 <div class="sect1">
+<h2 id="_module_13_deploying_your_application">Module 13 - Deploying your application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>12 factor app philosophy</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>12factor.net</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>What is AWS SAM?</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>AWS SAM is an open-source framework used to deploy serverless applications</p>
+</li>
+<li>
+<p><code>template.yml</code> file has our SAM information</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Deployment Strategies</strong></p>
+</div>
+<div class="sect2">
+<h3 id="_knowledge_check_5">Knowledge Check</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>AWS SAM templates are an extension of AWS CloudFormation templates</p>
+</li>
+<li>
+<p>Supported languages only need the environment that it runs in to be set up</p>
+</li>
+<li>
+<p><code>sam init</code> initializes a new AWS SAM project with required parameters</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_module_14_cloudwatch">Module 14 - CloudWatch</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Amazon CloudWatch = database of metrics</p>
+</li>
+<li>
+<p>Metrics &#8594; data about the performance of your systems</p>
+</li>
+<li>
+<p>Dimensions</p>
+</li>
+<li>
+<p>Alarms</p>
+</li>
+<li>
+<p>Logs</p>
+</li>
+<li>
+<p>Lambda context logging</p>
+</li>
+<li>
+<p>Amazon CloudWatch aplication <code>Insights</code> can help us detect patterns of problems</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>AWS X-Ray</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Can filter</p>
+</li>
+<li>
+<p>Daemon instance</p>
+</li>
+<li>
+<p>Trace &#8594; Segments &#8594; Subsegments</p>
+</li>
+<li>
+<p>Metadata vs. annotations</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Metadata is just data</p>
+</li>
+<li>
+<p>Annotations can be used for indexing and filtering</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_best_practices">Best Practices</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -2404,7 +2516,7 @@ pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-21 11:35:58 -0700
+Last updated 2022-07-21 13:40:12 -0700
 </div>
 </div>
 </body>
