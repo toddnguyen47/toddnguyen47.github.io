@@ -4,13 +4,7 @@
   box-sizing: border-box;
 }
 
-html {
-  /* 10 / 16 = 0.625. We can then use font-size in terms of tens */
-  font-size: 62.5%;
-}
-
 body {
-  /* roughly 20px that's scalable! */
-  font-size: 2.0rem;
+  font-size: 1.5rem;
   font-family: sans-serif;
 }
