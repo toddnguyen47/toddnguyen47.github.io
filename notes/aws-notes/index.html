@@ -558,6 +558,11 @@ pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
 </ul>
 </li>
 <li><a href="#_module_11_developing_a_modern_application">Module 11 - Developing a Modern Application</a></li>
+<li><a href="#_module_12_user_access_permissions">Module 12 - User Access Permissions</a>
+<ul class="sectlevel2">
+<li><a href="#_knowledge_check_4">Knowledge Check</a></li>
+</ul>
+</li>
 <li><a href="#_best_practices">Best Practices</a></li>
 </ul>
 </div>
@@ -2258,6 +2263,115 @@ pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
 </div>
 </div>
 <div class="sect1">
+<h2 id="_module_12_user_access_permissions">Module 12 - User Access Permissions</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Can give you JWT token on sign-ins, etc.</p>
+</li>
+<li>
+<p>SAML 2.0: Standards we have to pass security tokens around</p>
+</li>
+<li>
+<p>Amazon Cognito: can do the heavy lifting of authentication and authorization</p>
+</li>
+<li>
+<p>User pool vs. Identity pool</p>
+</li>
+<li>
+<p>User pool</p>
+<div class="ulist">
+<ul>
+<li>
+<p>output is JWT token</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Identity pool</p>
+<div class="ulist">
+<ul>
+<li>
+<p>output is AWS credentials</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>User Pools</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Define user flows</p>
+</li>
+<li>
+<p>Specify security requirements</p>
+</li>
+<li>
+<p>Once the application has the tokens, it will know how to give users access</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Granting access to users with user identity pools</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Identity pools for temporary access to AWS resources</p>
+</li>
+<li>
+<p>Identity pools know to go to AWS STS and get credentials: <a href="https://i.imgur.com/7oAMNxe.png" class="bare">https://i.imgur.com/7oAMNxe.png</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_knowledge_check_4">Knowledge Check</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Amazon Cognito <strong>user pools</strong> does NOT exchange authentication tokens for AWS credentials</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Identity pools</strong> do exchange authentication tokens</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>User and identity pools can be used together for authentication and authorization solutions</p>
+</li>
+<li>
+<p>To define permissions for members of a group, you can assign an AWS Identity and Access Management (IAM) role to an <em>Amazon Cognito group</em></p>
+</li>
+<li>
+<p>JSON Web Token (JWT) payload section contains encoded information about the <strong>CLAIM</strong> of the key</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Claim &#8594; user identity OR authorization</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Third-party federations: you are not forced to use identity pools; you can get tokens either from JWT or SAML</p>
+</li>
+<li>
+<p>Amazon Cognito identity pools can provide AWS credentials for unauthenticated users</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_best_practices">Best Practices</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -2290,7 +2404,7 @@ pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-21 08:52:08 -0700
+Last updated 2022-07-21 11:35:58 -0700
 </div>
 </div>
 </body>

@@ -566,6 +566,39 @@ def handler_name(event, context):
 
 * Manage state across distributed tasks while reducing application code and improving resiliency
 
+## Module 12 - User Access Permissions
+
+* Can give you JWT token on sign-ins, etc.
+* SAML 2.0: Standards we have to pass security tokens around
+* Amazon Cognito: can do the heavy lifting of authentication and authorization
+* User pool vs. Identity pool
+* User pool
+  ** output is JWT token
+* Identity pool
+  ** output is AWS credentials
+
+*User Pools*
+
+* Define user flows
+* Specify security requirements
+* Once the application has the tokens, it will know how to give users access
+
+*Granting access to users with user identity pools*
+
+* Identity pools for temporary access to AWS resources
+* Identity pools know to go to AWS STS and get credentials: https://i.imgur.com/7oAMNxe.png
+
+### Knowledge Check
+
+* Amazon Cognito *user pools* does NOT exchange authentication tokens for AWS credentials
+  ** *Identity pools* do exchange authentication tokens
+* User and identity pools can be used together for authentication and authorization solutions
+* To define permissions for members of a group, you can assign an AWS Identity and Access Management (IAM) role to an _Amazon Cognito group_
+* JSON Web Token (JWT) payload section contains encoded information about the *CLAIM* of the key
+  ** Claim -> user identity OR authorization
+* Third-party federations: you are not forced to use identity pools; you can get tokens either from JWT or SAML
+* Amazon Cognito identity pools can provide AWS credentials for unauthenticated users
+
 ## Best Practices
 
 **Policies**
