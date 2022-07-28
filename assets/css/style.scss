@@ -1,0 +1,14 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+section#main_content {
+  font-size: 1.6rem;
+}
