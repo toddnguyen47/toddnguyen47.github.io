@@ -5,10 +5,16 @@ function listenerSubmitButton(ev: MouseEvent) {
   let noSpecialCharsStr = convertToAscii(input.value);
 
   // Replace all whitespace with a single space
-  noSpecialCharsStr = noSpecialCharsStr.replace(/\s+/, " ");
+  noSpecialCharsStr = noSpecialCharsStr.replace(/\s+/g, " ");
 
   const output = document.getElementById("textAreaOutput") as HTMLInputElement;
   output.value = noSpecialCharsStr;
+
+  // Set number of characters
+  const numberOfCharsSpan = document.getElementById("numberOfChars");
+  if (numberOfCharsSpan !== null) {
+    numberOfCharsSpan.textContent = noSpecialCharsStr.length.toString();
+  }
 }
 
 function convertToAscii(strInput: string): string {
@@ -18,7 +24,7 @@ function convertToAscii(strInput: string): string {
       arr1.push(strInput.charAt(i));
     }
   }
-  return arr1.join("");
+  return arr1.join("").trim();
 }
 
 function listenerSelectAll(ev: MouseEvent) {
