@@ -22,7 +22,7 @@ div#overlay {
 
     /* Hide the content when the width is 0% */
     overflow-x: hidden;
-    
+
     /* Sits on top */
     position: fixed;
     z-index: 10;
