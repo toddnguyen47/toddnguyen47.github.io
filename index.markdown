@@ -14,3 +14,4 @@ Todd's Site
 
 * [About](about.markdown)
 * [Remove special chars](/remove-special-chars)
+* [Notes](/notes)
