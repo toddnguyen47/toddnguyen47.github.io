@@ -3,6 +3,14 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: default
+permalink: /
 ---
 
-Hello world!
+Todd's Site
+
+---
+
+# Navigation
+
+* [About](about.markdown)
+* [Remove special chars](/remove-special-chars)
