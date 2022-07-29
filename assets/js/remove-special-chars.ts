@@ -11,9 +11,21 @@ function listenerSubmitButton(ev: MouseEvent) {
   output.value = noSpecialCharsStr;
 
   // Set number of characters
-  const numberOfCharsSpan = document.getElementById("numberOfChars");
+  const numberOfCharsSpan = document.getElementById("numberOfCharsOutput");
   if (numberOfCharsSpan !== null) {
     numberOfCharsSpan.textContent = noSpecialCharsStr.length.toString();
+  }
+}
+
+function listenerSelectAll(ev: MouseEvent) {
+  const output = document.getElementById("textAreaOutput") as HTMLInputElement;
+  output.select();
+}
+
+function listenerInputTextArea(elem: HTMLInputElement) {
+  const numberOfCharsSpan = document.getElementById("numberOfCharsInput");
+  if (numberOfCharsSpan !== null) {
+    numberOfCharsSpan.textContent = elem.value.length.toString();
   }
 }
 
@@ -25,9 +37,4 @@ function convertToAscii(strInput: string): string {
     }
   }
   return arr1.join("").trim();
-}
-
-function listenerSelectAll(ev: MouseEvent) {
-  const output = document.getElementById("textAreaOutput") as HTMLInputElement;
-  output.select();
 }

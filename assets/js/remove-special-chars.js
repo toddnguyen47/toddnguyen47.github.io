@@ -8,9 +8,19 @@ function listenerSubmitButton(ev) {
     const output = document.getElementById("textAreaOutput");
     output.value = noSpecialCharsStr;
     // Set number of characters
-    const numberOfCharsSpan = document.getElementById("numberOfChars");
+    const numberOfCharsSpan = document.getElementById("numberOfCharsOutput");
     if (numberOfCharsSpan !== null) {
         numberOfCharsSpan.textContent = noSpecialCharsStr.length.toString();
+    }
+}
+function listenerSelectAll(ev) {
+    const output = document.getElementById("textAreaOutput");
+    output.select();
+}
+function listenerInputTextArea(elem) {
+    const numberOfCharsSpan = document.getElementById("numberOfCharsInput");
+    if (numberOfCharsSpan !== null) {
+        numberOfCharsSpan.textContent = elem.value.length.toString();
     }
 }
 function convertToAscii(strInput) {
@@ -21,8 +31,4 @@ function convertToAscii(strInput) {
         }
     }
     return arr1.join("").trim();
-}
-function listenerSelectAll(ev) {
-    const output = document.getElementById("textAreaOutput");
-    output.select();
 }
