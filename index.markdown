@@ -10,8 +10,18 @@ Todd's Site
 
 ---
 
-# Navigation
-
-* [About](about.markdown)
-* [Remove special chars](/remove-special-chars)
-* [Notes](/notes)
+<div class="navigation">
+  <hr>
+  <h2>Navigation</h2>
+  <div class="content">
+    <a class="item" href="/">Home</a>
+    <a class="item" href="/about">About</a>
+    <a class="item" href="/remove-special-chars">Remove special chars</a>
+    <a class="item" href="/notes">Notes</a>
+    <hr>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+</div>

@@ -59,3 +59,32 @@ button.button4 {
     margin: 0.2em auto;
   }
 }
+
+.content {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.content .item {
+  flex: 1 1 0px;
+  text-align: center;
+}
+
+.content a.item {
+  &:hover {
+    background-color: darkred;
+    color: white;
+  }
+}
+
+.content hr {
+  flex-basis: 100%;
+  height: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none;
+}
