@@ -1,6 +1,9 @@
 // $gap-size: 10px;
 // $padding: 15px;
 
+$linkedin-color: #0077b5;
+$github-color: #171515;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -27,7 +30,7 @@
     }
   }
 
-  .inner-container-column {
+  .item-column {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -37,9 +40,24 @@
       text-align: center;
       margin: 5px;
 
-      img.logo {
-        max-width: 64px;
-        height: auto;
+      .social-icon {
+        text-decoration: none;
+
+        .fa-linkedin,
+        .fa-github,
+        .fa-envelope {
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+
+        .fa-linkedin {
+          color: $linkedin-color;
+        }
+
+        .fa-github {
+          color: $github-color;
+        }
       }
     }
   }
