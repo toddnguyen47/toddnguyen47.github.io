@@ -17,9 +17,9 @@ layout: resume-page
 
 <h1>Work Experience</h1>
 {% for my_item in site.data.resume-work %}
-<h2>{{ my_item.company }} — {{ my_item.location }}</h2>
-<p>{{ my_item.position }} || {{ my_item.length-of-employment }}</p>
-<div>
+<div class="item-work-exp">
+  <h2>{{ my_item.company }} — {{ my_item.location }}</h2>
+  <p>{{ my_item.position }} || {{ my_item.length-of-employment }}</p>
   <ul class="expandable-list">
     {% for responsibility in my_item.responsibilities %}
     {% if forloop.index0 < 3 %} <li class="visible">{{ responsibility }}</li>
@@ -34,13 +34,15 @@ layout: resume-page
 
 <h1>Education</h1>
 {% for my_item in site.data.resume-education %}
-<h2>{{ my_item.degree }}</h2>
-<p>{{ my_item.school }}</p>
-<ul>
-  {% for responsibility in my_item.responsibilities %}
-  <li>{{ responsibility }}</li>
-  {% endfor %}
-</ul>
+<div class="item-work-exp">
+  <h2>{{ my_item.degree }}</h2>
+  <p>{{ my_item.school }}</p>
+  <ul>
+    {% for responsibility in my_item.responsibilities %}
+    <li>{{ responsibility }}</li>
+    {% endfor %}
+  </ul>
+</div>
 {% endfor %}
 
 <!-- Disclaimers / Miscellaneous -->

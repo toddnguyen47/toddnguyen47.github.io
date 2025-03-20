@@ -2,6 +2,7 @@ const BUTTON_TEXT_SHOW_MORE = "Show More";
 const BUTTON_TEXT_SHOW_LESS = "Show Less";
 
 const toggleList = (event) => {
+    const defaultTimeout = 300;
     const parent = event.target.parentElement;
     const ul = parent.querySelector('.expandable-list');
     const listItems = ul.querySelectorAll('li');
@@ -15,7 +16,7 @@ const toggleList = (event) => {
             if (isExpanded) {
                 item.style.opacity = "0";
                 item.style.transform = "translateY(-5px)";
-                setTimeout(() => (item.style.display = "none"), 300);
+                setTimeout(() => (item.style.display = "none"), defaultTimeout);
             } else {
                 item.style.display = "list-item";
                 setTimeout(() => {
@@ -27,4 +28,8 @@ const toggleList = (event) => {
     }
 
     button.innerText = isExpanded ? BUTTON_TEXT_SHOW_MORE : BUTTON_TEXT_SHOW_LESS;
+    // Scroll smoothly to the button after expanding the list
+    setTimeout(() => {
+        parent.scrollIntoView({ behavior: 'smooth' });
+    }, defaultTimeout + 50);
 }
