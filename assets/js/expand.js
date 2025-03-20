@@ -27,4 +27,6 @@ const toggleList = (event) => {
     }
 
     button.innerText = isExpanded ? BUTTON_TEXT_SHOW_MORE : BUTTON_TEXT_SHOW_LESS;
+    // Scroll smoothly to the button after expanding the list
+    parent.scrollIntoView({ behavior: 'smooth' });
 }
