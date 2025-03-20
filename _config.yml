@@ -56,5 +56,6 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
+github: [metadata]
 repository: toddnguyen47/toddnguyen47.github.io
 author: Todd Nguyen-Tran
