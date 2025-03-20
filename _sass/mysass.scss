@@ -99,3 +99,12 @@ $github-color: #171515;
 .miscellaneous {
   padding-top: 2em;
 }
+
+.no-text-decoration {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
