@@ -20,3 +20,14 @@
     - Leveraged Git for source control to track changes and shared 20+ code enhancements with engineers, leading to improved collaboration, optimized performance, and maintained code integrity across teams.
     - Improved data processing efficiency by developing custom Object-Relational Mappings (ORMs) for Couchbase NoSQL in Java and Go. Reduced query latency by 30%, enabling faster data retrieval and enhanced performance for high-traffic Java and Go microservices.
     - Enabled seamless data flow by developing services that efficiently processed gigabytes of data daily, ensuring reliable input and output across internal teams. This resulted in a bug-free overall system that enhanced cross-team collaboration and improved overall data accuracy.
+- company: GEORG FISCHER SIGNET
+  location: El Monte, CA
+  position: Software Engineer
+  length-of-employment: 06/2019 - 04/2021
+  responsibilities:
+    - Developed and maintained 3+ large projects using Rust and C++ to read and interpret embedded sensor data, improving data processing speed by 40% and enhancing system reliability and enabling accurate sensor data interpretation for better decision-making.
+    - Built a Python-integrated automated testing suite that replaced 70% of manual testing, reducing test run time by a week, speeding up development cycles and boosting operational productivity for faster release timelines.
+    - Implemented Jenkins as a Continuous Integration server using Docker to automate daily test execution, cutting manual testing time by 2+ hours per day and increasing testing efficiency and accelerating deployment workflows.
+    - Maintained and updated the website using JavaScript, HTML, and CSS, improving site responsiveness by 30% and enhancing functionality and providing a better touchscreen user experience, resulting in increased user satisfaction.
+    - Developed and implemented 20+ automated tests in Java to streamline testing procedures, cutting manual testing efforts by 50% and accelerating development workflows while enhancing testing efficiency.
+    - Provided support for an Android and iOS app, troubleshooting and optimizing Bluetooth connections, increasing connection stability by 25% and enhancing user experience and ensuring smooth device integration across mobile platforms.

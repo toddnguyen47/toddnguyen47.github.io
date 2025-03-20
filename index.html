@@ -16,7 +16,7 @@ layout: resume-page
 </p>
 
 <h1>Work Experience</h1>
-{% for my_item in site.data.resume %}
+{% for my_item in site.data.resume-work %}
 <h2>{{ my_item.company }} — {{ my_item.location }}</h2>
 <p>{{ my_item.position }} || {{ my_item.length-of-employment }}</p>
 <div>
@@ -31,3 +31,19 @@ layout: resume-page
   <button class="expand-btn" onclick="toggleList(event)">Show More</button>
 </div>
 {% endfor %}
+
+<h1>Education</h1>
+{% for my_item in site.data.resume-education %}
+<h2>{{ my_item.degree }}</h2>
+<p>{{ my_item.school }}</p>
+<ul>
+  {% for responsibility in my_item.responsibilities %}
+  <li>{{ responsibility }}</li>
+  {% endfor %}
+</ul>
+{% endfor %}
+
+<!-- Disclaimers / Miscellaneous -->
+<div class="miscellaneous">
+  <p class="small-font">AKA / Previously known as: Tho Nguyen, Todd Nguyen, Todd Nguyen Tran</p>
+</div>
