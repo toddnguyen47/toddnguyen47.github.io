@@ -55,3 +55,6 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+repository: toddnguyen47/toddnguyen47.github.io
+author: Todd Nguyen-Tran
