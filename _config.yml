@@ -18,10 +18,11 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Todd Nguyen-Tran's Page
+title: Todd Nguyen-Tran
 email: todd.nguyen47@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Todd Nguyen-Tran's page, with his resume and some sample repositories.
+  Software Engineer • MS in Computer Science • Creating high-performance, scalable, and resilient microservices to
+  enhance reliability, efficiency, and cost-effectiveness.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
@@ -33,6 +34,7 @@ remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
+  - jekyll-seo-tag
 
 # Exclude from processing.
 # The following items will not be processed, by default.

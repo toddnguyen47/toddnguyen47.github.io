@@ -2,29 +2,32 @@
 # Feel free to add content and custom Front Matter to this file.
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
-layout: default
+layout: resume-page
 ---
 
-<div class="container">
-  <div class="item">
-    <img src="assets/images/tnt-profile-picture-squared.jpg" alt="Todd Nguyen-Tran's profile picture"
-      class="profile-picture" />
-  </div>
-  <div class="item-column">
-    <div class="item">
-      <a href="https://www.linkedin.com/in/toddnguyen47/" target="_blank" rel="noopener noreferrer" class="social-icon">
-        <i class="fa-3x fa-fw fa-brands fa-linkedin"></i>
-      </a>
-    </div>
-    <div class="item">
-      <a href="https://github.com/toddnguyen47" target="_blank" rel="noopener noreferrer" class="social-icon">
-        <i class="fa-3x fa-fw fa-brands fa-github"></i>
-      </a>
-    </div>
-    <div class="item">
-      <a href="mailto:todd.nguyen47@gmail.com" target="_blank" rel="noopener noreferrer" class="social-icon">
-        <i class="fa-3x fa-fw fa-solid fa-envelope"></i>
-      </a>
-    </div>
-  </div>
+<script src="assets/js/expand.js"></script>
+
+<h1>Summary</h1>
+<p>
+  Software engineer with a Master's degree in Computer Science. Demonstrated expertise in Java, Go, and Python,
+  specializing in backend development, REST APIs, and cloud architecture with AWS. Proven ability to design scalable,
+  high-performance microservices that support seamless user experiences. Passionate about exploring new technologies to
+  enhance efficiency, foster collaboration, and elevate team performance.
+</p>
+
+<h1>Work Experience</h1>
+{% for my_item in site.data.resume %}
+<h2>{{ my_item.company }} — {{ my_item.location }}</h2>
+<p>{{ my_item.position }} || {{ my_item.length-of-employment }}</p>
+<div>
+  <ul class="expandable-list">
+    {% for responsibility in my_item.responsibilities %}
+    {% if forloop.index0 < 3 %} <li class="visible">{{ responsibility }}</li>
+      {% else %}
+      <li>{{ responsibility }}</li>
+      {% endif %}
+      {% endfor %}
+  </ul>
+  <button class="expand-btn" onclick="toggleList(event)">Show More</button>
 </div>
+{% endfor %}

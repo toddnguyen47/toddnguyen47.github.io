@@ -1,0 +1,38 @@
+---
+layout: default
+---
+
+<div class="container">
+  <div class="item">
+    <img src="assets/images/tnt-profile-picture-squared.jpg" alt="Todd Nguyen-Tran's profile picture"
+      class="profile-picture" />
+  </div>
+  <div class="item-column">
+    {% for my_item in site.data.social-icon-links %}
+    <div class="item">
+      <a href="{{ my_item.link }}" target="_blank" rel="noopener noreferrer" class="social-icon">
+        <i class="{{ my_item.i-class }}"></i>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="item-column">
+    <div class="item">
+      <span>Proficient in:</span>
+    </div>
+    {% for my_item in site.data.technology-icon-links %}
+    <div class="item">
+      <a href="{{ my_item.link }}" target="_blank" rel="noopener noreferrer">
+        <img src="{{ my_item.src }}" alt="{{ my_item.alt }}" class="{{ my_item.class }}" />
+        <ul>
+          {% for resume_item in my_item.responsibilities %}
+          <li>{{ resume_item }}</li>
+          {% endfor %}
+        </ul>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{{ content }}

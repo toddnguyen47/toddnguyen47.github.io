@@ -1,13 +1,10 @@
-// $gap-size: 10px;
-// $padding: 15px;
-
 $linkedin-color: #0077b5;
 $github-color: #171515;
 
 .container {
   display: flex;
   flex-direction: column;
-  // gap: $gap-size;
+  // gap: 1em;
   align-items: center; // Centers items horizontally
 
   .item {
@@ -38,7 +35,7 @@ $github-color: #171515;
 
     .item {
       text-align: center;
-      margin: 5px;
+      margin: 0.4em;
 
       .social-icon {
         text-decoration: none;
@@ -59,6 +56,38 @@ $github-color: #171515;
           color: $github-color;
         }
       }
+
+      img.technology-icon-3x {
+        width: 3em;
+        height: 3em;
+      }
+
+      img.technology-icon-4x {
+        width: 4em;
+        height: 4em;
+      }
+
+      img.technology-icon-3x,
+      img.technology-icon-4x {
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
     }
+  }
+}
+
+.expandable-list {
+  li {
+    display: none;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  li.visible {
+    display: list-item;
+    opacity: 1;
+    transform: translateY(0);
   }
 }
