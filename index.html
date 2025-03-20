@@ -1,0 +1,49 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
+layout: resume-page
+---
+
+<script src="assets/js/expand.js"></script>
+
+<h1>Summary</h1>
+<p>
+  Software engineer with a Master's degree in Computer Science. Demonstrated expertise in Java, Go, and Python,
+  specializing in backend development, REST APIs, and cloud architecture with AWS. Proven ability to design scalable,
+  high-performance microservices that support seamless user experiences. Passionate about exploring new technologies to
+  enhance efficiency, foster collaboration, and elevate team performance.
+</p>
+
+<h1>Work Experience</h1>
+{% for my_item in site.data.resume-work %}
+<h2>{{ my_item.company }} — {{ my_item.location }}</h2>
+<p>{{ my_item.position }} || {{ my_item.length-of-employment }}</p>
+<div>
+  <ul class="expandable-list">
+    {% for responsibility in my_item.responsibilities %}
+    {% if forloop.index0 < 3 %} <li class="visible">{{ responsibility }}</li>
+      {% else %}
+      <li>{{ responsibility }}</li>
+      {% endif %}
+      {% endfor %}
+  </ul>
+  <button class="expand-btn" onclick="toggleList(event)">Show More</button>
+</div>
+{% endfor %}
+
+<h1>Education</h1>
+{% for my_item in site.data.resume-education %}
+<h2>{{ my_item.degree }}</h2>
+<p>{{ my_item.school }}</p>
+<ul>
+  {% for responsibility in my_item.responsibilities %}
+  <li>{{ responsibility }}</li>
+  {% endfor %}
+</ul>
+{% endfor %}
+
+<!-- Disclaimers / Miscellaneous -->
+<div class="miscellaneous">
+  <p class="small-font">AKA / Previously known as: Tho Nguyen, Todd Nguyen, Todd Nguyen Tran</p>
+</div>

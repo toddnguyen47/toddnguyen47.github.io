@@ -1,0 +1,101 @@
+$linkedin-color: #0077b5;
+$github-color: #171515;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  // gap: 1em;
+  align-items: center; // Centers items horizontally
+
+  .item {
+    max-width: 100%; // Full width
+    text-align: center;
+    // padding: $padding;
+    // border-radius: 5px;
+
+    .profile-picture {
+      @include large {
+        max-width: 50%;
+      }
+
+      @include medium {
+        max-width: 50%;
+      }
+
+      border-radius: 50%; // Makes the image round
+      object-fit: cover; // Ensures the image fits well without stretching
+    }
+  }
+
+  .item-column {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .item {
+      text-align: center;
+      margin: 0.4em;
+
+      .social-icon {
+        text-decoration: none;
+
+        .fa-linkedin,
+        .fa-github,
+        .fa-envelope {
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+
+        .fa-linkedin {
+          color: $linkedin-color;
+        }
+
+        .fa-github {
+          color: $github-color;
+        }
+      }
+
+      img.technology-icon-3x {
+        width: 3em;
+        height: 3em;
+      }
+
+      img.technology-icon-4x {
+        width: 4em;
+        height: 4em;
+      }
+
+      img.technology-icon-3x,
+      img.technology-icon-4x {
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}
+
+.expandable-list {
+  li {
+    display: none;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  li.visible {
+    display: list-item;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.small-font {
+  font-size: 0.8em;
+}
+
+.miscellaneous {
+  padding-top: 2em;
+}
