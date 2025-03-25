@@ -112,3 +112,8 @@ $github-color: #171515;
 .item-work-exp {
   margin-bottom: 2em;
 }
+
+ul.no-left-indent {
+  // Reference: https://stackoverflow.com/a/26213863/6323360
+  padding-left: 1.2em;
+}

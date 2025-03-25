@@ -20,7 +20,7 @@ layout: resume-page
 <div class="item-work-exp">
   <h2>{{ my_item.company }} — {{ my_item.location }}</h2>
   <p>{{ my_item.position }} || {{ my_item.length-of-employment }}</p>
-  <ul class="expandable-list">
+  <ul class="expandable-list no-left-indent">
     {% for responsibility in my_item.responsibilities %}
     {% if forloop.index0 < 3 %} <li class="visible">{{ responsibility }}</li>
       {% else %}
@@ -37,7 +37,7 @@ layout: resume-page
 <div class="item-work-exp">
   <h2>{{ my_item.degree }}</h2>
   <p>{{ my_item.school }}</p>
-  <ul>
+  <ul class="no-left-indent">
     {% for responsibility in my_item.responsibilities %}
     <li>{{ responsibility }}</li>
     {% endfor %}
