@@ -16,22 +16,25 @@ layout: default
     </div>
     {% endfor %}
   </div>
-  <div class="item-column">
-    <div class="item">
+  <div class="item margin-bottom-2x"></div>
+  <div class="grid-container-second-col-only">
+    <div class="first-column">
       <span>Proficient in:</span>
     </div>
-    {% for my_item in site.data.technology-icon-links %}
-    <div class="item">
-      <a href="{{ my_item.link }}" target="_blank" rel="noopener noreferrer">
-        <img src="{{ my_item.src }}" alt="{{ my_item.alt }}" class="{{ my_item.class }}" />
-        <ul>
-          {% for resume_item in my_item.responsibilities %}
-          <li>{{ resume_item }}</li>
-          {% endfor %}
-        </ul>
-      </a>
+    <div class="second-column">
+      {% for my_item in site.data.technology-icon-links %}
+      <div class="item">
+        <a href="{{ my_item.link }}" target="_blank" rel="noopener noreferrer">
+          <img src="{{ my_item.src }}" alt="{{ my_item.alt }}" class="{{ my_item.class }}" />
+          <ul>
+            {% for resume_item in my_item.responsibilities %}
+            <li>{{ resume_item }}</li>
+            {% endfor %}
+          </ul>
+        </a>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
 </div>
 

@@ -1,5 +1,6 @@
 $linkedin-color: #0077b5;
 $github-color: #171515;
+$icon-margin: 0.4em;
 
 .container {
   display: flex;
@@ -22,6 +23,10 @@ $github-color: #171515;
         max-width: 50%;
       }
 
+      @include small {
+        max-width: 75%;
+      }
+
       border-radius: 50%; // Makes the image round
       object-fit: cover; // Ensures the image fits well without stretching
     }
@@ -35,7 +40,7 @@ $github-color: #171515;
 
     .item {
       text-align: center;
-      margin: 0.4em;
+      margin: $icon-margin;
 
       .social-icon {
         text-decoration: none;
@@ -56,24 +61,24 @@ $github-color: #171515;
           color: $github-color;
         }
       }
-
-      img.technology-icon-3x {
-        width: 3em;
-        height: 3em;
-      }
-
-      img.technology-icon-4x {
-        width: 4em;
-        height: 4em;
-      }
-
-      img.technology-icon-3x,
-      img.technology-icon-4x {
-        &:hover {
-          transform: scale(1.2);
-        }
-      }
     }
+  }
+}
+
+img.technology-icon-3x {
+  width: 3em;
+  height: 3em;
+}
+
+img.technology-icon-4x {
+  width: 4em;
+  height: 4em;
+}
+
+img.technology-icon-3x,
+img.technology-icon-4x {
+  &:hover {
+    transform: scale(1.2);
   }
 }
 
@@ -109,11 +114,37 @@ $github-color: #171515;
   }
 }
 
-.item-work-exp {
+.margin-bottom-2x {
   margin-bottom: 2em;
 }
 
 ul.no-left-indent {
   // Reference: https://stackoverflow.com/a/26213863/6323360
   padding-left: 1.2em;
+}
+
+.grid-container-second-col-only {
+  display: grid;
+  /* First column auto-sized, second column flexible */
+  grid-template-columns: auto 1fr;
+  align-items: center;
+
+  .first-column {
+    grid-row: span 100;
+    margin: 0 ($icon-margin/2);
+  }
+
+  .second-column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+
+    .item {
+      margin: 0 ($icon-margin/2);
+    }
+
+    @include large {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
 }
