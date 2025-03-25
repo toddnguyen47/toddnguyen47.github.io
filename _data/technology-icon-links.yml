@@ -18,6 +18,10 @@
   src: assets/images/icons/git-svgrepo-com.svg
   alt: Git
   class: technology-icon-3x
+- link: https://www.linux.org/pages/download/
+  src: assets/images/icons/linux.svg
+  alt: Linux
+  class: technology-icon-3x
 - link: https://www.gnu.org/software/bash/
   src: assets/images/icons/shell-script-icon.png
   alt: Bash Shell Script
