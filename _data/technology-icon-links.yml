@@ -14,6 +14,10 @@
   src: assets/images/icons/aws-svgrepo-com.svg
   alt: AWS
   class: technology-icon-3x
+- link: https://spring.io/
+  src: assets/images/icons/spring.svg
+  alt: Spring Boot
+  class: technology-icon-3x
 - link: https://git-scm.com/
   src: assets/images/icons/git-svgrepo-com.svg
   alt: Git

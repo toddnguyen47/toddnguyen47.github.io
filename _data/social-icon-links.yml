@@ -1,6 +1,9 @@
 - link: https://www.linkedin.com/in/toddnguyen47/
+  alt: LinkedIn
   i-class: fa-3x fa-fw fa-brands fa-linkedin
 - link: https://github.com/toddnguyen47
+  alt: Github
   i-class: fa-3x fa-fw fa-brands fa-github
 - link: mailto:todd.nguyen47@gmail.com
+  alt: Gmail for Email
   i-class: fa-3x fa-fw fa-solid fa-envelope
