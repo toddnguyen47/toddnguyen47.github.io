@@ -1,0 +1,287 @@
+---
+layout: default
+---
+
+<script src="assets/js/food-chain-magnate-calculator.js">
+</script>
+
+<div class="grid-container-2-columns">
+  <div class="row alternating-colors">
+    <div class="grid-item">
+      Pizza Bonus?
+    </div>
+    <div class="grid-item">
+      <input type="checkbox" id="pizza-bonus-checkbox">
+    </div>
+  </div>
+  <div class="row alternating-colors">
+    <div class="grid-item">
+      Burger Bonus?
+    </div>
+    <div class="grid-item">
+      <input type="checkbox" id="burger-bonus-checkbox">
+    </div>
+  </div>
+  <div class="row alternating-colors">
+    <div class="grid-item">
+      Drinks Bonus?
+    </div>
+    <div class="grid-item">
+      <input type="checkbox" id="drinks-bonus-checkbox">
+    </div>
+  </div>
+  <div class="row alternating-colors">
+    <div class="grid-item">
+      Luxuries Manager?
+    </div>
+    <div class="grid-item">
+      <input type="checkbox" id="luxuries-manager-checkbox">
+    </div>
+  </div>
+  <div class="row alternating-colors">
+    <div class="grid-item">
+      House has Garden?
+    </div>
+    <div class="grid-item">
+      <input type="checkbox" id="has-garden-checkbox">
+    </div>
+  </div>
+  <div class="row alternating-colors">
+    <div class="grid-item">
+      Discounts
+    </div>
+    <div class="grid-item">
+      <select id="discounts">
+        <option value="item1">
+          0
+        </option>
+        <option value="item1">
+          -1
+        </option>
+        <option value="item1">
+          -2
+        </option>
+        <option value="item1">
+          -3
+        </option>
+        <option value="item1">
+          -4
+        </option>
+        <option value="item1">
+          -5
+        </option>
+        <option value="item1">
+          -6
+        </option>
+        <option value="item1">
+          -7
+        </option>
+        <option value="item1">
+          -8
+        </option>
+        <option value="item1">
+          -9
+        </option>
+        <option value="item1">
+          -10
+        </option>
+        <option value="item1">
+          -11
+        </option>
+        <option value="item1">
+          -12
+        </option>
+        <option value="item1">
+          -13
+        </option>
+        <option value="item1">
+          -14
+        </option>
+        <option value="item1">
+          -15
+        </option>
+        <option value="item1">
+          -16
+        </option>
+        <option value="item1">
+          -17
+        </option>
+        <option value="item1">
+          -18
+        </option>
+        <option value="item1">
+          -19
+        </option>
+        <option value="item1">
+          -20
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row alternating-colors">
+    <div class="grid-item">
+      Pizzas
+    </div>
+    <div class="grid-item">
+      <select id="pizzas">
+        <option value="item1">
+          0
+        </option>
+        <option value="item1">
+          1
+        </option>
+        <option value="item1">
+          2
+        </option>
+        <option value="item1">
+          3
+        </option>
+        <option value="item1">
+          4
+        </option>
+        <option value="item1">
+          5
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row alternating-colors">
+    <div class="grid-item">
+      Burgers
+    </div>
+    <div class="grid-item">
+      <select id="burgers">
+        <option value="item1">
+          0
+        </option>
+        <option value="item1">
+          1
+        </option>
+        <option value="item1">
+          2
+        </option>
+        <option value="item1">
+          3
+        </option>
+        <option value="item1">
+          4
+        </option>
+        <option value="item1">
+          5
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row alternating-colors">
+    <div class="grid-item">
+      Lemonade
+    </div>
+    <div class="grid-item">
+      <select id="lemonades">
+        <option value="item1">
+          0
+        </option>
+        <option value="item1">
+          1
+        </option>
+        <option value="item1">
+          2
+        </option>
+        <option value="item1">
+          3
+        </option>
+        <option value="item1">
+          4
+        </option>
+        <option value="item1">
+          5
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row alternating-colors">
+    <div class="grid-item">
+      Sodas
+    </div>
+    <div class="grid-item">
+      <select id="sodas">
+        <option value="item1">
+          0
+        </option>
+        <option value="item1">
+          1
+        </option>
+        <option value="item1">
+          2
+        </option>
+        <option value="item1">
+          3
+        </option>
+        <option value="item1">
+          4
+        </option>
+        <option value="item1">
+          5
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row alternating-colors">
+    <div class="grid-item">
+      Beers
+    </div>
+    <div class="grid-item">
+      <select id="beers">
+        <option value="item1">
+          0
+        </option>
+        <option value="item1">
+          1
+        </option>
+        <option value="item1">
+          2
+        </option>
+        <option value="item1">
+          3
+        </option>
+        <option value="item1">
+          4
+        </option>
+        <option value="item1">
+          5
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="grid-container-2-columns margin-top-2x">
+  <div class="row">
+    <div class="grid-item">
+      Payout
+    </div>
+    <div class="grid-item">
+      <span id="payout">
+        0
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="grid-item">
+      <button id="calculate-button">
+        Calculate
+      </button>
+    </div>
+    <div class="grid-item">
+      <button id="reset-button">
+        Reset
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="grid-item span-two-columns">
+      <span id="calculate-error-message" class="red hidden-visibility">
+        A house without a garden cannot exceed 3 items.
+      </span>
+    </div>
+  </div>
+</div>
