@@ -10,19 +10,29 @@ const KEY_PIZZA_BONUS = "fcm_PizzaBonus";
 const KEY_BURGER_BONUS = "fcm_BurgerBonus";
 const KEY_DRINKS_BONUS = "fcm_DrinksBonus";
 
-function calculatePayout({
+const calculateUnitPrice = ({ hasLuxuriesManager, hasGarden, discounts }) => {
+  let unitPrice = BASE_UNIT_PRICE + discounts;
+  if (hasLuxuriesManager) {
+    unitPrice += 10;
+  }
+  if (hasGarden) {
+    unitPrice *= 2;
+  }
+  return unitPrice;
+};
+
+const calculatePayout = ({
   hasPizzaBonus,
   hasBurgerBonus,
   hasDrinksBonus,
-  hasLuxuriesManager,
+  unitPrice,
   hasGarden,
-  discounts,
   numPizzas,
   numBurgers,
   numLemonade,
   numSodas,
   numBeers,
-}) {
+}) => {
   const totalDrinks = numLemonade + numSodas + numBeers;
   const totalPieces = numPizzas + numBurgers + totalDrinks;
   if (hasGarden && totalPieces > MAX_ITEM_WITH_GARDEN) {
@@ -34,16 +44,6 @@ function calculatePayout({
     throw new Error(
       "A house without a garden cannot exceed " + MAX_ITEM_NO_GARDEN + " items",
     );
-  }
-
-  let unitPrice = BASE_UNIT_PRICE + discounts;
-
-  if (hasLuxuriesManager) {
-    unitPrice += 10;
-  }
-
-  if (hasGarden) {
-    unitPrice *= 2;
   }
 
   const calculateItemPayout = (quantity, hasBonus) => {
@@ -59,13 +59,26 @@ function calculatePayout({
   const drinksPayout = calculateItemPayout(totalDrinks, hasDrinksBonus);
 
   return pizzaPayout + burgerPayout + drinksPayout;
-}
+};
 
 document.addEventListener("DOMContentLoaded", function () {
-  const addOnChangeEvent = (checkbox, localStorageKey) => {
+  const addOnChangeEventCheckbox = (checkbox, localStorageKey) => {
     checkbox.addEventListener("change", function () {
       const checkedValue = checkbox.checked;
       localStorage.setItem(localStorageKey, checkedValue.toString());
+    });
+  };
+
+  const addOnChangeEventUnitPrice = (element) => {
+    console.log("BRUH");
+    element.addEventListener("change", function () {
+      console.log("BRUH");
+      const unitPrice = calculateUnitPrice({
+        hasLuxuriesManager: hasLuxuriesManagerElem.checked,
+        hasGarden: hasGardenElem.checked,
+        discounts: discounts,
+      });
+      unitPriceElem.textContent = unitPrice;
     });
   };
 
@@ -75,49 +88,54 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const getSelectOption = (select) => {
-    const text = select.options[select.selectedIndex].text;
-    return parseInt(text);
+    const selectedValue = select.options[select.selectedIndex].value;
+    return parseInt(selectedValue);
   };
 
   const pizzaCheckbox = document.querySelector("#pizza-bonus-checkbox");
-  addOnChangeEvent(pizzaCheckbox, KEY_PIZZA_BONUS);
+  addOnChangeEventCheckbox(pizzaCheckbox, KEY_PIZZA_BONUS);
   loadCheckbox(pizzaCheckbox, KEY_PIZZA_BONUS);
   const burgerCheckbox = document.querySelector("#burger-bonus-checkbox");
-  addOnChangeEvent(burgerCheckbox, KEY_BURGER_BONUS);
+  addOnChangeEventCheckbox(burgerCheckbox, KEY_BURGER_BONUS);
   loadCheckbox(burgerCheckbox, KEY_BURGER_BONUS);
   const drinksCheckbox = document.querySelector("#drinks-bonus-checkbox");
-  addOnChangeEvent(drinksCheckbox, KEY_DRINKS_BONUS);
+  addOnChangeEventCheckbox(drinksCheckbox, KEY_DRINKS_BONUS);
   loadCheckbox(drinksCheckbox, KEY_DRINKS_BONUS);
 
-  const hasLuxuriesManager = document.querySelector(
+  const hasLuxuriesManagerElem = document.querySelector(
     "#luxuries-manager-checkbox",
   );
-  const hasGarden = document.querySelector("#has-garden-checkbox");
-
-  const discount = document.querySelector("#discounts");
-  const pizzas = document.querySelector("#pizzas");
-  const burgers = document.querySelector("#burgers");
-  const lemonades = document.querySelector("#lemonades");
-  const sodas = document.querySelector("#sodas");
-  const beers = document.querySelector("#beers");
-
+  const hasGardenElem = document.querySelector("#has-garden-checkbox");
+  const discountElem = document.querySelector("#discounts");
+  const discounts = getSelectOption(discountElem);
+  const unitPriceElem = document.querySelector("#unit-price");
+  const pizzasElem = document.querySelector("#pizzas");
+  const burgersElem = document.querySelector("#burgers");
+  const lemonadesElem = document.querySelector("#lemonades");
+  const sodasElem = document.querySelector("#sodas");
+  const beersElem = document.querySelector("#beers");
   const calculateButton = document.querySelector("#calculate-button");
   const payoutSpan = document.querySelector("#payout");
   const errorSpan = document.querySelector("#calculate-error-message");
+
+  console.log("BRUH 5", hasLuxuriesManagerElem);
+  addOnChangeEventUnitPrice(hasLuxuriesManagerElem);
+  addOnChangeEventUnitPrice(hasGardenElem);
+  addOnChangeEventUnitPrice(discountElem);
+
   calculateButton.addEventListener("click", function () {
     try {
       const payout = calculatePayout({
         hasPizzaBonus: pizzaCheckbox.checked,
         hasBurgerBonus: burgerCheckbox.checked,
         hasDrinksBonus: drinksCheckbox.checked,
-        hasLuxuriesManager: hasLuxuriesManager.checked,
-        hasGarden: hasGarden.checked,
-        discounts: getSelectOption(discount),
-        numPizzas: getSelectOption(pizzas),
-        numBurgers: getSelectOption(burgers),
-        numLemonade: getSelectOption(lemonades),
-        numSodas: getSelectOption(sodas),
-        numBeers: getSelectOption(beers),
+        unitPrice: parseInt(unitPriceElem.textContent),
+        hasGarden: hasGardenElem.checked,
+        numPizzas: getSelectOption(pizzasElem),
+        numBurgers: getSelectOption(burgersElem),
+        numLemonade: getSelectOption(lemonadesElem),
+        numSodas: getSelectOption(sodasElem),
+        numBeers: getSelectOption(beersElem),
       });
       payoutSpan.textContent = payout;
       errorSpan.classList.add(CLASS_HIDDEN_VISILIBITY);
@@ -137,14 +155,15 @@ document.addEventListener("DOMContentLoaded", function () {
     pizzaCheckbox.checked = false;
     burgerCheckbox.checked = false;
     drinksCheckbox.checked = false;
-    hasLuxuriesManager.checked = false;
-    hasGarden.checked = false;
-    discount.selectedIndex = 0;
-    pizzas.selectedIndex = 0;
-    burgers.selectedIndex = 0;
-    lemonades.selectedIndex = 0;
-    sodas.selectedIndex = 0;
-    beers.selectedIndex = 0;
+    hasLuxuriesManagerElem.checked = false;
+    hasGardenElem.checked = false;
+    discountElem.selectedIndex = 0;
+    unitPriceElem.textContent = 10;
+    pizzasElem.selectedIndex = 0;
+    burgersElem.selectedIndex = 0;
+    lemonadesElem.selectedIndex = 0;
+    sodasElem.selectedIndex = 0;
+    beersElem.selectedIndex = 0;
     payoutSpan.textContent = 0;
     errorSpan.classList.add(CLASS_HIDDEN_VISILIBITY);
   });
