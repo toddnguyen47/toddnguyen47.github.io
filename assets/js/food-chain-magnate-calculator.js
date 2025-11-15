@@ -39,8 +39,7 @@ const calculatePayout = ({
     throw new Error(
       "A house with a garden cannot exceed " + MAX_ITEM_WITH_GARDEN + " items",
     );
-  }
-  if (totalPieces > MAX_ITEM_NO_GARDEN) {
+  } else if (!hasGarden && totalPieces > MAX_ITEM_NO_GARDEN) {
     throw new Error(
       "A house without a garden cannot exceed " + MAX_ITEM_NO_GARDEN + " items",
     );
