@@ -62,6 +62,16 @@ const calculatePayout = ({
 };
 
 document.addEventListener("DOMContentLoaded", function () {
+  const loadCheckbox = (checkbox, localStorageKey) => {
+    const storedChecked = localStorage.getItem(localStorageKey);
+    checkbox.checked = storedChecked === "true";
+  };
+
+  const getSelectOption = (selectInput) => {
+    const selectedValue = selectInput.options[selectInput.selectedIndex].value;
+    return parseInt(selectedValue);
+  };
+
   const addOnChangeEventCheckbox = (checkbox, localStorageKey) => {
     checkbox.addEventListener("change", function () {
       const checkedValue = checkbox.checked;
@@ -70,9 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const addOnChangeEventUnitPrice = (element) => {
-    console.log("BRUH");
     element.addEventListener("change", function () {
-      console.log("BRUH");
+      const discounts = getSelectOption(discountElem);
       const unitPrice = calculateUnitPrice({
         hasLuxuriesManager: hasLuxuriesManagerElem.checked,
         hasGarden: hasGardenElem.checked,
@@ -80,16 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       unitPriceElem.textContent = unitPrice;
     });
-  };
-
-  const loadCheckbox = (checkbox, localStorageKey) => {
-    const storedChecked = localStorage.getItem(localStorageKey);
-    checkbox.checked = storedChecked === "true";
-  };
-
-  const getSelectOption = (select) => {
-    const selectedValue = select.options[select.selectedIndex].value;
-    return parseInt(selectedValue);
   };
 
   const pizzaCheckbox = document.querySelector("#pizza-bonus-checkbox");
@@ -107,7 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   const hasGardenElem = document.querySelector("#has-garden-checkbox");
   const discountElem = document.querySelector("#discounts");
-  const discounts = getSelectOption(discountElem);
   const unitPriceElem = document.querySelector("#unit-price");
   const pizzasElem = document.querySelector("#pizzas");
   const burgersElem = document.querySelector("#burgers");
@@ -118,7 +116,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const payoutSpan = document.querySelector("#payout");
   const errorSpan = document.querySelector("#calculate-error-message");
 
-  console.log("BRUH 5", hasLuxuriesManagerElem);
   addOnChangeEventUnitPrice(hasLuxuriesManagerElem);
   addOnChangeEventUnitPrice(hasGardenElem);
   addOnChangeEventUnitPrice(discountElem);
@@ -158,6 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
     hasLuxuriesManagerElem.checked = false;
     hasGardenElem.checked = false;
     discountElem.selectedIndex = 0;
+    unitPriceElem.textContent = BASE_UNIT_PRICE;
     unitPriceElem.textContent = 10;
     pizzasElem.selectedIndex = 0;
     burgersElem.selectedIndex = 0;
