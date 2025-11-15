@@ -128,6 +128,10 @@ img.technology-icon-4x {
   margin-bottom: 2em;
 }
 
+.margin-top-2x {
+  margin-top: 2em;
+}
+
 ul.no-left-indent {
   // Reference: https://stackoverflow.com/a/26213863/6323360
   padding-left: 1.2em;
@@ -157,4 +161,88 @@ ul.no-left-indent {
       grid-template-columns: repeat(4, 1fr);
     }
   }
+}
+
+nav.main-nav ul, nav.main-nav * ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav.main-nav * li {
+  margin: 0 0.4em;
+}
+
+nav.main-nav * li a {
+  text-decoration: none;
+  color: rgba($header-heading-color, 0.8);
+  display: block;
+}
+
+nav.main-nav * li a:hover {
+  text-decoration: none;
+  color: $header-heading-color;
+}
+
+nav.main-nav * li.current-page {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+nav.main-nav * li ul {
+  display: none;
+}
+
+nav.main-nav * .active-parent {
+  font-style: italic;
+}
+
+nav.main-nav * .active {
+  display: block;
+}
+
+nav .border-top {
+  border-top: 0.2px dashed rgba($header-heading-color, 0.8);
+}
+
+nav .dropdown-items {
+  position: absolute;
+  background-color: rgba($header-bg-color, 0.5);
+  background-image: linear-gradient(120deg, $header-bg-color-secondary, $header-bg-color);
+  text-align: left;
+}
+
+nav .dropdown-items .dropdown-item {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.grid-container-2-columns {
+  max-width: 100%;
+}
+
+.grid-container-2-columns .row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-container-2-columns .row .grid-item {
+  margin: 0.2em 0em 0.2em 0.2em;
+}
+
+.grid-container-2-columns .alternating-colors:nth-child(odd) {
+  background-color: rgba($header-bg-color-secondary, 0.3);
+}
+
+.span-two-columns {
+  grid-column: span 2;
+}
+
+.red {
+  color: red;
+}
+
+.hidden-visibility {
+  visibility: hidden;
 }
