@@ -173,6 +173,7 @@ nav.main-nav ul, nav.main-nav * ul {
 
 nav.main-nav * li {
   margin: 0 0.4em;
+  padding: 0.2em;
 }
 
 nav.main-nav * li a {
@@ -187,7 +188,8 @@ nav.main-nav * li a:hover {
 }
 
 nav.main-nav * li.current-page {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid $header-heading-color;
+  border-radius: 12px;
 }
 
 nav.main-nav * li ul {
@@ -245,4 +247,8 @@ nav .dropdown-items .dropdown-item {
 
 .hidden-visibility {
   visibility: hidden;
+}
+
+.cool-box-shadow {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
