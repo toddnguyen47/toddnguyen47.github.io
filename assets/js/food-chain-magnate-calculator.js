@@ -40,9 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const errorSpan = document.querySelector("#calculate-error-message");
   const resetButton = document.querySelector("#reset-button");
 
-  // Calculate payout on page re-loading, if there are any leftover items
-  calculatePayout();
-
   const loadCheckbox = (checkbox, localStorageKey) => {
     const storedChecked = localStorage.getItem(localStorageKey);
     checkbox.checked = storedChecked === "true";
