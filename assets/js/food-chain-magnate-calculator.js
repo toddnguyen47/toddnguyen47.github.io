@@ -136,6 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
       payoutSpan.textContent = payout;
       errorSpan.classList.add(CLASS_HIDDEN_VISILIBITY);
     } catch (error) {
+      payoutSpan.textContent = 0;
       errorSpan.textContent = error;
       errorSpan.classList.remove(CLASS_HIDDEN_VISILIBITY);
       return;
