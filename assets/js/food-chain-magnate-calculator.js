@@ -21,25 +21,46 @@ const calculateUnitPrice = ({ hasLuxuriesManager, hasGarden, discounts }) => {
   return unitPrice;
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-  const pizzaCheckbox = document.querySelector("#pizza-bonus-checkbox");
-  const burgerCheckbox = document.querySelector("#burger-bonus-checkbox");
-  const drinksCheckbox = document.querySelector("#drinks-bonus-checkbox");
-  const hasLuxuriesManagerElem = document.querySelector(
-    "#luxuries-manager-checkbox",
-  );
-  const hasGardenElem = document.querySelector("#has-garden-checkbox");
-  const discountElem = document.querySelector("#discounts");
-  const unitPriceElem = document.querySelector("#unit-price");
-  const pizzasElem = document.querySelector("#pizzas");
-  const burgersElem = document.querySelector("#burgers");
-  const lemonadesElem = document.querySelector("#lemonades");
-  const sodasElem = document.querySelector("#sodas");
-  const beersElem = document.querySelector("#beers");
-  const payoutSpan = document.querySelector("#payout");
-  const errorSpan = document.querySelector("#calculate-error-message");
-  const resetButton = document.querySelector("#reset-button");
+const calculatePayout = ({
+  hasPizzaBonus,
+  hasBurgerBonus,
+  hasDrinksBonus,
+  unitPrice,
+  hasGarden,
+  numPizzas,
+  numBurgers,
+  numLemonade,
+  numSodas,
+  numBeers,
+}) => {
+  const totalDrinks = numLemonade + numSodas + numBeers;
+  const totalPieces = numPizzas + numBurgers + totalDrinks;
+  if (hasGarden && totalPieces > MAX_ITEM_WITH_GARDEN) {
+    throw new Error(
+      "A house with a garden cannot exceed " + MAX_ITEM_WITH_GARDEN + " items",
+    );
+  } else if (!hasGarden && totalPieces > MAX_ITEM_NO_GARDEN) {
+    throw new Error(
+      "A house without a garden cannot exceed " + MAX_ITEM_NO_GARDEN + " items",
+    );
+  }
 
+  const calculateItemPayout = (quantity, hasBonus) => {
+    let payout = quantity * unitPrice;
+    if (hasBonus) {
+      payout += quantity * BASE_BONUS_PRICE;
+    }
+    return payout;
+  };
+
+  const pizzaPayout = calculateItemPayout(numPizzas, hasPizzaBonus);
+  const burgerPayout = calculateItemPayout(numBurgers, hasBurgerBonus);
+  const drinksPayout = calculateItemPayout(totalDrinks, hasDrinksBonus);
+
+  return pizzaPayout + burgerPayout + drinksPayout;
+};
+
+document.addEventListener("DOMContentLoaded", function () {
   const loadCheckbox = (checkbox, localStorageKey) => {
     const storedChecked = localStorage.getItem(localStorageKey);
     checkbox.checked = storedChecked === "true";
@@ -54,7 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
     checkbox.addEventListener("change", function () {
       const checkedValue = checkbox.checked;
       localStorage.setItem(localStorageKey, checkedValue.toString());
-      calculatePayout();
     });
   };
 
@@ -67,92 +87,62 @@ document.addEventListener("DOMContentLoaded", function () {
         discounts: discounts,
       });
       unitPriceElem.textContent = unitPrice;
-      calculatePayout();
     });
   };
 
-  const calculatePayout = () => {
-    const numPizzas = getSelectOption(pizzasElem);
-    const numBurgers = getSelectOption(burgersElem);
-    const numLemonade = getSelectOption(lemonadesElem);
-    const numSodas = getSelectOption(sodasElem);
-    const numBeers = getSelectOption(beersElem);
-    const totalDrinks = numLemonade + numSodas + numBeers;
-    const totalPieces = numPizzas + numBurgers + totalDrinks;
-    const hasGarden = hasGardenElem.checked;
-    if (hasGarden && totalPieces > MAX_ITEM_WITH_GARDEN) {
-      setErrorMessage(
-        "A house with a garden cannot exceed " +
-          MAX_ITEM_WITH_GARDEN +
-          " items",
-      );
-      return;
-    } else if (!hasGarden && totalPieces > MAX_ITEM_NO_GARDEN) {
-      setErrorMessage(
-        "A house without a garden cannot exceed " +
-          MAX_ITEM_NO_GARDEN +
-          " items",
-      );
+  const pizzaCheckbox = document.querySelector("#pizza-bonus-checkbox");
+  addOnChangeEventCheckbox(pizzaCheckbox, KEY_PIZZA_BONUS);
+  loadCheckbox(pizzaCheckbox, KEY_PIZZA_BONUS);
+  const burgerCheckbox = document.querySelector("#burger-bonus-checkbox");
+  addOnChangeEventCheckbox(burgerCheckbox, KEY_BURGER_BONUS);
+  loadCheckbox(burgerCheckbox, KEY_BURGER_BONUS);
+  const drinksCheckbox = document.querySelector("#drinks-bonus-checkbox");
+  addOnChangeEventCheckbox(drinksCheckbox, KEY_DRINKS_BONUS);
+  loadCheckbox(drinksCheckbox, KEY_DRINKS_BONUS);
+
+  const hasLuxuriesManagerElem = document.querySelector(
+    "#luxuries-manager-checkbox",
+  );
+  const hasGardenElem = document.querySelector("#has-garden-checkbox");
+  const discountElem = document.querySelector("#discounts");
+  const unitPriceElem = document.querySelector("#unit-price");
+  const pizzasElem = document.querySelector("#pizzas");
+  const burgersElem = document.querySelector("#burgers");
+  const lemonadesElem = document.querySelector("#lemonades");
+  const sodasElem = document.querySelector("#sodas");
+  const beersElem = document.querySelector("#beers");
+  const calculateButton = document.querySelector("#calculate-button");
+  const payoutSpan = document.querySelector("#payout");
+  const errorSpan = document.querySelector("#calculate-error-message");
+
+  addOnChangeEventUnitPrice(hasLuxuriesManagerElem);
+  addOnChangeEventUnitPrice(hasGardenElem);
+  addOnChangeEventUnitPrice(discountElem);
+
+  calculateButton.addEventListener("click", function () {
+    try {
+      const payout = calculatePayout({
+        hasPizzaBonus: pizzaCheckbox.checked,
+        hasBurgerBonus: burgerCheckbox.checked,
+        hasDrinksBonus: drinksCheckbox.checked,
+        unitPrice: parseInt(unitPriceElem.textContent),
+        hasGarden: hasGardenElem.checked,
+        numPizzas: getSelectOption(pizzasElem),
+        numBurgers: getSelectOption(burgersElem),
+        numLemonade: getSelectOption(lemonadesElem),
+        numSodas: getSelectOption(sodasElem),
+        numBeers: getSelectOption(beersElem),
+      });
+      payoutSpan.textContent = payout;
+      errorSpan.classList.add(CLASS_HIDDEN_VISILIBITY);
+    } catch (error) {
+      errorSpan.textContent = error;
+      errorSpan.classList.remove(CLASS_HIDDEN_VISILIBITY);
       return;
     }
+  });
 
-    const calculateItemPayout = (quantity, hasBonus) => {
-      let payout = quantity * parseInt(unitPriceElem.textContent);
-      if (hasBonus) {
-        payout += quantity * BASE_BONUS_PRICE;
-      }
-      return payout;
-    };
-
-    const pizzaPayout = calculateItemPayout(numPizzas, pizzaCheckbox.checked);
-    const burgerPayout = calculateItemPayout(
-      numBurgers,
-      burgerCheckbox.checked,
-    );
-    const drinksPayout = calculateItemPayout(
-      totalDrinks,
-      drinksCheckbox.checked,
-    );
-
-    const payout = pizzaPayout + burgerPayout + drinksPayout;
-    payoutSpan.textContent = payout;
-    errorSpan.classList.add(CLASS_HIDDEN_VISILIBITY);
-  };
-
-  const setErrorMessage = (errorMessage) => {
-    errorSpan.textContent = errorMessage;
-    errorSpan.classList.remove(CLASS_HIDDEN_VISILIBITY);
-    payoutSpan.textContent = 0;
-  };
-
-  const checkboxes = [
-    [pizzaCheckbox, KEY_PIZZA_BONUS],
-    [burgerCheckbox, KEY_BURGER_BONUS],
-    [drinksCheckbox, KEY_DRINKS_BONUS],
-  ];
-  for (const [checkbox, key] of checkboxes) {
-    addOnChangeEventCheckbox(checkbox, key);
-    loadCheckbox(checkbox, key);
-  }
-
-  const unitPriceElems = [hasLuxuriesManagerElem, hasGardenElem, discountElem];
-  for (const elem of unitPriceElems) {
-    addOnChangeEventUnitPrice(elem);
-  }
-
-  const foodElems = [
-    pizzasElem,
-    burgersElem,
-    lemonadesElem,
-    sodasElem,
-    beersElem,
-  ];
-  for (const elem of foodElems) {
-    elem.addEventListener("change", function () {
-      calculatePayout();
-    });
-  }
-
+  const resetButton = document.querySelector("#reset-button");
   resetButton.addEventListener("click", function () {
     localStorage.removeItem(KEY_PIZZA_BONUS);
     localStorage.removeItem(KEY_BURGER_BONUS);
