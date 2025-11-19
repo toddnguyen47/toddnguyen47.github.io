@@ -257,3 +257,8 @@ nav .dropdown-items .dropdown-item {
 .cool-box-shadow {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+
+.align-bottom-left {
+  align-self: end;    /* Aligns item to the bottom (end of the column/block axis) */
+  justify-self: start; /* Aligns item to the left (start of the row/inline axis) */
+}

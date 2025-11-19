@@ -42,14 +42,6 @@ layout: default
   </div>
   <div class="row alternating-colors">
     <div class="grid-item">
-      House has a Garden
-    </div>
-    <div class="grid-item">
-      <input type="checkbox" id="has-garden-checkbox">
-    </div>
-  </div>
-  <div class="row alternating-colors">
-    <div class="grid-item">
       Discounts
     </div>
     <div class="grid-item">
@@ -58,6 +50,14 @@ layout: default
         <option value="{{ number }}">{{ number }}</option>
         {% endfor %}
       </select>
+    </div>
+  </div>
+  <div class="row alternating-colors">
+    <div class="grid-item">
+      House has a Garden
+    </div>
+    <div class="grid-item">
+      <input type="checkbox" id="has-garden-checkbox">
     </div>
   </div>
   <div class="row alternating-colors">
@@ -139,7 +139,7 @@ layout: default
     </div>
   </div>
   <div class="row">
-    <div class="grid-item">
+    <div class="grid-item align-bottom-left">
       <button id="calculate-button">
         Calculate
       </button>

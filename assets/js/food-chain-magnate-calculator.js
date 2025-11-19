@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sodasElem.value = "0";
     beersElem.value = "0";
     payoutSpan.textContent = 0;
+    hasGardenElem.checked = false;
   };
 
   const pizzaCheckbox = document.querySelector("#pizza-bonus-checkbox");
@@ -167,7 +168,6 @@ document.addEventListener("DOMContentLoaded", function () {
     burgerCheckbox.checked = false;
     drinksCheckbox.checked = false;
     hasLuxuriesManagerElem.checked = false;
-    hasGardenElem.checked = false;
     discountElem.selectedIndex = 0;
     unitPriceElem.textContent = BASE_UNIT_PRICE;
     unitPriceElem.textContent = 10;
