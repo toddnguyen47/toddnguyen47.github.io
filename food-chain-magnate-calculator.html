@@ -55,7 +55,7 @@ layout: default
     <div class="grid-item">
       <select id="discounts">
         {% for number in site.data.food-chain-magnate-calculator.discounts %}
-          <option value="{{ number }}">{{ number }}</option>
+        <option value="{{ number }}">{{ number }}</option>
         {% endfor %}
       </select>
     </div>
@@ -73,7 +73,7 @@ layout: default
     <div class="grid-item">
       <select id="pizzas">
         {% for number in site.data.food-chain-magnate-calculator.food-tokens %}
-          <option value="{{ number }}">{{ number }}</option>
+        <option value="{{ number }}">{{ number }}</option>
         {% endfor %}
       </select>
     </div>
@@ -85,7 +85,7 @@ layout: default
     <div class="grid-item">
       <select id="burgers">
         {% for number in site.data.food-chain-magnate-calculator.food-tokens %}
-          <option value="{{ number }}">{{ number }}</option>
+        <option value="{{ number }}">{{ number }}</option>
         {% endfor %}
       </select>
     </div>
@@ -97,7 +97,7 @@ layout: default
     <div class="grid-item">
       <select id="lemonades">
         {% for number in site.data.food-chain-magnate-calculator.food-tokens %}
-          <option value="{{ number }}">{{ number }}</option>
+        <option value="{{ number }}">{{ number }}</option>
         {% endfor %}
       </select>
     </div>
@@ -109,7 +109,7 @@ layout: default
     <div class="grid-item">
       <select id="sodas">
         {% for number in site.data.food-chain-magnate-calculator.food-tokens %}
-          <option value="{{ number }}">{{ number }}</option>
+        <option value="{{ number }}">{{ number }}</option>
         {% endfor %}
       </select>
     </div>
@@ -121,7 +121,7 @@ layout: default
     <div class="grid-item">
       <select id="beers">
         {% for number in site.data.food-chain-magnate-calculator.food-tokens %}
-          <option value="{{ number }}">{{ number }}</option>
+        <option value="{{ number }}">{{ number }}</option>
         {% endfor %}
       </select>
     </div>
@@ -145,16 +145,23 @@ layout: default
       </button>
     </div>
     <div class="grid-item">
-      <button id="reset-button">
-        Reset
+      <span id="calculate-error-message" class="red hidden-visibility">
+        Error: A house without a garden cannot exceed 3 items.
+      </span>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="grid-item span-two-columns ">
+      <button id="reset-food-drinks">
+        Reset Food & Drinks
       </button>
     </div>
   </div>
   <div class="row">
-    <div class="grid-item span-two-columns">
-      <span id="calculate-error-message" class="red hidden-visibility">
-        A house without a garden cannot exceed 3 items.
-      </span>
+    <div class="grid-item span-two-columns ">
+      <button id="reset-all-button">
+        Reset All
+      </button>
     </div>
   </div>
 </div>

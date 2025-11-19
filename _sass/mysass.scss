@@ -229,6 +229,11 @@ nav .dropdown-items .dropdown-item {
   grid-template-columns: repeat(2, 1fr);
 }
 
+.grid-container-1-column {
+  display: grid;
+  grid-template-columns: repeat(1fr); /* Creates 2 equal-width columns */
+}
+
 .grid-container-2-columns .row .grid-item {
   margin: 0.2em 0em 0.2em 0.2em;
 }

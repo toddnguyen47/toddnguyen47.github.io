@@ -90,6 +90,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
+  const resetFoodDrinks = function () {
+    pizzasElem.value = "0";
+    burgersElem.value = "0";
+    lemonadesElem.value = "0";
+    sodasElem.value = "0";
+    beersElem.value = "0";
+    payoutSpan.textContent = 0;
+  };
+
   const pizzaCheckbox = document.querySelector("#pizza-bonus-checkbox");
   addOnChangeEventCheckbox(pizzaCheckbox, KEY_PIZZA_BONUS);
   loadCheckbox(pizzaCheckbox, KEY_PIZZA_BONUS);
@@ -114,6 +123,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const calculateButton = document.querySelector("#calculate-button");
   const payoutSpan = document.querySelector("#payout");
   const errorSpan = document.querySelector("#calculate-error-message");
+  const resetFoodDrinksButton = document.querySelector("#reset-food-drinks");
+  const resetAllButton = document.querySelector("#reset-all-button");
 
   addOnChangeEventUnitPrice(hasLuxuriesManagerElem);
   addOnChangeEventUnitPrice(hasGardenElem);
@@ -143,8 +154,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  const resetButton = document.querySelector("#reset-button");
-  resetButton.addEventListener("click", function () {
+  resetFoodDrinksButton.addEventListener("click", function () {
+    resetFoodDrinks();
+  });
+
+  resetAllButton.addEventListener("click", function () {
     localStorage.removeItem(KEY_PIZZA_BONUS);
     localStorage.removeItem(KEY_BURGER_BONUS);
     localStorage.removeItem(KEY_DRINKS_BONUS);
@@ -157,12 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
     discountElem.selectedIndex = 0;
     unitPriceElem.textContent = BASE_UNIT_PRICE;
     unitPriceElem.textContent = 10;
-    pizzasElem.selectedIndex = 0;
-    burgersElem.selectedIndex = 0;
-    lemonadesElem.selectedIndex = 0;
-    sodasElem.selectedIndex = 0;
-    beersElem.selectedIndex = 0;
-    payoutSpan.textContent = 0;
+    resetFoodDrinks();
     errorSpan.classList.add(CLASS_HIDDEN_VISILIBITY);
   });
 });
