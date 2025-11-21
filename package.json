@@ -1,0 +1,20 @@
+{
+  "name": "toddnguyen47.github.io",
+  "version": "1.0.0",
+  "description": "My Page",
+  "repository": {
+    "type": "git",
+    "url": "git@me.github.com:toddnguyen47/toddnguyen47.github.io.git"
+  },
+  "license": "MIT",
+  "author": "Todd Nguyen-Tran",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
