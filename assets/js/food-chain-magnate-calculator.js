@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const resetAllPerPlayerCheckboxes = () => {
     for (const [, bonusKey] of perPlayerCheckboxes) {
-      let localStorageKey = getLocalStorageKey(playerNameInput, bonusKey);
+      let localStorageKey = getLocalStorageKey(playerNameInput.value, bonusKey);
       localStorage.removeItem(localStorageKey);
     }
   };
