@@ -36,3 +36,4 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 # 2025-03-20: Additional gems
 
 gem 'jekyll-seo-tag'
+gem 'openssl', '~> 3.2'
