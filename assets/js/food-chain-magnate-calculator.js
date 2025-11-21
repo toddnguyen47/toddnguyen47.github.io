@@ -10,6 +10,8 @@ const KEY_PIZZA_BONUS = "fcm_PizzaBonus";
 const KEY_BURGER_BONUS = "fcm_BurgerBonus";
 const KEY_DRINKS_BONUS = "fcm_DrinksBonus";
 
+const REGEX_WHITESPACES = new RegExp("\\s+", "g");
+
 const calculateUnitPrice = ({ hasLuxuriesManager, hasGarden, discounts }) => {
   let unitPrice = BASE_UNIT_PRICE + discounts;
   if (hasLuxuriesManager) {
@@ -62,8 +64,38 @@ const calculatePayout = ({
 
 document.addEventListener("DOMContentLoaded", function () {
   const loadCheckbox = (checkbox, localStorageKey) => {
+    localStorageKey = getLocalStorageKey(
+      playerNameInput.value,
+      localStorageKey,
+    );
     const storedChecked = localStorage.getItem(localStorageKey);
     checkbox.checked = storedChecked === "true";
+  };
+
+  const getLocalStorageKey = (playerName, key) => {
+    playerName = playerName.replace(REGEX_WHITESPACES, "_");
+    playerName = playerName + "&" + key;
+    playerName = playerName.toUpperCase();
+    return playerName;
+  };
+
+  const loadAllPerPlayerCheckboxes = () => {
+    for (const [checkbox, bonusKey] of perPlayerCheckboxes) {
+      loadCheckbox(checkbox, bonusKey);
+    }
+  };
+
+  const resetAllPerPlayerCheckboxes = () => {
+    for (const [, bonusKey] of perPlayerCheckboxes) {
+      let localStorageKey = getLocalStorageKey(playerNameInput, bonusKey);
+      localStorage.removeItem(localStorageKey);
+    }
+  };
+
+  const addEventListenerPerPlayerCheckboxes = () => {
+    for (const [checkbox, bonusKey] of perPlayerCheckboxes) {
+      addOnChangeEventCheckbox(checkbox, bonusKey);
+    }
   };
 
   const getSelectOption = (selectInput) => {
@@ -73,6 +105,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const addOnChangeEventCheckbox = (checkbox, localStorageKey) => {
     checkbox.addEventListener("change", function () {
+      localStorageKey = getLocalStorageKey(
+        playerNameInput.value,
+        localStorageKey,
+      );
       const checkedValue = checkbox.checked;
       localStorage.setItem(localStorageKey, checkedValue.toString());
     });
@@ -100,15 +136,20 @@ document.addEventListener("DOMContentLoaded", function () {
     hasGardenElem.checked = false;
   };
 
+  const playerNameInput = document.querySelector("#player-name");
+  const loadPlayerNameButton = document.querySelector(
+    "#load-player-name-button",
+  );
+
   const pizzaCheckbox = document.querySelector("#pizza-bonus-checkbox");
-  addOnChangeEventCheckbox(pizzaCheckbox, KEY_PIZZA_BONUS);
-  loadCheckbox(pizzaCheckbox, KEY_PIZZA_BONUS);
   const burgerCheckbox = document.querySelector("#burger-bonus-checkbox");
-  addOnChangeEventCheckbox(burgerCheckbox, KEY_BURGER_BONUS);
-  loadCheckbox(burgerCheckbox, KEY_BURGER_BONUS);
   const drinksCheckbox = document.querySelector("#drinks-bonus-checkbox");
-  addOnChangeEventCheckbox(drinksCheckbox, KEY_DRINKS_BONUS);
-  loadCheckbox(drinksCheckbox, KEY_DRINKS_BONUS);
+
+  const perPlayerCheckboxes = [
+    [pizzaCheckbox, KEY_PIZZA_BONUS],
+    [burgerCheckbox, KEY_BURGER_BONUS],
+    [drinksCheckbox, KEY_DRINKS_BONUS],
+  ];
 
   const hasLuxuriesManagerElem = document.querySelector(
     "#luxuries-manager-checkbox",
@@ -127,9 +168,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const resetFoodDrinksButton = document.querySelector("#reset-food-drinks");
   const resetAllButton = document.querySelector("#reset-all-button");
 
+  addEventListenerPerPlayerCheckboxes();
+  loadAllPerPlayerCheckboxes();
+
   addOnChangeEventUnitPrice(hasLuxuriesManagerElem);
   addOnChangeEventUnitPrice(hasGardenElem);
   addOnChangeEventUnitPrice(discountElem);
+
+  loadPlayerNameButton.addEventListener("click", function () {
+    loadAllPerPlayerCheckboxes();
+  });
 
   calculateButton.addEventListener("click", function () {
     try {
@@ -160,10 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   resetAllButton.addEventListener("click", function () {
-    localStorage.removeItem(KEY_PIZZA_BONUS);
-    localStorage.removeItem(KEY_BURGER_BONUS);
-    localStorage.removeItem(KEY_DRINKS_BONUS);
-
+    resetAllPerPlayerCheckboxes();
     pizzaCheckbox.checked = false;
     burgerCheckbox.checked = false;
     drinksCheckbox.checked = false;

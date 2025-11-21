@@ -234,8 +234,17 @@ nav .dropdown-items .dropdown-item {
   grid-template-columns: repeat(1fr); /* Creates 2 equal-width columns */
 }
 
-.grid-container-2-columns .row .grid-item {
+.grid-item {
   margin: 0.2em 0em 0.2em 0.2em;
+}
+
+.grid-item * textarea {
+  resize: none;
+  min-height: 2lh;
+}
+
+.width-100 {
+  width: 100%;
 }
 
 .grid-container-2-columns .alternating-colors:nth-child(odd) {
@@ -261,4 +270,9 @@ nav .dropdown-items .dropdown-item {
 .align-bottom-left {
   align-self: end;    /* Aligns item to the bottom (end of the column/block axis) */
   justify-self: start; /* Aligns item to the left (start of the row/inline axis) */
+}
+
+.align-bottom-center {
+  align-self: end;    /* Aligns item to the bottom (end of the column/block axis) */
+  justify-self: center;
 }
