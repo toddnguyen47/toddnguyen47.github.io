@@ -63,9 +63,15 @@ const calculatePayout = ({
 };
 
 document.addEventListener("DOMContentLoaded", function () {
+  const getInputTypeTextTrimmed = (element) => {
+    const trimmedValue = element.value.trim();
+    element.value = trimmedValue;
+    return trimmedValue;
+  };
+
   const loadCheckbox = (checkbox, localStorageKey) => {
     localStorageKey = getLocalStorageKey(
-      playerNameInput.value,
+      getInputTypeTextTrimmed(playerNameInput),
       localStorageKey,
     );
     const storedChecked = localStorage.getItem(localStorageKey);
@@ -87,7 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const resetAllPerPlayerCheckboxes = () => {
     for (const [, bonusKey] of perPlayerCheckboxes) {
-      let localStorageKey = getLocalStorageKey(playerNameInput.value, bonusKey);
+      const localStorageKey = getLocalStorageKey(
+        getInputTypeTextTrimmed(playerNameInput),
+        bonusKey,
+      );
       localStorage.removeItem(localStorageKey);
     }
   };
@@ -106,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const addOnChangeEventCheckbox = (checkbox, localStorageKey) => {
     checkbox.addEventListener("change", function () {
       localStorageKey = getLocalStorageKey(
-        playerNameInput.value,
+        getInputTypeTextTrimmed(playerNameInput),
         localStorageKey,
       );
       const checkedValue = checkbox.checked;
