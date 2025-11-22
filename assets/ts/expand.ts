@@ -32,4 +32,4 @@ function toggleList(event: MouseEvent) {
   setTimeout(() => {
     parent?.scrollIntoView({ behavior: "smooth" });
   }, defaultTimeout + 50);
-};
+}
