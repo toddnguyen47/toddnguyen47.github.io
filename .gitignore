@@ -143,6 +143,9 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node
 
+# JavaScript assets as we only need TypeScript files
+assets/js/
+
 # Jekyll build output
 
 _site
