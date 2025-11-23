@@ -221,6 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
     beersElem.value = "0";
     payoutSpan.textContent = "0";
     hasGardenElem.checked = false;
+    discountElem.value = "0";
   }
 
   addEventListenerPerPlayerCheckboxes();
@@ -268,7 +269,6 @@ document.addEventListener("DOMContentLoaded", function () {
     burgerCheckbox.checked = false;
     drinksCheckbox.checked = false;
     hasLuxuriesManagerElem.checked = false;
-    discountElem.selectedIndex = 0;
     unitPriceElem.textContent = BASE_UNIT_PRICE.toString(10);
     unitPriceElem.textContent = "10";
     resetFoodDrinks();
