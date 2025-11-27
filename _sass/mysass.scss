@@ -204,7 +204,7 @@ nav.main-nav * .active {
   display: block;
 }
 
-nav .border-top {
+nav .my-border-top {
   border-top: 0.2px dashed rgba($header-heading-color, 0.8);
 }
 
@@ -224,7 +224,7 @@ nav .dropdown-items .dropdown-item {
   max-width: 100%;
 }
 
-.grid-container-2-columns .row {
+.grid-container-2-columns .my-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
