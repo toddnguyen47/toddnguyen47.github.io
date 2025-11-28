@@ -296,7 +296,7 @@ nav .my-dropdown-items .my-dropdown-item {
   height: 65%;
   object-fit: cover;
   opacity: 0; /* initially hidden */
-  transition: opacity 0.5s;
+  // transition: opacity 0.25s;
   pointer-events: none; /* overlay should not receive clicks */
   z-index: 10;
   background: transparent;
