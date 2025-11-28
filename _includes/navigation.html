@@ -6,14 +6,14 @@
       <li {% if page.url == item.url %}class="current-page"{% endif %}>
         <a href="{{ item.url }}">{{ item.title }}</a>
         {% if item.children %}
-          <ul class="dropdown-items">
+          <ul class="my-dropdown-items">
             {% for child in item.children %}
-              <li class="dropdown-item {% if page.url == child.url %} current-page{% endif %}">
+              <li class="my-dropdown-item {% if page.url == child.url %} current-page{% endif %}">
                 <a href="{{ child.url }}">{{ child.title }}</a>
                 {% if child.children %}
-                  <ul class="dropdown-items">
+                  <ul class="my-dropdown-items">
                     {% for grandchild in child.children %}
-                      <li class="dropdown-item {% if page.url == child.url %} current-page{% endif %}">
+                      <li class="my-dropdown-item {% if page.url == child.url %} current-page{% endif %}">
                         <a href="{{ grandchild.url }}">{{ grandchild.title }}</a>
                       </li>
                     {% endfor %}
