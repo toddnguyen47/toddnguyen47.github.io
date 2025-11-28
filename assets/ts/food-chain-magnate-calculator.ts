@@ -319,15 +319,19 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
+    function setUnitPrice(): void {
+      const discounts = getSelectOption(discountElem);
+      const unitPrice = calculateUnitPrice(
+        hasLuxuriesManagerElem?.checked,
+        hasGardenElem?.checked,
+        discounts,
+      );
+      unitPriceElem.textContent = unitPrice.toString();
+    }
+
     function addOnChangeEventUnitPrice(inputElement: Element): void {
-      inputElement?.addEventListener("change", function () {
-        const discounts = getSelectOption(discountElem);
-        const unitPrice = calculateUnitPrice(
-          hasLuxuriesManagerElem?.checked,
-          hasGardenElem?.checked,
-          discounts,
-        );
-        unitPriceElem.textContent = unitPrice.toString();
+      inputElement?.addEventListener("change", () => {
+        setUnitPrice();
       });
     }
 
@@ -339,6 +343,8 @@ document.addEventListener("DOMContentLoaded", function () {
       beersElem.value = "0";
       payoutSpan.textContent = "0";
       hasGardenElem.checked = false;
+      // Calculate last
+      setUnitPrice();
     }
 
     addEventListenerPerPlayerCheckboxes();
@@ -391,10 +397,9 @@ document.addEventListener("DOMContentLoaded", function () {
       drinksCheckbox.checked = false;
       hasLuxuriesManagerElem.checked = false;
       discountElem.selectedIndex = 0;
-      unitPriceElem.textContent = BASE_UNIT_PRICE.toString(10);
-      unitPriceElem.textContent = "10";
-      resetFoodDrinks();
       errorSpan.classList.add(CLASS_HIDDEN_VISILIBITY);
+      // Calculate last
+      resetFoodDrinks();
     });
   }
 
