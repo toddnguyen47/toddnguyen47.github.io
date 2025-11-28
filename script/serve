@@ -2,7 +2,5 @@
 
 npm run build
 
-cp assets/ts/*.js* assets/js/
-
 bundle exec jekyll build
 bundle exec jekyll serve --livereload --incremental

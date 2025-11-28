@@ -271,3 +271,17 @@ nav .dropdown-items .dropdown-item {
   align-self: end;    /* Aligns item to the bottom (end of the column/block axis) */
   justify-self: start; /* Aligns item to the left (start of the row/inline axis) */
 }
+
+.nav .nav-item .header-bg-color-secondary-bg {
+  color: $header-heading-color;
+  background-color: $header-bg-color-secondary;
+}
+
+.nav .nav-item .header-bg-color-secondary-bg-inverted {
+  color: $header-bg-color-secondary;
+}
+
+.my-button {
+  border-radius: 0.3rem;
+  border: 0.1rem solid rgba($body-text-color, 0.5);
+}

@@ -1,0 +1,177 @@
+<div class="grid-container-2-columns">
+  <div class="my-row">
+    <div class="grid-item span-two-columns">
+      <div>
+        <label for="player-name-{{ include.player_number }}">Player {{ include.player_number }}'s Name</label>
+      </div>
+      <div>
+        <input class="width-100" type="text" id="player-name-{{ include.player_number }}" name="player-name-{{ include.player_number }}"></input>
+      </div>
+    </div>
+  </div>
+  <div class="my-row">
+    <div class="grid-item">
+      <button id="load-player-name-button-{{ include.player_number }}" class="my-button">Load</button>
+    </div>
+  </div>
+</div>
+
+<div class="grid-container-2-columns margin-top-2x">
+  <div class="my-row alternating-colors">
+    <div class="grid-item">
+      Pizza Bonus
+    </div>
+    <div class="grid-item">
+      <input type="checkbox" id="pizza-bonus-checkbox-{{ include.player_number }}">
+    </div>
+  </div>
+  <div class="my-row alternating-colors">
+    <div class="grid-item">
+      Burger Bonus
+    </div>
+    <div class="grid-item">
+      <input type="checkbox" id="burger-bonus-checkbox-{{ include.player_number }}">
+    </div>
+  </div>
+  <div class="my-row alternating-colors">
+    <div class="grid-item">
+      Drinks Bonus
+    </div>
+    <div class="grid-item">
+      <input type="checkbox" id="drinks-bonus-checkbox-{{ include.player_number }}">
+    </div>
+  </div>
+  <div class="my-row alternating-colors">
+    <div class="grid-item">
+      Luxuries Manager
+    </div>
+    <div class="grid-item">
+      <input type="checkbox" id="luxuries-manager-checkbox-{{ include.player_number }}">
+    </div>
+  </div>
+  <div class="my-row alternating-colors">
+    <div class="grid-item">
+      Discounts
+    </div>
+    <div class="grid-item">
+      <select id="discounts-{{ include.player_number }}">
+        {% for number in site.data.food-chain-magnate-calculator.discounts %}
+        <option value="{{ number }}">{{ number }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="my-row alternating-colors">
+    <div class="grid-item">
+      House has a Garden
+    </div>
+    <div class="grid-item">
+      <input type="checkbox" id="has-garden-checkbox-{{ include.player_number }}">
+    </div>
+  </div>
+  <div class="my-row alternating-colors">
+    <div class="grid-item">Unit Price</div>
+    <div class="grid-item">
+      <span id="unit-price-{{ include.player_number }}">10</span>
+    </div>
+  </div>
+  <div class="my-row alternating-colors">
+    <div class="grid-item">
+      Pizzas
+    </div>
+    <div class="grid-item">
+      <select id="pizzas-{{ include.player_number }}">
+        {% for number in site.data.food-chain-magnate-calculator.food-tokens %}
+        <option value="{{ number }}">{{ number }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="my-row alternating-colors">
+    <div class="grid-item">
+      Burgers
+    </div>
+    <div class="grid-item">
+      <select id="burgers-{{ include.player_number }}">
+        {% for number in site.data.food-chain-magnate-calculator.food-tokens %}
+        <option value="{{ number }}">{{ number }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="my-row alternating-colors">
+    <div class="grid-item">
+      Lemonade
+    </div>
+    <div class="grid-item">
+      <select id="lemonades-{{ include.player_number }}">
+        {% for number in site.data.food-chain-magnate-calculator.food-tokens %}
+        <option value="{{ number }}">{{ number }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="my-row alternating-colors">
+    <div class="grid-item">
+      Sodas
+    </div>
+    <div class="grid-item">
+      <select id="sodas-{{ include.player_number }}">
+        {% for number in site.data.food-chain-magnate-calculator.food-tokens %}
+        <option value="{{ number }}">{{ number }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="my-row alternating-colors">
+    <div class="grid-item">
+      Beers
+    </div>
+    <div class="grid-item">
+      <select id="beers-{{ include.player_number }}">
+        {% for number in site.data.food-chain-magnate-calculator.food-tokens %}
+        <option value="{{ number }}">{{ number }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="grid-container-2-columns margin-top-2x">
+  <div class="my-row">
+    <div class="grid-item">
+      Payout
+    </div>
+    <div class="grid-item">
+      <span id="payout-{{ include.player_number }}">
+        0
+      </span>
+    </div>
+  </div>
+  <div class="my-row">
+    <div class="grid-item align-bottom-left">
+      <button id="calculate-button-{{ include.player_number }}" class="my-button">
+        Calculate
+      </button>
+    </div>
+    <div class="grid-item">
+      <span id="calculate-error-message-{{ include.player_number }}" class="red hidden-visibility">
+        Error: A house without a garden cannot exceed 3 items.
+      </span>
+    </div>
+  </div>
+  <div class="my-row ">
+    <div class="grid-item span-two-columns ">
+      <button id="reset-food-drinks-{{ include.player_number }}" class="my-button">
+        Reset Food & Drinks
+      </button>
+    </div>
+  </div>
+  <div class="my-row">
+    <div class="grid-item span-two-columns ">
+      <button id="reset-all-button-{{ include.player_number }}" class="my-button">
+        Reset All
+      </button>
+    </div>
+  </div>
+</div>
