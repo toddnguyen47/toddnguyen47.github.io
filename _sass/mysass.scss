@@ -291,9 +291,10 @@ nav .my-dropdown-items .my-dropdown-item {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* centers exactly */
-  width: 65%;
-  height: 65%;
+  // transform: translate(-50%, -50%); /* centers exactly */
+  transform: translate(-57%, -55%);
+  width: 70%;
+  height: 70%;
   object-fit: cover;
   opacity: 0; /* initially hidden */
   // transition: opacity 0.25s;
