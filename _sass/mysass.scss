@@ -1,6 +1,7 @@
 $linkedin-color: #0077b5;
 $github-color: #171515;
 $icon-margin: 0.4em;
+$food-chain-magnate-background: #FEF4E0;
 
 body {
   font-family: "Be Vietnam Pro", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -284,4 +285,27 @@ nav .my-dropdown-items .my-dropdown-item {
 .my-button {
   border-radius: 0.3rem;
   border: 0.1rem solid rgba($body-text-color, 0.5);
+}
+
+.my-overlay-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* centers exactly */
+  width: 65%;
+  height: 65%;
+  object-fit: cover;
+  opacity: 0; /* initially hidden */
+  transition: opacity 0.5s;
+  pointer-events: none; /* overlay should not receive clicks */
+  z-index: 10;
+  background: transparent;
+}
+
+.my-overlay-image.show {
+  opacity: 0.7;
+}
+
+.food-chain-magnate-background {
+  background-color: $food-chain-magnate-background;
 }
