@@ -68,14 +68,18 @@ description: A calculator to help Food Chain Magnate players calculate their pay
       {% assign result1 = num1 | prepend: '00' | slice: -2, 2 %}
       {% assign num2 = i | times: 2 | plus: 2 %}
       {% assign result2 = num2 | prepend: '00' | slice: -2, 2 %}
-      <div class="col-3 pt-2">
+      <div class="col-3 position-relative pt-2">
         <img id="employee-1x-{{ result1 }}" role="button" src="assets/images/food-chain-magnate/employees/employee-{{ result1 }}.png" />
+        <img id="employee-1x-red-x-{{ result1 }}" src="assets/images/food-chain-magnate/milestones/red-x-mini.png"
+          class="my-overlay-image employee-1x" />
       </div>
       <div class="col-3 pt-2">
         <div id="employee-1x-text-{{ result1 }}" role="button" class="employee-1x-text user-select-none">3</div>
       </div>
-      <div class="col-3 pt-2">
+      <div class="col-3 position-relative pt-2">
         <img id="employee-1x-{{ result2 }}" role="button" src="assets/images/food-chain-magnate/employees/employee-{{ result2 }}.png" />
+        <img id="employee-1x-red-x-{{ result2 }}" src="assets/images/food-chain-magnate/milestones/red-x-mini.png"
+          class="my-overlay-image employee-1x" />
       </div>
       <div class="col-3 pt-2">
         <div id="employee-1x-text-{{ result2 }}" role="button" class="employee-1x-text user-select-none">3</div>

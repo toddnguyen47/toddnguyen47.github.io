@@ -457,24 +457,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const employeeImage =
       document.querySelector<HTMLImageElement>("#" + id) ??
       new HTMLImageElement();
-    const redTextId = get1xEmployeeRedTextId(employeeNumber);
+    const redTextIds = get1xEmployeeRedTextId(employeeNumber);
     const employee1xDiv =
-      document.querySelector<HTMLDivElement>("#" + redTextId) ??
+      document.querySelector<HTMLDivElement>("#" + redTextIds[0]) ??
       new HTMLDivElement();
-    employee1xDiv.textContent = localStorage.getItem(redTextId) ?? "3";
+    const redXImage =
+      document.querySelector<HTMLImageElement>("#" + redTextIds[1]) ??
+      new HTMLImageElement();
+    const redTextId = redTextIds[0];
+    setEmployee1xValue(
+      employee1xDiv,
+      redXImage,
+      parseInt(localStorage.getItem(redTextIds[0]) ?? "3"),
+    );
 
     employeeImage.addEventListener("click", () => {
       let currentValue = parseInt(employee1xDiv.textContent ?? "0");
       currentValue -= 1;
-      if (currentValue === 0) {
-        employee1xDiv.classList.toggle("red");
-      } else {
-        employee1xDiv.classList.remove("red");
-      }
       if (currentValue < 0) {
         currentValue = get1xMaxEmployees();
       }
-      employee1xDiv.textContent = currentValue.toString();
+      setEmployee1xValue(employee1xDiv, redXImage, currentValue);
       localStorage.setItem(redTextId, employee1xDiv.textContent);
     });
 
@@ -483,11 +486,8 @@ document.addEventListener("DOMContentLoaded", function () {
       currentValue += 1;
       if (currentValue > get1xMaxEmployees()) {
         currentValue = 0;
-        employee1xDiv.classList.add("red");
-      } else {
-        employee1xDiv.classList.remove("red");
       }
-      employee1xDiv.textContent = currentValue.toString();
+      setEmployee1xValue(employee1xDiv, redXImage, currentValue);
       localStorage.setItem(redTextId, employee1xDiv.textContent);
     });
   }
@@ -505,25 +505,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Update all 1x employees' max values based on number of players
       for (let i = 1; i <= NUM_1X_EMPLOYEES; i++) {
-        const redTextId = get1xEmployeeRedTextId(i);
-        const milestoneRedText =
-          document.querySelector<HTMLDivElement>("#" + redTextId) ??
+        const redTextIds = get1xEmployeeRedTextId(i);
+        const employee1xDiv =
+          document.querySelector<HTMLDivElement>("#" + redTextIds[0]) ??
           new HTMLDivElement();
+        const redXImage =
+          document.querySelector<HTMLImageElement>("#" + redTextIds[1]) ??
+          new HTMLImageElement();
         const max1xEmployees = NUM_PLAYERS_MAX_1X_EMPLOYEES[selectedValue] ?? 3;
-        milestoneRedText.textContent = max1xEmployees.toString();
-        localStorage.setItem(redTextId, milestoneRedText.textContent);
+        setEmployee1xValue(employee1xDiv, redXImage, max1xEmployees);
+        localStorage.setItem(redTextIds[0], employee1xDiv.textContent);
       }
     });
   }
 
-  function getMilestoneRedXId(milestoneNumber: number) {
+  function getMilestoneRedXId(milestoneNumber: number): string {
     const paddedNumber = leftPad(milestoneNumber);
     return "milestone-red-x-" + paddedNumber;
   }
 
-  function get1xEmployeeRedTextId(employeeNumber: number) {
+  function get1xEmployeeRedTextId(employeeNumber: number): [string, string] {
     const paddedNumber = leftPad(employeeNumber);
-    return "employee-1x-text-" + paddedNumber;
+    return [
+      "employee-1x-text-" + paddedNumber,
+      "employee-1x-red-x-" + paddedNumber,
+    ];
   }
 
   function getNumberOfPlayersId() {
@@ -534,5 +540,20 @@ document.addEventListener("DOMContentLoaded", function () {
     return NUM_PLAYERS_MAX_1X_EMPLOYEES[
       localStorage.getItem(getNumberOfPlayersId()) ?? "5"
     ];
+  }
+
+  function setEmployee1xValue(
+    textDiv: HTMLDivElement,
+    redXImg: HTMLImageElement,
+    value: number,
+  ): void {
+    textDiv.textContent = value.toString();
+    if (value === 0) {
+      textDiv.classList.add("red");
+      redXImg.classList.add("show");
+    } else {
+      textDiv.classList.remove("red");
+      redXImg.classList.remove("show");
+    }
   }
 });
