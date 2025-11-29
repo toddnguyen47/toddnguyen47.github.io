@@ -329,8 +329,8 @@ nav .my-dropdown-items .my-dropdown-item {
 
 .employee-1x-text {
   font-size: 2rem;
-  text-shadow: 1px 1px 4px black;
-  font-family: $code-font;
+  // text-shadow: 1px 1px 4px black;
+  font-family: "Share Tech Mono", monospace;
 
   @include medium {
     font-size: 3rem;
