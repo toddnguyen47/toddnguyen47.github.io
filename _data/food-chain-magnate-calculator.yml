@@ -29,3 +29,8 @@ discounts:
   - -18
   - -19
   - -20
+num-players:
+  - 2
+  - 3
+  - 4
+  - 5
