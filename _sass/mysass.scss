@@ -1,11 +1,15 @@
 $linkedin-color: #0077b5;
 $github-color: #171515;
 $icon-margin: 0.4em;
-$food-chain-magnate-background: #FEF4E0;
-$code-font: "Spline Sans Mono", "Oxygen Mono", Consolas, "Liberation Mono", Menlo, monospace;
+$food-chain-magnate-background: #fef4e0;
+$code-font:
+  "Spline Sans Mono", "Oxygen Mono", Consolas, "Liberation Mono", Menlo,
+  monospace;
 
 body {
-  font-family: "Be Vietnam Pro", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family:
+    "Be Vietnam Pro", "Open Sans", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
 }
 
 .main-content {
@@ -99,7 +103,9 @@ img.technology-icon-4x {
     display: none;
     opacity: 0;
     transform: translateY(-5px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
 
   li.visible {
@@ -154,7 +160,6 @@ ul.no-left-indent {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 
-
     .item {
       margin: 0 ($icon-margin/2);
     }
@@ -165,7 +170,8 @@ ul.no-left-indent {
   }
 }
 
-nav.main-nav ul, nav.main-nav * ul {
+nav.main-nav ul,
+nav.main-nav * ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -213,7 +219,11 @@ nav .my-border-top {
 nav .my-dropdown-items {
   position: absolute;
   background-color: rgba($header-bg-color, 0.5);
-  background-image: linear-gradient(120deg, $header-bg-color-secondary, $header-bg-color);
+  background-image: linear-gradient(
+    120deg,
+    $header-bg-color-secondary,
+    $header-bg-color
+  );
   text-align: left;
 }
 
@@ -270,7 +280,7 @@ nav .my-dropdown-items .my-dropdown-item {
 }
 
 .align-bottom-left {
-  align-self: end;    /* Aligns item to the bottom (end of the column/block axis) */
+  align-self: end; /* Aligns item to the bottom (end of the column/block axis) */
   justify-self: start; /* Aligns item to the left (start of the row/inline axis) */
 }
 
@@ -314,10 +324,14 @@ nav .my-dropdown-items .my-dropdown-item {
 }
 
 .employee-1x-red-text {
-  font-size: 3rem;
+  font-size: 2rem;
   color: red;
   text-shadow: 1px 1px 4px black;
   font-family: $code-font;
+
+  @include medium {
+    font-size: 3rem;
+  }
 
   @include large {
     font-size: 4rem;
