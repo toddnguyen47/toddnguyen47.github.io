@@ -4,6 +4,7 @@ const MAX_ITEM_NO_GARDEN = 3;
 const MAX_ITEM_WITH_GARDEN = 5;
 const NUM_PLAYERS = 5;
 const NUM_MILESTONES = 18;
+const NUM_1X_EMPLOYEES = 10;
 
 const CLASS_HIDDEN_VISILIBITY = "hidden-visibility";
 
@@ -13,6 +14,13 @@ const KEY_DRINKS_BONUS = "fcm_DrinksBonus";
 
 const DELIMITER = "&";
 const REGEX_WHITESPACES = new RegExp("\\s+", "g");
+
+const NUM_PLAYERS_MAX_1X_EMPLOYEES: { [key: string]: number } = {
+  "2": 1,
+  "3": 1,
+  "4": 2,
+  "5": 3,
+};
 
 function calculateUnitPrice(
   hasLuxuriesManager: boolean,
@@ -149,15 +157,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  const playerDivState = new PlayerDivState();
-  for (let i = 1; i <= NUM_PLAYERS; i++) {
-    loadOnePlayer(i);
-    playerDivState.loadPlayerSwitchingButton(i);
-  }
+  const selectNumPlayers =
+    document.querySelector<HTMLSelectElement>("#" + getNumberOfPlayersId()) ??
+    new HTMLSelectElement();
 
-  for (let i = 1; i <= NUM_MILESTONES; i++) {
-    loadOneMilestone(i);
+  function load() {
+    loadNumberOfPlayers();
+    const playerDivState = new PlayerDivState();
+    for (let i = 1; i <= NUM_PLAYERS; i++) {
+      loadOnePlayer(i);
+      playerDivState.loadPlayerSwitchingButton(i);
+    }
+
+    for (let i = 1; i <= NUM_MILESTONES; i++) {
+      loadOneMilestone(i);
+    }
+
+    for (let i = 1; i <= NUM_1X_EMPLOYEES; i++) {
+      loadOne1xEmployee(i);
+    }
   }
+  load();
 
   const milestoneResetButton =
     document.querySelector<HTMLButtonElement>("#reset-milestones") ??
@@ -431,8 +451,80 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  function loadOne1xEmployee(employeeNumber: number): void {
+    const paddedNumber = leftPad(employeeNumber);
+    const id = "employee-1x-" + paddedNumber;
+    const employeeImage =
+      document.querySelector<HTMLImageElement>("#" + id) ??
+      new HTMLImageElement();
+    const redTextId = get1xEmployeeRedTextId(employeeNumber);
+    const milestoneRedText =
+      document.querySelector<HTMLDivElement>("#" + redTextId) ??
+      new HTMLDivElement();
+    milestoneRedText.textContent = localStorage.getItem(redTextId) ?? "3";
+
+    employeeImage.addEventListener("click", () => {
+      let currentValue = parseInt(milestoneRedText.textContent ?? "0");
+      currentValue -= 1;
+      if (currentValue < 0) {
+        currentValue = get1xMaxEmployees();
+      }
+      milestoneRedText.textContent = currentValue.toString();
+      localStorage.setItem(redTextId, milestoneRedText.textContent);
+    });
+
+    milestoneRedText.addEventListener("click", () => {
+      let currentValue = parseInt(milestoneRedText.textContent ?? "0");
+      currentValue += 1;
+      if (currentValue > get1xMaxEmployees()) {
+        currentValue = 0;
+      }
+      milestoneRedText.textContent = currentValue.toString();
+      localStorage.setItem(redTextId, milestoneRedText.textContent);
+    });
+  }
+
+  function loadNumberOfPlayers(): void {
+    const id = getNumberOfPlayersId();
+    const selectedValue = localStorage.getItem(id) ?? "5";
+    selectNumPlayers.value = selectedValue;
+
+    selectNumPlayers?.addEventListener("change", () => {
+      const selectedValue =
+        selectNumPlayers?.options[selectNumPlayers.selectedIndex].value ?? "2";
+      const numPlayers = parseInt(selectedValue);
+      localStorage.setItem(id, numPlayers.toString());
+
+      // Update all 1x employees' max values based on number of players
+      for (let i = 1; i <= NUM_1X_EMPLOYEES; i++) {
+        const redTextId = get1xEmployeeRedTextId(i);
+        const milestoneRedText =
+          document.querySelector<HTMLDivElement>("#" + redTextId) ??
+          new HTMLDivElement();
+        const max1xEmployees = NUM_PLAYERS_MAX_1X_EMPLOYEES[selectedValue] ?? 3;
+        milestoneRedText.textContent = max1xEmployees.toString();
+        localStorage.setItem(redTextId, milestoneRedText.textContent);
+      }
+    });
+  }
+
   function getMilestoneRedXId(milestoneNumber: number) {
     const paddedNumber = leftPad(milestoneNumber);
     return "milestone-red-x-" + paddedNumber;
+  }
+
+  function get1xEmployeeRedTextId(employeeNumber: number) {
+    const paddedNumber = leftPad(employeeNumber);
+    return "employee-1x-red-text-" + paddedNumber;
+  }
+
+  function getNumberOfPlayersId() {
+    return "num-players";
+  }
+
+  function get1xMaxEmployees(): number {
+    return NUM_PLAYERS_MAX_1X_EMPLOYEES[
+      localStorage.getItem(getNumberOfPlayersId()) ?? "5"
+    ];
   }
 });

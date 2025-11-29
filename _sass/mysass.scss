@@ -2,6 +2,7 @@ $linkedin-color: #0077b5;
 $github-color: #171515;
 $icon-margin: 0.4em;
 $food-chain-magnate-background: #FEF4E0;
+$code-font: "Spline Sans Mono", "Oxygen Mono", Consolas, "Liberation Mono", Menlo, monospace;
 
 body {
   font-family: "Be Vietnam Pro", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -9,7 +10,7 @@ body {
 
 .main-content {
   code {
-    font-family: "Oxygen Mono", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-family: $code-font;
   }
 }
 
@@ -310,6 +311,17 @@ nav .my-dropdown-items .my-dropdown-item {
 
 .my-overlay-image.show {
   opacity: 1;
+}
+
+.employee-1x-red-text {
+  font-size: 3rem;
+  color: red;
+  text-shadow: 1px 1px 4px black;
+  font-family: $code-font;
+
+  @include large {
+    font-size: 4rem;
+  }
 }
 
 .food-chain-magnate-background {
