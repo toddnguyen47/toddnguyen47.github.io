@@ -458,29 +458,37 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelector<HTMLImageElement>("#" + id) ??
       new HTMLImageElement();
     const redTextId = get1xEmployeeRedTextId(employeeNumber);
-    const milestoneRedText =
+    const employee1xDiv =
       document.querySelector<HTMLDivElement>("#" + redTextId) ??
       new HTMLDivElement();
-    milestoneRedText.textContent = localStorage.getItem(redTextId) ?? "3";
+    employee1xDiv.textContent = localStorage.getItem(redTextId) ?? "3";
 
     employeeImage.addEventListener("click", () => {
-      let currentValue = parseInt(milestoneRedText.textContent ?? "0");
+      let currentValue = parseInt(employee1xDiv.textContent ?? "0");
       currentValue -= 1;
+      if (currentValue === 0) {
+        employee1xDiv.classList.toggle("red");
+      } else {
+        employee1xDiv.classList.remove("red");
+      }
       if (currentValue < 0) {
         currentValue = get1xMaxEmployees();
       }
-      milestoneRedText.textContent = currentValue.toString();
-      localStorage.setItem(redTextId, milestoneRedText.textContent);
+      employee1xDiv.textContent = currentValue.toString();
+      localStorage.setItem(redTextId, employee1xDiv.textContent);
     });
 
-    milestoneRedText.addEventListener("click", () => {
-      let currentValue = parseInt(milestoneRedText.textContent ?? "0");
+    employee1xDiv.addEventListener("click", () => {
+      let currentValue = parseInt(employee1xDiv.textContent ?? "0");
       currentValue += 1;
       if (currentValue > get1xMaxEmployees()) {
         currentValue = 0;
+        employee1xDiv.classList.add("red");
+      } else {
+        employee1xDiv.classList.remove("red");
       }
-      milestoneRedText.textContent = currentValue.toString();
-      localStorage.setItem(redTextId, milestoneRedText.textContent);
+      employee1xDiv.textContent = currentValue.toString();
+      localStorage.setItem(redTextId, employee1xDiv.textContent);
     });
   }
 
@@ -515,7 +523,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function get1xEmployeeRedTextId(employeeNumber: number) {
     const paddedNumber = leftPad(employeeNumber);
-    return "employee-1x-red-text-" + paddedNumber;
+    return "employee-1x-text-" + paddedNumber;
   }
 
   function getNumberOfPlayersId() {
