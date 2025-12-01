@@ -5,7 +5,8 @@
         <label for="player-name-{{ include.player_number }}">Player {{ include.player_number }}'s Name</label>
       </div>
       <div>
-        <input class="width-100" type="text" id="player-name-{{ include.player_number }}" name="player-name-{{ include.player_number }}"></input>
+        <input class="width-100" type="text" id="player-name-{{ include.player_number }}"
+          name="player-name-{{ include.player_number }}"></input>
       </div>
     </div>
   </div>
@@ -99,7 +100,7 @@
       </select>
     </div>
   </div>
-  <div class="my-row alternating-colors">
+  <div class="my-row alternating-colors" id="row-lemonades-{{ include.player_number }}">
     <div class="grid-item">
       Lemonade
     </div>
@@ -111,7 +112,7 @@
       </select>
     </div>
   </div>
-  <div class="my-row alternating-colors">
+  <div class="my-row alternating-colors" id="row-sodas-{{ include.player_number }}">
     <div class="grid-item">
       Sodas
     </div>
@@ -123,12 +124,26 @@
       </select>
     </div>
   </div>
-  <div class="my-row alternating-colors">
+  <div class="my-row alternating-colors" id="row-beers-{{ include.player_number }}">
     <div class="grid-item">
       Beers
     </div>
     <div class="grid-item">
       <select id="beers-{{ include.player_number }}">
+        {% for number in site.data.food-chain-magnate-calculator.food-tokens %}
+        <option value="{{ number }}">{{ number }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <!-- Empty row so alternating colors can work -->
+  <div class="my-row alternating-colors d-none"></div>
+  <div class="my-row alternating-colors d-none" id="row-drinks-{{ include.player_number }}">
+    <div class="grid-item">
+      Drinks
+    </div>
+    <div class="grid-item">
+      <select id="drinks-{{ include.player_number }}">
         {% for number in site.data.food-chain-magnate-calculator.food-tokens %}
         <option value="{{ number }}">{{ number }}</option>
         {% endfor %}
