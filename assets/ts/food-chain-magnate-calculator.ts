@@ -25,7 +25,7 @@ const NUM_PLAYERS_MAX_1X_EMPLOYEES: { [key: string]: number } = {
 function calculateUnitPrice(
   hasLuxuriesManager: boolean,
   hasGarden: boolean,
-  discounts: number
+  discounts: number,
 ): number {
   let unitPrice = BASE_UNIT_PRICE + discounts;
   if (hasLuxuriesManager) {
@@ -45,19 +45,16 @@ function calculatePayout(
   hasGarden: boolean,
   numPizzas: number,
   numBurgers: number,
-  numLemonade: number,
-  numSodas: number,
-  numBeers: number
+  numDrinks: number,
 ): number {
-  const totalDrinks = numLemonade + numSodas + numBeers;
-  const totalPieces = numPizzas + numBurgers + totalDrinks;
+  const totalPieces = numPizzas + numBurgers + numDrinks;
   if (hasGarden && totalPieces > MAX_ITEM_WITH_GARDEN) {
     throw new Error(
-      "A house with a garden cannot exceed " + MAX_ITEM_WITH_GARDEN + " items"
+      "A house with a garden cannot exceed " + MAX_ITEM_WITH_GARDEN + " items",
     );
   } else if (!hasGarden && totalPieces > MAX_ITEM_NO_GARDEN) {
     throw new Error(
-      "A house without a garden cannot exceed " + MAX_ITEM_NO_GARDEN + " items"
+      "A house without a garden cannot exceed " + MAX_ITEM_NO_GARDEN + " items",
     );
   }
 
@@ -71,12 +68,15 @@ function calculatePayout(
 
   const pizzaPayout = calculateItemPayout(numPizzas, hasPizzaBonus);
   const burgerPayout = calculateItemPayout(numBurgers, hasBurgerBonus);
-  const drinksPayout = calculateItemPayout(totalDrinks, hasDrinksBonus);
+  const drinksPayout = calculateItemPayout(numDrinks, hasDrinksBonus);
 
   return pizzaPayout + burgerPayout + drinksPayout;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  const ID_DINNER_CALCULATOR_DRINKS_PREFERENCE =
+    "dinner-calculator-drinks-preference";
+
   class PlayerDiv {
     playerNumber: number;
     button: HTMLButtonElement;
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
     constructor(
       playerNumber: number,
       button: HTMLButtonElement,
-      div: HTMLDivElement
+      div: HTMLDivElement,
     ) {
       this.playerNumber = playerNumber;
       this.button = button;
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const currentActivePlayer = new PlayerDiv(
         playerNumber,
         switchPlayerButton,
-        div
+        div,
       );
       if (this.previousActivePlayer === null && playerNumber === 1) {
         this.previousActivePlayer = currentActivePlayer;
@@ -157,30 +157,357 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  class DrinksPreferenceEventTarget extends EventTarget {
+    constructor() {
+      super();
+    }
+  }
+
+  const drinksPreferenceEventTarget = new DrinksPreferenceEventTarget();
+
+  enum DrinksPreference {
+    SHOW_ALL = "SHOW_ALL",
+    SHOW_DRINKS_ONLY = "SHOW_DRINKS_ONLY",
+  }
+
+  class OnePlayerCalculator {
+    drinksPreference: DrinksPreference;
+    playerNumber: number;
+
+    constructor() {
+      this.drinksPreference = DrinksPreference.SHOW_ALL;
+      this.playerNumber = 1;
+    }
+
+    loadOnePlayer(playerNumber: number): void {
+      this.playerNumber = playerNumber;
+      const playerNameInput =
+        document.querySelector<HTMLInputElement>(
+          "#player-name-" + playerNumber,
+        ) ?? new HTMLInputElement();
+      const loadPlayerNameButton =
+        document.querySelector<HTMLButtonElement>(
+          "#load-player-name-button-" + playerNumber,
+        ) ?? new HTMLButtonElement();
+      const pizzaCheckbox =
+        document.querySelector<HTMLInputElement>(
+          "#pizza-bonus-checkbox-" + playerNumber,
+        ) ?? new HTMLInputElement();
+      const burgerCheckbox =
+        document.querySelector<HTMLInputElement>(
+          "#burger-bonus-checkbox-" + playerNumber,
+        ) ?? new HTMLInputElement();
+      const drinksCheckbox =
+        document.querySelector<HTMLInputElement>(
+          "#drinks-bonus-checkbox-" + playerNumber,
+        ) ?? new HTMLInputElement();
+      const perPlayerCheckboxes: [HTMLInputElement, string][] = [
+        [pizzaCheckbox, KEY_PIZZA_BONUS],
+        [burgerCheckbox, KEY_BURGER_BONUS],
+        [drinksCheckbox, KEY_DRINKS_BONUS],
+      ];
+      const hasLuxuriesManagerElem =
+        document.querySelector<HTMLInputElement>(
+          "#luxuries-manager-checkbox-" + playerNumber,
+        ) ?? new HTMLInputElement();
+      const hasGardenElem =
+        document.querySelector<HTMLInputElement>(
+          "#has-garden-checkbox-" + playerNumber,
+        ) ?? new HTMLInputElement();
+      const discountElem =
+        document.querySelector<HTMLSelectElement>(
+          "#discounts-" + playerNumber,
+        ) ?? new HTMLSelectElement();
+      const unitPriceElem =
+        document.querySelector<HTMLSpanElement>(
+          "#unit-price-" + playerNumber,
+        ) ?? new HTMLSpanElement();
+      const pizzasElem =
+        document.querySelector<HTMLSelectElement>("#pizzas-" + playerNumber) ??
+        new HTMLSelectElement();
+      const burgersElem =
+        document.querySelector<HTMLSelectElement>("#burgers-" + playerNumber) ??
+        new HTMLSelectElement();
+      const lemonadesRow =
+        document.querySelector<HTMLDivElement>(
+          "#row-lemonades-" + playerNumber,
+        ) ?? new HTMLDivElement();
+      const lemonadesElem =
+        document.querySelector<HTMLSelectElement>(
+          "#lemonades-" + playerNumber,
+        ) ?? new HTMLSelectElement();
+      const sodasRow =
+        document.querySelector<HTMLDivElement>("#row-sodas-" + playerNumber) ??
+        new HTMLDivElement();
+      const sodasElem =
+        document.querySelector<HTMLSelectElement>("#sodas-" + playerNumber) ??
+        new HTMLSelectElement();
+      const beersRow =
+        document.querySelector<HTMLDivElement>("#row-beers-" + playerNumber) ??
+        new HTMLDivElement();
+      const beersElem =
+        document.querySelector<HTMLSelectElement>("#beers-" + playerNumber) ??
+        new HTMLSelectElement();
+      const drinksRow =
+        document.querySelector<HTMLDivElement>("#row-drinks-" + playerNumber) ??
+        new HTMLDivElement();
+      const drinksElem =
+        document.querySelector<HTMLSelectElement>("#drinks-" + playerNumber) ??
+        new HTMLSelectElement();
+      const calculateButton =
+        document.querySelector<HTMLButtonElement>(
+          "#calculate-button-" + playerNumber,
+        ) ?? new HTMLButtonElement();
+      const payoutSpan =
+        document.querySelector<HTMLSpanElement>("#payout-" + playerNumber) ??
+        new HTMLSpanElement();
+      const errorSpan =
+        document.querySelector<HTMLSpanElement>(
+          "#calculate-error-message-" + playerNumber,
+        ) ?? new HTMLSpanElement();
+      const resetFoodDrinksButton =
+        document.querySelector<HTMLButtonElement>(
+          "#reset-food-drinks-" + playerNumber,
+        ) ?? new HTMLButtonElement();
+      const resetAllButton =
+        document.querySelector<HTMLButtonElement>(
+          "#reset-all-button-" + playerNumber,
+        ) ?? new HTMLButtonElement();
+
+      function getInputTypeTextTrimmed(element: HTMLInputElement): string {
+        const trimmedValue = element?.value.trim() ?? "";
+        if (element) {
+          element.value = trimmedValue;
+        }
+        return trimmedValue;
+      }
+
+      function loadCheckbox(
+        checkbox: HTMLInputElement,
+        localStorageKey: string,
+      ): void {
+        const formattedKey = getLocalStorageKey(
+          getInputTypeTextTrimmed(playerNameInput),
+          localStorageKey,
+        );
+        const storedChecked = localStorage.getItem(formattedKey);
+        checkbox.checked = storedChecked === "true";
+      }
+
+      function getLocalStorageKey(playerName: string, key: string): string {
+        playerName = playerName.replace(REGEX_WHITESPACES, "_");
+        const tokens = key.split(DELIMITER);
+        if (tokens[0].toUpperCase() === playerName.toUpperCase()) {
+          return key;
+        }
+        return (playerName + DELIMITER + key).toUpperCase();
+      }
+
+      function loadAllPerPlayerCheckboxes(): void {
+        for (const [checkbox, bonusKey] of perPlayerCheckboxes) {
+          loadCheckbox(checkbox, bonusKey);
+        }
+      }
+
+      function resetAllPerPlayerCheckboxes(): void {
+        for (const [, bonusKey] of perPlayerCheckboxes) {
+          const localStorageKey = getLocalStorageKey(
+            getInputTypeTextTrimmed(playerNameInput),
+            bonusKey,
+          );
+          localStorage.removeItem(localStorageKey);
+        }
+      }
+
+      function addEventListenerPerPlayerCheckboxes(): void {
+        for (const [checkbox, bonusKey] of perPlayerCheckboxes) {
+          addOnChangeEventCheckbox(checkbox, bonusKey);
+        }
+      }
+
+      function addOnChangeEventCheckbox(
+        checkbox: HTMLInputElement,
+        localStorageKey: string,
+      ): void {
+        checkbox?.addEventListener("change", function () {
+          localStorageKey = getLocalStorageKey(
+            getInputTypeTextTrimmed(playerNameInput),
+            localStorageKey,
+          );
+          const checkedValue = checkbox?.checked ?? false;
+          localStorage.setItem(localStorageKey, checkedValue.toString());
+        });
+      }
+
+      function setUnitPrice(): void {
+        const discounts = getSelectOption(discountElem);
+        const unitPrice = calculateUnitPrice(
+          hasLuxuriesManagerElem?.checked,
+          hasGardenElem?.checked,
+          parseInt(discounts),
+        );
+        unitPriceElem.textContent = unitPrice.toString();
+      }
+
+      function addOnChangeEventUnitPrice(inputElement: Element): void {
+        inputElement?.addEventListener("change", () => {
+          setUnitPrice();
+        });
+      }
+
+      function resetFoodDrinks(): void {
+        pizzasElem.value = "0";
+        burgersElem.value = "0";
+        lemonadesElem.value = "0";
+        sodasElem.value = "0";
+        beersElem.value = "0";
+        drinksElem.value = "0";
+        payoutSpan.textContent = "0";
+        hasGardenElem.checked = false;
+        // Calculate last
+        setUnitPrice();
+      }
+
+      function addEventListenerForDrinksPreferenceLemonadesSodasBeers(
+        drinksRow: HTMLDivElement,
+      ): void {
+        drinksPreferenceEventTarget.addEventListener(
+          getDinnerCalculatorPreferenceEventName(),
+          (event) => {
+            const customEvent = event as CustomEvent;
+            const drinksPreferenceValue = customEvent.detail
+              .drinksPreference as DrinksPreference;
+            if (drinksPreferenceValue === DrinksPreference.SHOW_ALL) {
+              drinksRow.classList.remove("d-none");
+            } else {
+              drinksRow.classList.add("d-none");
+            }
+          },
+        );
+      }
+
+      addEventListenerPerPlayerCheckboxes();
+      loadAllPerPlayerCheckboxes();
+
+      addOnChangeEventUnitPrice(hasLuxuriesManagerElem);
+      addOnChangeEventUnitPrice(hasGardenElem);
+      addOnChangeEventUnitPrice(discountElem);
+
+      addEventListenerForDrinksPreferenceLemonadesSodasBeers(lemonadesRow);
+      addEventListenerForDrinksPreferenceLemonadesSodasBeers(sodasRow);
+      addEventListenerForDrinksPreferenceLemonadesSodasBeers(beersRow);
+      drinksPreferenceEventTarget.addEventListener(
+        getDinnerCalculatorPreferenceEventName(),
+        (event) => {
+          const customEvent = event as CustomEvent;
+          const drinksPreferenceValue = customEvent.detail
+            .drinksPreference as DrinksPreference;
+          this.drinksPreference = drinksPreferenceValue;
+          if (drinksPreferenceValue === DrinksPreference.SHOW_DRINKS_ONLY) {
+            drinksRow.classList.remove("d-none");
+          } else {
+            drinksRow.classList.add("d-none");
+          }
+        },
+      );
+
+      loadPlayerNameButton?.addEventListener("click", function () {
+        loadAllPerPlayerCheckboxes();
+      });
+
+      calculateButton?.addEventListener("click", () => {
+        let numDrinks = 0;
+        if (this.drinksPreference === DrinksPreference.SHOW_ALL) {
+          numDrinks =
+            parseInt(getSelectOption(lemonadesElem)) +
+            parseInt(getSelectOption(sodasElem)) +
+            parseInt(getSelectOption(beersElem));
+        } else if (
+          this.drinksPreference === DrinksPreference.SHOW_DRINKS_ONLY
+        ) {
+          numDrinks = parseInt(getSelectOption(drinksElem));
+        }
+        try {
+          const payout = calculatePayout(
+            pizzaCheckbox?.checked ?? false,
+            burgerCheckbox?.checked ?? false,
+            drinksCheckbox?.checked ?? false,
+            parseInt(unitPriceElem?.textContent ?? "0"),
+            hasGardenElem?.checked ?? false,
+            parseInt(getSelectOption(pizzasElem)),
+            parseInt(getSelectOption(burgersElem)),
+            numDrinks,
+          );
+          payoutSpan.textContent = payout.toString();
+          errorSpan?.classList.add(CLASS_HIDDEN_VISILIBITY);
+        } catch (error: Error | unknown) {
+          if (error instanceof Error) {
+            payoutSpan.textContent = "0";
+            errorSpan.textContent = error.toString();
+            errorSpan?.classList.remove(CLASS_HIDDEN_VISILIBITY);
+          } else {
+            console.error("An unknown error occurred during calculation.");
+          }
+          return;
+        }
+      });
+
+      resetFoodDrinksButton?.addEventListener("click", function () {
+        resetFoodDrinks();
+      });
+
+      resetAllButton?.addEventListener("click", function () {
+        resetAllPerPlayerCheckboxes();
+        pizzaCheckbox.checked = false;
+        burgerCheckbox.checked = false;
+        drinksCheckbox.checked = false;
+        hasLuxuriesManagerElem.checked = false;
+        discountElem.selectedIndex = 0;
+        errorSpan.classList.add(CLASS_HIDDEN_VISILIBITY);
+        // Calculate last
+        resetFoodDrinks();
+      });
+    }
+  }
+
   const selectNumPlayers =
     document.querySelector<HTMLSelectElement>("#" + getNumberOfPlayersId()) ??
     new HTMLSelectElement();
+  const drinksPreference =
+    document.querySelector<HTMLSelectElement>(
+      "#" + ID_DINNER_CALCULATOR_DRINKS_PREFERENCE,
+    ) ?? new HTMLSelectElement();
 
   function loadDrinksPreference(): void {
-    const id = "dinner-calculator-drinks-preference";
-    const drinksPreference =
-      document.querySelector<HTMLSelectElement>("#" + id) ??
-      new HTMLSelectElement();
-    const stored = localStorage.getItem(id);
-    if (stored !== null) {
-      drinksPreference.value = stored;
-    }
     drinksPreference.addEventListener("change", () => {
       const value = getSelectOption(drinksPreference);
-      localStorage.setItem(id, value);
+      localStorage.setItem(ID_DINNER_CALCULATOR_DRINKS_PREFERENCE, value);
+      const customEvent = new CustomEvent(
+        getDinnerCalculatorPreferenceEventName(),
+        {
+          detail: {
+            drinksPreference: value,
+          },
+        },
+      );
+      drinksPreferenceEventTarget.dispatchEvent(customEvent);
     });
+    const stored = localStorage.getItem(ID_DINNER_CALCULATOR_DRINKS_PREFERENCE);
+    if (stored !== null) {
+      drinksPreference.value = stored;
+      // Create a new 'change' event
+      const event = new Event("change");
+      // Dispatch it.
+      drinksPreference.dispatchEvent(event);
+    }
   }
 
   function load() {
     loadNumberOfPlayers();
     const playerDivState = new PlayerDivState();
     for (let i = 1; i <= NUM_PLAYERS; i++) {
-      loadOnePlayer(i);
+      const onePlayerCalculator = new OnePlayerCalculator();
+      onePlayerCalculator.loadOnePlayer(i);
       playerDivState.loadPlayerSwitchingButton(i);
     }
 
@@ -194,6 +521,10 @@ document.addEventListener("DOMContentLoaded", function () {
     loadDrinksPreference();
   }
   load();
+
+  function getDinnerCalculatorPreferenceEventName(): string {
+    return ID_DINNER_CALCULATOR_DRINKS_PREFERENCE + "-event";
+  }
 
   const milestoneResetButton =
     document.querySelector<HTMLButtonElement>("#reset-milestones") ??
@@ -213,230 +544,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedValue =
       selectInput?.options[selectInput.selectedIndex].value ?? "0";
     return selectedValue;
-  }
-
-  function loadOnePlayer(playerNumber: number): void {
-    const playerNameInput =
-      document.querySelector<HTMLInputElement>(
-        "#player-name-" + playerNumber
-      ) ?? new HTMLInputElement();
-    const loadPlayerNameButton =
-      document.querySelector<HTMLButtonElement>(
-        "#load-player-name-button-" + playerNumber
-      ) ?? new HTMLButtonElement();
-    const pizzaCheckbox =
-      document.querySelector<HTMLInputElement>(
-        "#pizza-bonus-checkbox-" + playerNumber
-      ) ?? new HTMLInputElement();
-    const burgerCheckbox =
-      document.querySelector<HTMLInputElement>(
-        "#burger-bonus-checkbox-" + playerNumber
-      ) ?? new HTMLInputElement();
-    const drinksCheckbox =
-      document.querySelector<HTMLInputElement>(
-        "#drinks-bonus-checkbox-" + playerNumber
-      ) ?? new HTMLInputElement();
-    const perPlayerCheckboxes: [HTMLInputElement, string][] = [
-      [pizzaCheckbox, KEY_PIZZA_BONUS],
-      [burgerCheckbox, KEY_BURGER_BONUS],
-      [drinksCheckbox, KEY_DRINKS_BONUS],
-    ];
-    const hasLuxuriesManagerElem =
-      document.querySelector<HTMLInputElement>(
-        "#luxuries-manager-checkbox-" + playerNumber
-      ) ?? new HTMLInputElement();
-    const hasGardenElem =
-      document.querySelector<HTMLInputElement>(
-        "#has-garden-checkbox-" + playerNumber
-      ) ?? new HTMLInputElement();
-    const discountElem =
-      document.querySelector<HTMLSelectElement>("#discounts-" + playerNumber) ??
-      new HTMLSelectElement();
-    const unitPriceElem =
-      document.querySelector<HTMLSpanElement>("#unit-price-" + playerNumber) ??
-      new HTMLSpanElement();
-    const pizzasElem =
-      document.querySelector<HTMLSelectElement>("#pizzas-" + playerNumber) ??
-      new HTMLSelectElement();
-    const burgersElem =
-      document.querySelector<HTMLSelectElement>("#burgers-" + playerNumber) ??
-      new HTMLSelectElement();
-    const lemonadesElem =
-      document.querySelector<HTMLSelectElement>("#lemonades-" + playerNumber) ??
-      new HTMLSelectElement();
-    const sodasElem =
-      document.querySelector<HTMLSelectElement>("#sodas-" + playerNumber) ??
-      new HTMLSelectElement();
-    const beersElem =
-      document.querySelector<HTMLSelectElement>("#beers-" + playerNumber) ??
-      new HTMLSelectElement();
-    const calculateButton =
-      document.querySelector<HTMLButtonElement>(
-        "#calculate-button-" + playerNumber
-      ) ?? new HTMLButtonElement();
-    const payoutSpan =
-      document.querySelector<HTMLSpanElement>("#payout-" + playerNumber) ??
-      new HTMLSpanElement();
-    const errorSpan =
-      document.querySelector<HTMLSpanElement>(
-        "#calculate-error-message-" + playerNumber
-      ) ?? new HTMLSpanElement();
-    const resetFoodDrinksButton =
-      document.querySelector<HTMLButtonElement>(
-        "#reset-food-drinks-" + playerNumber
-      ) ?? new HTMLButtonElement();
-    const resetAllButton =
-      document.querySelector<HTMLButtonElement>(
-        "#reset-all-button-" + playerNumber
-      ) ?? new HTMLButtonElement();
-
-    function getInputTypeTextTrimmed(element: HTMLInputElement): string {
-      const trimmedValue = element?.value.trim() ?? "";
-      if (element) {
-        element.value = trimmedValue;
-      }
-      return trimmedValue;
-    }
-
-    function loadCheckbox(
-      checkbox: HTMLInputElement,
-      localStorageKey: string
-    ): void {
-      const formattedKey = getLocalStorageKey(
-        getInputTypeTextTrimmed(playerNameInput),
-        localStorageKey
-      );
-      const storedChecked = localStorage.getItem(formattedKey);
-      checkbox.checked = storedChecked === "true";
-    }
-
-    function getLocalStorageKey(playerName: string, key: string): string {
-      playerName = playerName.replace(REGEX_WHITESPACES, "_");
-      const tokens = key.split(DELIMITER);
-      if (tokens[0].toUpperCase() === playerName.toUpperCase()) {
-        return key;
-      }
-      return (playerName + DELIMITER + key).toUpperCase();
-    }
-
-    function loadAllPerPlayerCheckboxes(): void {
-      for (const [checkbox, bonusKey] of perPlayerCheckboxes) {
-        loadCheckbox(checkbox, bonusKey);
-      }
-    }
-
-    function resetAllPerPlayerCheckboxes(): void {
-      for (const [, bonusKey] of perPlayerCheckboxes) {
-        const localStorageKey = getLocalStorageKey(
-          getInputTypeTextTrimmed(playerNameInput),
-          bonusKey
-        );
-        localStorage.removeItem(localStorageKey);
-      }
-    }
-
-    function addEventListenerPerPlayerCheckboxes(): void {
-      for (const [checkbox, bonusKey] of perPlayerCheckboxes) {
-        addOnChangeEventCheckbox(checkbox, bonusKey);
-      }
-    }
-
-    function addOnChangeEventCheckbox(
-      checkbox: HTMLInputElement,
-      localStorageKey: string
-    ): void {
-      checkbox?.addEventListener("change", function () {
-        localStorageKey = getLocalStorageKey(
-          getInputTypeTextTrimmed(playerNameInput),
-          localStorageKey
-        );
-        const checkedValue = checkbox?.checked ?? false;
-        localStorage.setItem(localStorageKey, checkedValue.toString());
-      });
-    }
-
-    function setUnitPrice(): void {
-      const discounts = getSelectOption(discountElem);
-      const unitPrice = calculateUnitPrice(
-        hasLuxuriesManagerElem?.checked,
-        hasGardenElem?.checked,
-        parseInt(discounts),
-      );
-      unitPriceElem.textContent = unitPrice.toString();
-    }
-
-    function addOnChangeEventUnitPrice(inputElement: Element): void {
-      inputElement?.addEventListener("change", () => {
-        setUnitPrice();
-      });
-    }
-
-    function resetFoodDrinks(): void {
-      pizzasElem.value = "0";
-      burgersElem.value = "0";
-      lemonadesElem.value = "0";
-      sodasElem.value = "0";
-      beersElem.value = "0";
-      payoutSpan.textContent = "0";
-      hasGardenElem.checked = false;
-      // Calculate last
-      setUnitPrice();
-    }
-
-    addEventListenerPerPlayerCheckboxes();
-    loadAllPerPlayerCheckboxes();
-
-    addOnChangeEventUnitPrice(hasLuxuriesManagerElem);
-    addOnChangeEventUnitPrice(hasGardenElem);
-    addOnChangeEventUnitPrice(discountElem);
-
-    loadPlayerNameButton?.addEventListener("click", function () {
-      loadAllPerPlayerCheckboxes();
-    });
-
-    calculateButton?.addEventListener("click", function () {
-      try {
-        const payout = calculatePayout(
-          pizzaCheckbox?.checked ?? false,
-          burgerCheckbox?.checked ?? false,
-          drinksCheckbox?.checked ?? false,
-          parseInt(unitPriceElem?.textContent ?? "0"),
-          hasGardenElem?.checked ?? false,
-          parseInt(getSelectOption(pizzasElem)),
-          parseInt(getSelectOption(burgersElem)),
-          parseInt(getSelectOption(lemonadesElem)),
-          parseInt(getSelectOption(sodasElem)),
-          parseInt(getSelectOption(beersElem)),
-        );
-        payoutSpan.textContent = payout.toString();
-        errorSpan?.classList.add(CLASS_HIDDEN_VISILIBITY);
-      } catch (error: Error | unknown) {
-        if (error instanceof Error) {
-          payoutSpan.textContent = "0";
-          errorSpan.textContent = error.toString();
-          errorSpan?.classList.remove(CLASS_HIDDEN_VISILIBITY);
-        } else {
-          console.error("An unknown error occurred during calculation.");
-        }
-        return;
-      }
-    });
-
-    resetFoodDrinksButton?.addEventListener("click", function () {
-      resetFoodDrinks();
-    });
-
-    resetAllButton?.addEventListener("click", function () {
-      resetAllPerPlayerCheckboxes();
-      pizzaCheckbox.checked = false;
-      burgerCheckbox.checked = false;
-      drinksCheckbox.checked = false;
-      hasLuxuriesManagerElem.checked = false;
-      discountElem.selectedIndex = 0;
-      errorSpan.classList.add(CLASS_HIDDEN_VISILIBITY);
-      // Calculate last
-      resetFoodDrinks();
-    });
   }
 
   function leftPad(n: number): string {
@@ -462,7 +569,7 @@ document.addEventListener("DOMContentLoaded", function () {
       milestoneRedXImage.classList.toggle("show");
       localStorage.setItem(
         redXId,
-        String(milestoneRedXImage.classList.contains("show"))
+        String(milestoneRedXImage.classList.contains("show")),
       );
     });
   }
@@ -484,7 +591,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setEmployee1xValue(
       employee1xDiv,
       redXImage,
-      parseInt(localStorage.getItem(redTextIds[0]) ?? "3")
+      parseInt(localStorage.getItem(redTextIds[0]) ?? "3"),
     );
 
     employeeImage.addEventListener("click", () => {
@@ -561,7 +668,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function setEmployee1xValue(
     textDiv: HTMLDivElement,
     redXImg: HTMLImageElement,
-    value: number
+    value: number,
   ): void {
     textDiv.textContent = value.toString();
     if (value === 0) {
