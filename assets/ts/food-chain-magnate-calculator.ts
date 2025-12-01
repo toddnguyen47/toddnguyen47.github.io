@@ -283,13 +283,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       function loadCheckbox(
+        playerName: string,
         checkbox: HTMLInputElement,
         localStorageKey: string,
       ): void {
-        const formattedKey = getLocalStorageKey(
-          getInputTypeTextTrimmed(playerNameInput),
-          localStorageKey,
-        );
+        if (playerName === "") {
+          return;
+        }
+        const formattedKey = getLocalStorageKey(playerName, localStorageKey);
         const storedChecked = localStorage.getItem(formattedKey);
         checkbox.checked = storedChecked === "true";
       }
@@ -303,9 +304,9 @@ document.addEventListener("DOMContentLoaded", function () {
         return (playerName + DELIMITER + key).toUpperCase();
       }
 
-      function loadAllPerPlayerCheckboxes(): void {
+      function loadAllPerPlayerCheckboxes(playerName: string): void {
         for (const [checkbox, bonusKey] of perPlayerCheckboxes) {
-          loadCheckbox(checkbox, bonusKey);
+          loadCheckbox(playerName, checkbox, bonusKey);
         }
       }
 
@@ -330,10 +331,11 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorageKey: string,
       ): void {
         checkbox?.addEventListener("change", function () {
-          localStorageKey = getLocalStorageKey(
-            getInputTypeTextTrimmed(playerNameInput),
-            localStorageKey,
-          );
+          const playerName = getInputTypeTextTrimmed(playerNameInput);
+          if (playerName === "") {
+            return;
+          }
+          localStorageKey = getLocalStorageKey(playerName, localStorageKey);
           const checkedValue = checkbox?.checked ?? false;
           localStorage.setItem(localStorageKey, checkedValue.toString());
         });
@@ -386,13 +388,16 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       }
 
-      addEventListenerPerPlayerCheckboxes();
-      loadAllPerPlayerCheckboxes();
+      const loadPlayerName = () => {
+        const id = `player_${this.playerNumber}_name`;
+        const name = localStorage.getItem(id) ?? "";
+        playerNameInput.value = name;
+      };
 
+      addEventListenerPerPlayerCheckboxes();
       addOnChangeEventUnitPrice(hasLuxuriesManagerElem);
       addOnChangeEventUnitPrice(hasGardenElem);
       addOnChangeEventUnitPrice(discountElem);
-
       addEventListenerForDrinksPreferenceLemonadesSodasBeers(lemonadesRow);
       addEventListenerForDrinksPreferenceLemonadesSodasBeers(sodasRow);
       addEventListenerForDrinksPreferenceLemonadesSodasBeers(beersRow);
@@ -411,8 +416,14 @@ document.addEventListener("DOMContentLoaded", function () {
         },
       );
 
-      loadPlayerNameButton?.addEventListener("click", function () {
-        loadAllPerPlayerCheckboxes();
+      loadPlayerNameButton?.addEventListener("click", () => {
+        const playerName = getInputTypeTextTrimmed(playerNameInput);
+        if (playerName === "") {
+          return;
+        }
+        const id = `player_${this.playerNumber}_name`;
+        localStorage.setItem(id, playerName);
+        loadAllPerPlayerCheckboxes(playerName);
       });
 
       calculateButton?.addEventListener("click", () => {
@@ -467,6 +478,11 @@ document.addEventListener("DOMContentLoaded", function () {
         // Calculate last
         resetFoodDrinks();
       });
+
+      // After all event listeners have been set
+      setUnitPrice();
+      loadPlayerName();
+      loadAllPerPlayerCheckboxes(getInputTypeTextTrimmed(playerNameInput));
     }
   }
 
