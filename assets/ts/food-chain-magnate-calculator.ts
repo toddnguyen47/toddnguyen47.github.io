@@ -261,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const payoutSpan =
         document.querySelector<HTMLSpanElement>("#payout-" + playerNumber) ??
         new HTMLSpanElement();
-      const errorSpan =
+      const errorDiv =
         document.querySelector<HTMLSpanElement>(
           "#calculate-error-message-" + playerNumber,
         ) ?? new HTMLSpanElement();
@@ -389,8 +389,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const loadPlayerName = () => {
-        const id = `player_${this.playerNumber}_name`;
-        const name = localStorage.getItem(id) ?? "";
+        const name = localStorage.getItem(this.getIdForCurrentPlayer()) ?? "";
         playerNameInput.value = name;
       };
 
@@ -421,12 +420,19 @@ document.addEventListener("DOMContentLoaded", function () {
         if (playerName === "") {
           return;
         }
-        const id = `player_${this.playerNumber}_name`;
-        localStorage.setItem(id, playerName);
+        localStorage.setItem(this.getIdForCurrentPlayer(), playerName);
         loadAllPerPlayerCheckboxes(playerName);
       });
 
       calculateButton?.addEventListener("click", () => {
+        const playerName = localStorage.getItem(this.getIdForCurrentPlayer()) ?? "";
+        if (playerName === "") {
+          payoutSpan.textContent = "0";
+          errorDiv.textContent = "Please load a player's name first";
+          errorDiv?.classList.remove(CLASS_HIDDEN_VISILIBITY);
+          return;
+        }
+
         let numDrinks = 0;
         if (this.drinksPreference === DrinksPreference.SHOW_ALL) {
           numDrinks =
@@ -450,12 +456,12 @@ document.addEventListener("DOMContentLoaded", function () {
             numDrinks,
           );
           payoutSpan.textContent = payout.toString();
-          errorSpan?.classList.add(CLASS_HIDDEN_VISILIBITY);
+          errorDiv?.classList.add(CLASS_HIDDEN_VISILIBITY);
         } catch (error: Error | unknown) {
           if (error instanceof Error) {
             payoutSpan.textContent = "0";
-            errorSpan.textContent = error.toString();
-            errorSpan?.classList.remove(CLASS_HIDDEN_VISILIBITY);
+            errorDiv.textContent = error.toString();
+            errorDiv?.classList.remove(CLASS_HIDDEN_VISILIBITY);
           } else {
             console.error("An unknown error occurred during calculation.");
           }
@@ -474,7 +480,7 @@ document.addEventListener("DOMContentLoaded", function () {
         drinksCheckbox.checked = false;
         hasLuxuriesManagerElem.checked = false;
         discountElem.selectedIndex = 0;
-        errorSpan.classList.add(CLASS_HIDDEN_VISILIBITY);
+        errorDiv.classList.add(CLASS_HIDDEN_VISILIBITY);
         // Calculate last
         resetFoodDrinks();
       });
@@ -483,6 +489,10 @@ document.addEventListener("DOMContentLoaded", function () {
       setUnitPrice();
       loadPlayerName();
       loadAllPerPlayerCheckboxes(getInputTypeTextTrimmed(playerNameInput));
+    }
+
+    private getIdForCurrentPlayer() {
+      return `player_${this.playerNumber}_name`;
     }
   }
 
