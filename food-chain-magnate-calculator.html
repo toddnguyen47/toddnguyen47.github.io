@@ -9,6 +9,32 @@ description: A calculator to help Food Chain Magnate players calculate their pay
 {% assign max_players = 5 %}
 
 <div>
+  <h1>Poker Chip ↔ Money Conversion</h1>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-4 position-relative pt-2">
+        <img class="img-fluid" src="assets/images/food-chain-magnate/poker-chips/marked-01-poker-green.jpg"
+          alt="marked-01-poker-green" />
+      </div>
+      <div class="col-4 position-relative pt-2">
+        <img class="img-fluid" src="assets/images/food-chain-magnate/poker-chips/marked-05-poker-blue.jpg"
+          alt="marked-05-poker-blue" />
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-4 position-relative pt-2">
+        <img class="img-fluid" src="assets/images/food-chain-magnate/poker-chips/marked-10-poker-red.jpg"
+          alt="marked-10-poker-red" />
+      </div>
+      <div class="col-4 position-relative pt-2">
+        <img class="img-fluid" src="assets/images/food-chain-magnate/poker-chips/marked-50-poker-white.jpg"
+          alt="marked-50-poker-white" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-5">
   <h1>Dinner Calculator</h1>
 
   <p>
@@ -21,9 +47,9 @@ description: A calculator to help Food Chain Magnate players calculate their pay
   </p>
   <ol>
     <li>"Show All", which means "Lemonades" / "Sodas" / "Beers"
-    will be shown separately</li>
+      will be shown separately</li>
     <li>"Show Drinks Only" where only one dropdown of "Drinks" will be shown</li>
-    </ol>
+  </ol>
 
   <label for="dinner-calculator-drinks-preference">Drinks Preference</label>
   <select name="dinner-calculator-drinks-preference" id="dinner-calculator-drinks-preference">
@@ -34,11 +60,8 @@ description: A calculator to help Food Chain Magnate players calculate their pay
   <ul class="mt-3 nav nav-pills">
     {% for i in (1..max_players) %}
     <li class="nav-item">
-      <button
-        class="nav-link header-bg-color-secondary-bg-inverted"
-        aria-current="page"
-        id="switch-button-player-{{ i }}"
-      >
+      <button class="nav-link header-bg-color-secondary-bg-inverted" aria-current="page"
+        id="switch-button-player-{{ i }}">
         Player {{ i }}
       </button>
     </li>
@@ -65,16 +88,10 @@ description: A calculator to help Food Chain Magnate players calculate their pay
       <div class="col-4 position-relative pt-2">
         {% assign num = i | times: 3 | plus: j %} {% assign result = num |
         prepend: '00' | slice: -2, 2 %}
-        <img
-          id="milestone-{{ result }}"
-          role="button"
-          src="assets/images/food-chain-magnate/milestones/milestone-{{ result }}.png"
-        />
-        <img
-          id="milestone-red-x-{{ result }}"
-          src="assets/images/food-chain-magnate/milestones/red-x-mini.png"
-          class="my-overlay-image"
-        />
+        <img id="milestone-{{ result }}" role="button"
+          src="assets/images/food-chain-magnate/milestones/milestone-{{ result }}.png" />
+        <img id="milestone-red-x-{{ result }}" src="assets/images/food-chain-magnate/milestones/red-x-mini.png"
+          class="my-overlay-image" />
       </div>
       {% endfor %}
     </div>
@@ -107,58 +124,35 @@ description: A calculator to help Food Chain Magnate players calculate their pay
     increase their count by one.
   </p>
 
-<div class="mt-3 container food-chain-magnate-background">
+  <div class="mt-3 container food-chain-magnate-background">
     {% for i in (0..4) %}
     <div class="row align-items-center">
       {% assign num1 = i | times: 2 | plus: 1 %}
-      {% if num1 <= 10 %}
-      {% assign result1 = num1 | prepend: '00' | slice: -2, 2 %}
-      {% assign num2 = i | times: 2 | plus: 2 %}
-      {% assign result2 = num2 | prepend: '00' | slice: -2, 2 %}
-      <div class="col-3 position-relative pt-2">
-        <img
-          id="employee-1x-{{ result1 }}"
-          role="button"
-          src="assets/images/food-chain-magnate/employees/employee-{{ result1 }}.png"
-        />
-        <img
-          id="employee-1x-red-x-{{ result1 }}"
-          src="assets/images/food-chain-magnate/milestones/red-x-mini.png"
-          class="my-overlay-image employee-1x"
-        />
-      </div>
-      <div class="col-3 pt-2">
-        <div
-          id="employee-1x-text-{{ result1 }}"
-          role="button"
-          class="employee-1x-text user-select-none"
-        >
-          3
-        </div>
-      </div>
-      <div class="col-3 position-relative pt-2">
-        <img
-          id="employee-1x-{{ result2 }}"
-          role="button"
-          src="assets/images/food-chain-magnate/employees/employee-{{ result2 }}.png"
-        />
-        <img
-          id="employee-1x-red-x-{{ result2 }}"
-          src="assets/images/food-chain-magnate/milestones/red-x-mini.png"
-          class="my-overlay-image employee-1x"
-        />
-      </div>
-      <div class="col-3 pt-2">
-        <div
-          id="employee-1x-text-{{ result2 }}"
-          role="button"
-          class="employee-1x-text user-select-none"
-        >
-          3
-        </div>
-      </div>
-      {% endif %}
+      {% if num1 <= 10 %} {% assign result1=num1 | prepend: '00' | slice: -2, 2 %} {% assign num2=i | times: 2 | plus: 2
+        %} {% assign result2=num2 | prepend: '00' | slice: -2, 2 %} <div class="col-3 position-relative pt-2">
+        <img id="employee-1x-{{ result1 }}" role="button"
+          src="assets/images/food-chain-magnate/employees/employee-{{ result1 }}.png" />
+        <img id="employee-1x-red-x-{{ result1 }}" src="assets/images/food-chain-magnate/milestones/red-x-mini.png"
+          class="my-overlay-image employee-1x" />
     </div>
-    {% endfor %}
+    <div class="col-3 pt-2">
+      <div id="employee-1x-text-{{ result1 }}" role="button" class="employee-1x-text user-select-none">
+        3
+      </div>
+    </div>
+    <div class="col-3 position-relative pt-2">
+      <img id="employee-1x-{{ result2 }}" role="button"
+        src="assets/images/food-chain-magnate/employees/employee-{{ result2 }}.png" />
+      <img id="employee-1x-red-x-{{ result2 }}" src="assets/images/food-chain-magnate/milestones/red-x-mini.png"
+        class="my-overlay-image employee-1x" />
+    </div>
+    <div class="col-3 pt-2">
+      <div id="employee-1x-text-{{ result2 }}" role="button" class="employee-1x-text user-select-none">
+        3
+      </div>
+    </div>
+    {% endif %}
   </div>
+  {% endfor %}
+</div>
 </div>
