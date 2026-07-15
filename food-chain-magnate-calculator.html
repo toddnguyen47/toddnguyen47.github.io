@@ -9,28 +9,29 @@ description: A calculator to help Food Chain Magnate players calculate their pay
 {% assign max_players = 5 %}
 
 <div>
-  <h1>Poker Chip ↔ Money Conversion</h1>
+  <h1>Money Calculator</h1>
+  <p>Input money into the textbox, then press "Calculate"</p>
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-4 position-relative pt-2">
-        <img class="img-fluid" src="assets/images/food-chain-magnate/poker-chips/marked-01-poker-green.jpg"
-          alt="marked-01-poker-green" />
+    <div class="row justify-content-center align-items-center pb-3">
+      <div class="col-5">
+        <button id="money-calculator-btn" class="my-button">Calculate</button>
       </div>
-      <div class="col-4 position-relative pt-2">
-        <img class="img-fluid" src="assets/images/food-chain-magnate/poker-chips/marked-05-poker-blue.jpg"
-          alt="marked-05-poker-blue" />
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col-4 position-relative pt-2">
-        <img class="img-fluid" src="assets/images/food-chain-magnate/poker-chips/marked-10-poker-red.jpg"
-          alt="marked-10-poker-red" />
-      </div>
-      <div class="col-4 position-relative pt-2">
-        <img class="img-fluid" src="assets/images/food-chain-magnate/poker-chips/marked-50-poker-white.jpg"
-          alt="marked-50-poker-white" />
+      <div class="col-4">
+        <input class="width-100" type="text" id="money-calculator-amount"
+          name="money-calculator-amount"></input>
       </div>
     </div>
+    {% for chipAmountData in site.data.food-chain-magnate-calculator.chip-amount %}
+    <div class="row justify-content-center align-items-center">
+      <div class="col-5 pt-2">
+        <img class="img-fluid" src="assets/images/food-chain-magnate/poker-chips/marked-{{ chipAmountData[0] }}-poker-{{ chipAmountData[1] }}.jpg"
+          alt="marked-{{ chipAmountData[0] }}-poker-{{ chipAmountData[1] }}" />
+      </div>
+      <div class="col-4 pt-2">
+        <div id="marked-{{ chipAmountData[0] }}-count" class="employee-1x-text">0</div>
+      </div>
+    </div>
+    {% endfor %}
   </div>
 </div>
 

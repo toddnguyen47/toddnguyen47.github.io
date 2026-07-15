@@ -22,6 +22,8 @@ const NUM_PLAYERS_MAX_1X_EMPLOYEES: { [key: string]: number } = {
   "5": 3,
 };
 
+const CHIP_AMOUNT = [1, 5, 10, 50];
+
 function calculateUnitPrice(
   hasLuxuriesManager: boolean,
   hasGarden: boolean,
@@ -71,6 +73,36 @@ function calculatePayout(
   const drinksPayout = calculateItemPayout(numDrinks, hasDrinksBonus);
 
   return pizzaPayout + burgerPayout + drinksPayout;
+}
+
+function calculateMoney(amount: number): Map<number, number> {
+  const chipAmounts: Map<number, number> = new Map(
+    CHIP_AMOUNT.map(amount => [amount, 0])
+  );
+
+  let index = CHIP_AMOUNT.length - 1;
+  while (amount > 0) {
+    const curChipValue = CHIP_AMOUNT[index];
+    const numberOfTokens = Math.floor(amount / curChipValue);
+    amount = amount % curChipValue;
+    chipAmounts.set(curChipValue, numberOfTokens);
+    index--;
+  }
+
+  return chipAmounts;
+}
+
+function getInputTypeTextTrimmed(element: HTMLInputElement): string {
+  const trimmedValue = element?.value.trim() ?? "";
+  if (element) {
+    element.value = trimmedValue;
+  }
+  return trimmedValue;
+}
+
+function leftPad(n: number): string {
+  const x = Math.floor(n);
+  return x < 10 ? "0" + x : String(x);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -273,14 +305,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector<HTMLButtonElement>(
           "#reset-all-button-" + playerNumber,
         ) ?? new HTMLButtonElement();
-
-      function getInputTypeTextTrimmed(element: HTMLInputElement): string {
-        const trimmedValue = element?.value.trim() ?? "";
-        if (element) {
-          element.value = trimmedValue;
-        }
-        return trimmedValue;
-      }
 
       function loadCheckbox(
         playerName: string,
@@ -528,26 +552,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function load() {
-    loadNumberOfPlayers();
-    const playerDivState = new PlayerDivState();
-    for (let i = 1; i <= NUM_PLAYERS; i++) {
-      const onePlayerCalculator = new OnePlayerCalculator();
-      onePlayerCalculator.loadOnePlayer(i);
-      playerDivState.loadPlayerSwitchingButton(i);
-    }
-
-    for (let i = 1; i <= NUM_MILESTONES; i++) {
-      loadOneMilestone(i);
-    }
-
-    for (let i = 1; i <= NUM_1X_EMPLOYEES; i++) {
-      loadOne1xEmployee(i);
-    }
-    loadDrinksPreference();
-  }
-  load();
-
   function getDinnerCalculatorPreferenceEventName(): string {
     return ID_DINNER_CALCULATOR_DRINKS_PREFERENCE + "-event";
   }
@@ -570,11 +574,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedValue =
       selectInput?.options[selectInput.selectedIndex].value ?? "0";
     return selectedValue;
-  }
-
-  function leftPad(n: number): string {
-    const x = Math.floor(n);
-    return x < 10 ? "0" + x : String(x);
   }
 
   function loadOneMilestone(milestoneNumber: number): void {
@@ -705,4 +704,56 @@ document.addEventListener("DOMContentLoaded", function () {
       redXImg.classList.remove("show");
     }
   }
+
+  function loadMoneyCalculator() {
+    const moneyCalculatorButton =
+      document.querySelector<HTMLButtonElement>("#money-calculator-btn") ??
+      new HTMLButtonElement();
+    const moneyCalculatorInput =
+      document.querySelector<HTMLInputElement>("#money-calculator-amount") ??
+      new HTMLInputElement();
+
+    const divMap: Map<number, HTMLDivElement> = new Map(
+      CHIP_AMOUNT.map(amount => [
+        amount,
+        document.querySelector<HTMLDivElement>(`#marked-${leftPad(amount)}-count`) ?? document.createElement('div')
+      ])
+    );
+
+    moneyCalculatorButton?.addEventListener("click", () => {
+      const amount = getInputTypeTextTrimmed(moneyCalculatorInput);
+      const amountNumber = Number(amount);
+      const amountDict = calculateMoney(amountNumber);
+      for (const [key, value] of amountDict) {
+        const div1 = divMap.get(key);
+        if (div1) {
+          div1.textContent = value.toString();
+        }
+      };
+    });
+  }
+
+  // Big bad load function!
+  function load() {
+    loadNumberOfPlayers();
+    const playerDivState = new PlayerDivState();
+    for (let i = 1; i <= NUM_PLAYERS; i++) {
+      const onePlayerCalculator = new OnePlayerCalculator();
+      onePlayerCalculator.loadOnePlayer(i);
+      playerDivState.loadPlayerSwitchingButton(i);
+    }
+
+    for (let i = 1; i <= NUM_MILESTONES; i++) {
+      loadOneMilestone(i);
+    }
+
+    for (let i = 1; i <= NUM_1X_EMPLOYEES; i++) {
+      loadOne1xEmployee(i);
+    }
+    loadDrinksPreference();
+
+    loadMoneyCalculator();
+  }
+
+  load();
 });
