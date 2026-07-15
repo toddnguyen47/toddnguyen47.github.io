@@ -723,6 +723,10 @@ document.addEventListener("DOMContentLoaded", function () {
     moneyCalculatorButton?.addEventListener("click", () => {
       const amount = getInputTypeTextTrimmed(moneyCalculatorInput);
       const amountNumber = Number(amount);
+      if (Number.isNaN(amountNumber)) {
+        console.error(`${amount} is not a number!`);
+        return;
+      }
       const amountDict = calculateMoney(amountNumber);
       for (const [key, value] of amountDict) {
         const div1 = divMap.get(key);
