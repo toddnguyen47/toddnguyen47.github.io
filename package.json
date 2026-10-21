@@ -12,14 +12,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "watch:ts": "tsc --watch"
+    "build": "tsc && npm run build:botc:bundle",
+    "build:botc:bundle": "esbuild assets/ts/blood-on-the-clocktower.ts --bundle --format=iife --target=es2020 --outfile=assets/js/blood-on-the-clocktower.js",
+    "watch:botc": "tsc --watch",
+    "watch:botc:bundle": "esbuild assets/ts/blood-on-the-clocktower.ts --bundle --format=iife --target=es2020 --outfile=assets/js/blood-on-the-clocktower.js --watch"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "esbuild": "^0.28.2",
     "eslint": "^9.39.1",
     "prettier": "^3.7.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0"
+  },
+  "dependencies": {
+    "fuse.js": "^7.5.0"
   }
 }
