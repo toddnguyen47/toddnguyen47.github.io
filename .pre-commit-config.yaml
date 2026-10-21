@@ -14,9 +14,9 @@ repos:
       - id: check-shebang-scripts-are-executable
       - id: check-merge-conflict
       - id: check-symlinks
-  - repo: https://github.com/toddnguyen47/pre-commit-hooks
-    rev: v1.5.0
-    hooks:
-      - id: prettify-json
-        types: [json]
-        exclude: ^.vscode[ \S]*$
+  # - repo: https://github.com/toddnguyen47/pre-commit-hooks
+  #   rev: v1.5.0
+  #   hooks:
+  #     - id: prettify-json
+  #       types: [json]
+  #       exclude: ^.vscode[ \S]*$

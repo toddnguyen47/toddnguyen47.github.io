@@ -14,7 +14,8 @@ function loadRoleFind() {
   }
 
   const input =
-    document.querySelector<HTMLInputElement>("#role-input") ?? new HTMLInputElement();
+    document.querySelector<HTMLInputElement>("#role-input") ??
+    new HTMLInputElement();
   input.addEventListener("dblclick", () => {
     input.select();
   });
@@ -26,13 +27,16 @@ function loadRoleFind() {
     document.querySelector<HTMLButtonElement>("#role-input-button");
 
   const remindersOutput =
-    document.querySelector<HTMLTextAreaElement>("#reminders") ?? new HTMLTextAreaElement();
+    document.querySelector<HTMLTextAreaElement>("#reminders") ??
+    new HTMLTextAreaElement();
   remindersOutput.value = "";
 
   async function initAutocomplete(): Promise<void> {
     if (!input || !suggestionsList) return;
 
-    const response = await fetch("https://release.botc.app/resources/data/roles.json");
+    const response = await fetch(
+      "https://release.botc.app/resources/data/roles.json",
+    );
     if (!response.ok) throw new Error("Failed to load roles.json");
 
     const roles: Role[] = await response.json();
@@ -75,7 +79,7 @@ function loadRoleFind() {
       const matches = fuse
         .search(query.trim())
         .slice(0, 8)
-        .map(result => result.item);
+        .map((result) => result.item);
 
       if (!matches.length) {
         hideSuggestions();
@@ -103,9 +107,7 @@ function loadRoleFind() {
     function findRole(): void {
       const query = input!.value.trim().toLowerCase();
 
-      const role = roles.find(
-        role => role.name.toLowerCase() === query
-      );
+      const role = roles.find((role) => role.name.toLowerCase() === query);
 
       if (!role) {
         remindersOutput.value = "Role not found.";
@@ -124,7 +126,7 @@ function loadRoleFind() {
     });
 
     // Escape closes suggestions; Enter performs an exact search.
-    input.addEventListener("keydown", event => {
+    input.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         hideSuggestions();
       }
@@ -139,7 +141,7 @@ function loadRoleFind() {
     findButton?.addEventListener("click", findRole);
 
     // Hide suggestions when clicking elsewhere on the page.
-    document.addEventListener("click", event => {
+    document.addEventListener("click", (event) => {
       if (
         !input!.contains(event.target as Node) &&
         !suggestionsList!.contains(event.target as Node)
