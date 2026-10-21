@@ -26,7 +26,8 @@ function loadRoleFind() {
     document.querySelector<HTMLButtonElement>("#role-input-button");
 
   const remindersOutput =
-    document.querySelector<HTMLTextAreaElement>("#reminders");
+    document.querySelector<HTMLTextAreaElement>("#reminders") ?? new HTMLTextAreaElement();
+  remindersOutput.value = "";
 
   async function initAutocomplete(): Promise<void> {
     if (!input || !suggestionsList) return;
@@ -55,9 +56,7 @@ function loadRoleFind() {
         reminders,
       };
 
-      if (remindersOutput) {
-        remindersOutput.value = JSON.stringify(output, null, 2);
-      }
+      remindersOutput.value = JSON.stringify(output, null, 2);
     }
 
     function hideSuggestions(): void {
@@ -109,9 +108,7 @@ function loadRoleFind() {
       );
 
       if (!role) {
-        if (remindersOutput) {
-          remindersOutput.value = "Role not found.";
-        }
+        remindersOutput.value = "Role not found.";
 
         hideSuggestions();
         return;
