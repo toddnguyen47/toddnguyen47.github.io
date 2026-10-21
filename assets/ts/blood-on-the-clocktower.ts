@@ -8,10 +8,9 @@ function loadRoleFind() {
   interface Role {
     id: string;
     name: string;
-    team: string;
     reminders?: string[];
     remindersGlobal?: string[];
-    ability: string;
+    edition: string;
   }
 
   const input =
@@ -50,6 +49,8 @@ function loadRoleFind() {
       ];
 
       const output = {
+        name: role.name,
+        edition: role.edition,
         number: reminders.length,
         reminders,
       };
