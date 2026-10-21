@@ -77,7 +77,7 @@ function calculatePayout(
 
 function calculateMoney(amount: number): Map<number, number> {
   const chipAmounts: Map<number, number> = new Map(
-    CHIP_AMOUNT.map((amount) => [amount, 0]),
+    CHIP_AMOUNT.map(amount => [amount, 0])
   );
 
   let index = CHIP_AMOUNT.length - 1;
@@ -449,8 +449,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       calculateButton?.addEventListener("click", () => {
-        const playerName =
-          localStorage.getItem(this.getIdForCurrentPlayer()) ?? "";
+        const playerName = localStorage.getItem(this.getIdForCurrentPlayer()) ?? "";
         if (playerName === "") {
           payoutSpan.textContent = "0";
           errorDiv.textContent = "Please load a player's name first";
@@ -715,12 +714,10 @@ document.addEventListener("DOMContentLoaded", function () {
       new HTMLInputElement();
 
     const divMap: Map<number, HTMLDivElement> = new Map(
-      CHIP_AMOUNT.map((amount) => [
+      CHIP_AMOUNT.map(amount => [
         amount,
-        document.querySelector<HTMLDivElement>(
-          `#marked-${leftPad(amount)}-count`,
-        ) ?? document.createElement("div"),
-      ]),
+        document.querySelector<HTMLDivElement>(`#marked-${leftPad(amount)}-count`) ?? document.createElement('div')
+      ])
     );
 
     moneyCalculatorButton?.addEventListener("click", () => {
@@ -736,7 +733,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (div1) {
           div1.textContent = value.toString();
         }
-      }
+      };
     });
   }
 

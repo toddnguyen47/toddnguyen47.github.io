@@ -1,7 +1,7 @@
 @import "normalize";
 @import "rouge-github";
 @import "variables";
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 
 /* Ref: https://www.youtube.com/watch?v=WlGQdgy-M6w */
 *,
@@ -55,10 +55,7 @@ a {
   border-style: solid;
   border-width: 1px;
   border-radius: 0.3rem;
-  transition:
-    color 0.2s,
-    background-color 0.2s,
-    border-color 0.2s;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 
   &:hover {
     color: rgba(255, 255, 255, 0.8);
@@ -67,7 +64,7 @@ a {
     border-color: rgba(255, 255, 255, 0.3);
   }
 
-  + .btn {
+  +.btn {
     margin-left: 1rem;
   }
 
@@ -86,7 +83,7 @@ a {
     padding: 0.75rem;
     font-size: 0.9rem;
 
-    + .btn {
+    +.btn {
       margin-top: 1rem;
       margin-left: 0;
     }
@@ -97,11 +94,7 @@ a {
   color: $header-heading-color;
   text-align: center;
   background-color: $header-bg-color;
-  background-image: linear-gradient(
-    120deg,
-    $header-bg-color-secondary,
-    $header-bg-color
-  );
+  background-image: linear-gradient(120deg, $header-bg-color-secondary, $header-bg-color);
 
   @include large {
     padding: 5rem 6rem;
@@ -222,19 +215,14 @@ a {
     padding: 0.8rem;
     margin-top: 0;
     margin-bottom: 1rem;
-    font:
-      1rem Consolas,
-      "Liberation Mono",
-      Menlo,
-      Courier,
-      monospace;
+    font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
     color: $code-text-color;
     word-wrap: normal;
     background-color: $code-bg-color;
     border: solid 1px $border-color;
     border-radius: 0.3rem;
 
-    > code {
+    >code {
       padding: 0;
       margin: 0;
       font-size: 0.9rem;
